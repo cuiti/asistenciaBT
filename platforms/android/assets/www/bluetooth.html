@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bluetooth</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+   
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready",onDeviceReady,false);
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+	
+        
+	
+	
+	}
+	
+	function scanForDevices() {
+		alert("besitos");
+		BC.bluetooth.addEventListener("newdevice",addNewDevice);
+		BC.Bluetooth.OpenBluetooth(function(){alert("todo ok!");},function(){alert("bluetooth open error!");});
+		BC.Bluetooth.StartScan();//start hybrid scan,in android platform the default scan strategy is scan for BLE device 5s first, then scan for classical device 12s,and restart the hybrid scan untill the BC.Bluetooth.StopScan be called. in IOS platform only start the LE scan.
+		BC.Bluetooth.StartScan(null,[]);//start hybrid scan with LE service UUID.
+		BC.Bluetooth.StartScan("LE"); //just start the LE scan
+		BC.Bluetooth.StartScan("Classical"); //just start the classical scan in android platform, if the platform is IOS,call this method will nothing happen.
+	}
+	
+	function addNewDevice(s){
+		var newDevice = s.target;
+		var ul = document.getElementById("lista");
+		var li = document.createElement("li");
+		li.appendChild(document.createTextNode("new device be found! it's device Address is: " + newDevice.deviceAddress));
+		ul.appendChild(li);
+		var newDevice = BC.bluetooth.devices[deviceAddress];
+	}
+	
+	
+    </script>
+  </head>
+  <body>
+	    <button onclick="scanForDevices();">Scan For Devices</button> <br>
+
+	<h1>Lista de dispositivos:</h1>
+	<ul id="lista">
+	</ul>
+  </body>
+</html>

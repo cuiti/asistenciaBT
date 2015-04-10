@@ -1,0 +1,15 @@
+{
+    "org.apache.cordova.camera": {
+        "source": {
+            "type": "registry",
+            "id": "org.apache.cordova.camera"
+        }
+    },
+    "org.bcsphere.bluetooth": {
+        "source": {
+            "type": "git",
+            "url": "http://github.com/bcsphere/bluetooth.git",
+            "subdir": "."
+        }
+    }
+}
