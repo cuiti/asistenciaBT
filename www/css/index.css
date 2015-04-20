@@ -41,8 +41,10 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /*text-transform:uppercase;*/
+	text-align:center;
     width:100%;
+	
 }
 
 /* Portrait layout (default) */
@@ -113,3 +115,16 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+button{
+	background-color:#989898;
+	color:#fff;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:18px;
+	line-height:30px;
+	border-radius:20px;
+	border:0;
+	text-shadow:#C17C3A 0 -1px 0;
+}
+
+

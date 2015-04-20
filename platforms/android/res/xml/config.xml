@@ -4,7 +4,7 @@
     <feature name="BCBluetooth">
         <param name="android-package" value="org.bcsphere.bluetooth.BCBluetooth" />
     </feature>
-    <name>HelloWorld</name>
+    <name>Asistencia Bluetooth</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>

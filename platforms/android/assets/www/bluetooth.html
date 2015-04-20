@@ -2,9 +2,11 @@
 <html>
   <head>
     <title>Bluetooth</title>
-
+	
+	<link rel="stylesheet" type="text/css" href="css/index.css" />
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
+	
 
    
     // Wait for device API libraries to load
@@ -14,12 +16,14 @@
     // device APIs are available
     //
     function onDeviceReady() {
-	
-        
-	
-	
+		
 	}
 	
+	//Array con datos de demo. JS no soporta arrays asociativos, solo con indices numericos.
+	
+	var nombres = ["Notebook Asus Alfonso", "Juan", "Julia"];
+	var direcciones	= ["00:08:CA:3E:D5:89", ":::::", ":::::"];
+
 	function scanForDevices() {
 		alert("besitos");
 		BC.bluetooth.addEventListener("newdevice",addNewDevice);
@@ -34,8 +38,18 @@
 		var newDevice = s.target;
 		var ul = document.getElementById("lista");
 		var li = document.createElement("li");
-		li.appendChild(document.createTextNode("new device be found! it's device Address is: " + newDevice.deviceAddress));
+		li.appendChild(document.createTextNode("Dispositivo encontrado: " + newDevice.deviceAddress + " " + newDevice.deviceName));
 		ul.appendChild(li);
+		
+		//funcion que busca la direccion dentro del array
+		for	(index = 0; index < direcciones.length; index++) {
+			if ( newDevice.deviceAddress == direcciones[index] ){
+				var li = document.createElement("li");
+				li.appendChild(document.createTextNode(nombres[index] + " se encuentra presente! :D "));
+				ul.appendChild(li);
+			}
+		} 
+			
 		var newDevice = BC.bluetooth.devices[deviceAddress];
 	}
 	
@@ -43,7 +57,7 @@
     </script>
   </head>
   <body>
-	    <button onclick="scanForDevices();">Scan For Devices</button> <br>
+	    <button onclick="scanForDevices();">Buscar dispositivos</button> <br>
 
 	<h1>Lista de dispositivos:</h1>
 	<ul id="lista">
