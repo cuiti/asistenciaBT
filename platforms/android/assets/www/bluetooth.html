@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/bluethoot.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/bluetooth.js"></script>
   </head>
   
   <body>
@@ -24,7 +24,7 @@
               <td>
                 <span data-bind="text: name"></span>
               </td>
-              <td><span data-bind="text: present"></span></td>
+              <td><span data-bind="text: present() ? 'presente' : 'ausente'"></span></td>
           </tr>    
       </tbody>
   </table>

@@ -8,15 +8,11 @@
     function onDeviceReady() {
         ko.applyBindings(new AsistenciaViewModel());
     }
-	
-
-
 
 	function AsistenciaViewModel() {
         var self = this;
 
         self.alumnos = ko.observableArray([
-            {name:"Julia Lasarte PC", device_mac:"20:16:D8:63:8D:D0", present: ko.observable(false)},
             {name:"Juan Fernández", device_mac:"0:5F:2E:BD:32:DC", present: ko.observable(false)},
         	{name:"Alfonso Cuitiño", device_mac : "00:08:CA:3E:D5:89", present: ko.observable(false)},
         	{name:"Julia Lasarte", device_mac : "54:44:08:CA:BC:28", present: ko.observable(false)},
