@@ -4,6 +4,9 @@
     <feature name="BCBluetooth">
         <param name="android-package" value="org.bcsphere.bluetooth.BCBluetooth" />
     </feature>
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="io.liteglue.SQLitePlugin" />
+    </feature>
     <name>Asistencia Bluetooth</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
