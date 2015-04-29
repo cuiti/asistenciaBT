@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html>
+    
+  <head>
+    <title>Registro de usuarios</title>
+    <link rel="stylesheet" type="text/css" href="../css/ratchet.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/vendor/ratchet.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/vendor/knockout-3.3.0.js"></script>
+  </head>
+<body onload="init()" src="UserController.js">
+<div id="wrap">
+    <header class="bar bar-nav">
+        <h1 class="title"> Bienvenido! </h1>
+    </header>
+
+	    <script type="text/javascript" src="plugins/io.litehelpers.cordova.sqlite/wwww/SQLitePlugin.js"></script>
+        <script type="text/javascript" src="js/SQLitePlugin.js"></script>
+        
+        <div id="main">
+          
+            <div class="content">
+                <form class="input-group" name="formulario" method="post" >
+             </br></br>
+        
+                       <div class="input-area ch30">   
+                <div class="input-row">
+                    <label>Nombre</label>
+                    <input type="text" id="Nombre" placeholder="Nombre" required/>
+                </div></div>
+                <div class="input-row">
+                    <label>Apellido</label>
+                    <input type="text" id="Apellido" placeholder="Apellido" required/>
+                </div>
+                <div class="input-row">
+                    <label>Legajo</label>
+                    <input type="text" id="Legajo" placeholder="Legajo">
+                </div></br>
+                <div class="input-row">
+                    <label>Nombre de usuario</br></label>
+                    <input type="text"  id="Username" placeholder="Nombre de usuario" required,unique/></br>
+                    </div>
+                <div class="input-row">
+                    <label>Contraseña</label>
+                    <input type="password" id="Password" required/>
+                </div>
+            </div>    
+        </div>        
+</div>
+<div id="footer">
+    <button class="btn btn-primary btn-block" type="submit" id="addButton" src="user/UserController.js" onclick="addTodo()">Crear Usuario</button>
+</div> 
+</form>
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <script type="text/javascript" charset="utf-8" src="UserController.js"></script>
+
+</body>
+</html>
+        
