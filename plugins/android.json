@@ -9,11 +9,11 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"BCBluetooth\"><param name=\"android-package\" value=\"org.bcsphere.bluetooth.BCBluetooth\" /></feature>",
+                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.liteglue.SQLitePlugin\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SQLitePlugin\"><param name=\"android-package\" value=\"io.liteglue.SQLitePlugin\" /></feature>",
+                            "xml": "<feature name=\"BCBluetooth\"><param name=\"android-package\" value=\"org.bcsphere.bluetooth.BCBluetooth\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -21,7 +21,6 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
-                    "/*": [],
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.BLUETOOTH\" />",
@@ -37,10 +36,10 @@
         }
     },
     "installed_plugins": {
-        "org.bcsphere.bluetooth": {
+        "io.litehelpers.cordova.sqlite": {
             "PACKAGE_NAME": "com.example.hello"
         },
-        "io.litehelpers.cordova.sqlite": {
+        "org.bcsphere.bluetooth": {
             "PACKAGE_NAME": "com.example.hello"
         }
     },

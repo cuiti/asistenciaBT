@@ -6,33 +6,49 @@
     <title>Registro de usuarios</title>
     <link rel="stylesheet" type="text/css" href="../css/ratchet.min.css" />
     <link rel="stylesheet" type="text/css" href="../css/index.css" />
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="../js/vendor/ratchet.min.js"></script>
+  
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script> 
+<script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../js/vendor/ratchet.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="../js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="UserController.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    
+    function iniciar() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+    
+     function onDeviceReady() {
+        init();       
+    }
+         </script>
+
+        <script type="text/javascript" charset="utf-8" src="../js/gen_validatorv4.js"></script>
+        
   </head>
-<body onload="init()" src="UserController.js">
+<body onload='iniciar()'>
 <div id="wrap">
     <header class="bar bar-nav">
         <h1 class="title"> Bienvenido! </h1>
     </header>
 
 	    <script type="text/javascript" src="plugins/io.litehelpers.cordova.sqlite/wwww/SQLitePlugin.js"></script>
-        <script type="text/javascript" src="js/SQLitePlugin.js"></script>
-        
+        <script type="text/javascript" src="../js/SQLitePlugin.js"></script>
+ 
         <div id="main">
           
             <div class="content">
-                <form class="input-group" name="formulario" method="post" >
+                <form class="input-group" id="form" action="profile.html" method="post" data-transition"slide" >
              </br></br>
         
                        <div class="input-area ch30">   
                 <div class="input-row">
                     <label>Nombre</label>
-                    <input type="text" id="Nombre" placeholder="Nombre" required/>
+                    <input id="Nombre" name="Nombre" pattern="[a-zA-Z0-9\s]+" type="text" placeholder="Nombre" >
                 </div></div>
                 <div class="input-row">
                     <label>Apellido</label>
-                    <input type="text" id="Apellido" placeholder="Apellido" required/>
+                    <input type="text" id="Apellido" name="Apellido" placeholder="Apellido" >
                 </div>
                 <div class="input-row">
                     <label>Legajo</label>
@@ -40,19 +56,35 @@
                 </div></br>
                 <div class="input-row">
                     <label>Nombre de usuario</br></label>
-                    <input type="text"  id="Username" placeholder="Nombre de usuario" required,unique/></br>
+                    <input type="text"  id="Username" name="Username" placeholder="Nombre de usuario" >
                     </div>
-                <div class="input-row">
-                    <label>Contraseña</label>
-                    <input type="password" id="Password" required/>
-                </div>
-            </div>    
+           </div>
+
         </div>        
 </div>
-<div id="footer">
-    <button class="btn btn-primary btn-block" type="submit" id="addButton" src="user/UserController.js" onclick="addTodo()">Crear Usuario</button>
+<div id="footer">               
+    <button class="btn btn-primary btn-block" type="submit" id="addButton" src="user/UserController.js" onclick="addTodo()" onClick= "profile.html">Crear Usuario</button>
 </div> 
 </form>
+    <script  type="text/javascript">
+        var frmvalidator = new Validator("form");
+        frmvalidator.addValidation("Nombre","req","Ingrese su nombre!");
+        frmvalidator.addValidation("Nombre","maxlen=50",
+       "Longitud maxima de 50 caracteres");
+        frmvalidator.addValidation("Nombre","alpha_s",
+        "Solo se permiten letras!"); 
+        frmvalidator.addValidation("Apellido","req","Ingrese su apellido!");
+        frmvalidator.addValidation("Apellido","maxlen=50",
+       "Longitud maxima de 50 caracteres");
+        frmvalidator.addValidation("Apellido","alpha_s",
+        "Solo se permiten letras!"); 
+        frmvalidator.addValidation("Username","req","Ingrese su nombre de usuario!");
+        frmvalidator.addValidation("Username","maxlen=15",
+       "Longitud maxima de 15 caracteres");
+        frmvalidator.addValidation("Username","alnum",
+        "solo se permiten caracteres alfanumericos!"); 
+
+ </script>
         <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
         <script type="text/javascript" charset="utf-8" src="UserController.js"></script>
 

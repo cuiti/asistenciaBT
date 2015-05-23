@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?><plugings>
+	
 <widget id="com.example.hello" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Asistencia Bluetooth</name>
     <description>
@@ -9,4 +10,8 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+<feature name="SQLitePlugin">
+ <param name="android-package" value="org.pgsqlite.SQLitePlugin" />
+ </feature>
+ <plugin name="SQLitePlugin" value="org.pgsqlite.SQLitePlugin"/>
 </widget>

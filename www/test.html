@@ -1,0 +1,109 @@
+<!-- ********************* BEGIN *********************** -->
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="utf-8" />
+ <meta name="format-detection" content="telephone=no" />
+ <!-- WARNING from Cordova: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+ <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+ <title></title>
+
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script> 
+<script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
+
+ <style type="text/css">
+ .buttonClass, .buttonClass2, h2, p {
+ font-family: "Helvetica"; color: #000; font-size:1em;
+ }
+ .buttonClass, .buttonClass2 {
+ border-radius:8px; background-color:#fff;
+ border:#878787 solid 1px; padding:0 1em;margin:.5em;
+ height: 3em; width: 46%;
+ text-align:center;
+ -webkit-appearance:none;
+ } 
+ .buttonClass2 {
+ background-color: silver;
+ }
+ .segment, .segment2 {
+ display:block; border-radius:8px; background-color:#eee;
+ border:#878787 solid 1px; padding:1em; margin:.5em;
+ text-align:left;
+ -webkit-appearance:none; 
+ }
+ .segment2 {
+ 
+ }
+ h2 {
+ font-size:1.3em; font-weight: bold;
+ }
+table {
+ width:100%;
+}
+td {
+ font-size:.8em;
+ padding: .5em;
+ width:25%;
+ border:1px gray solid;
+ overflow:auto; 
+ border-radius: 4px;
+ background-color: #fff;
+ height:2em;
+}
+ @media screen and (max-width:800px) {
+ .buttonClass { width: 100%;}
+ }
+ </style>
+ <script type="text/javascript" src="cordova.js"></script> 
+ <script type="text/javascript" src="SQLitePlugin.js"></script> 
+<script type="text/javascript" charset="utf-8">
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+ var db = window.sqlitePlugin.openDatabase({name: "my.db"});
+ db.transaction(populateDB, errorCB, successCB);
+}
+
+// create table
+function populateDB(tx) {
+ tx.executeSql('DROP TABLE IF EXISTS test_table');
+ tx.executeSql('CREATE TABLE IF NOT EXISTS test_table (id integer primary key, data1 text, data2 integer, svgImage text)');
+ tx.executeSql('INSERT INTO test_table (data1, data2, svgImage) VALUES (?,?,?)', ['test1', 100, '<svg version="1.1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><rect x="4.815" y="4.815" fill="#039BF9" stroke="" width="100" height="100"></svg>']);
+ tx.executeSql("INSERT INTO test_table (data1, data2, svgImage) VALUES (?,?,?)", ['test2', 200, '<svg version="1.1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><rect x="4.815" y="4.815" fill="#039BF9" stroke="" width="100" height="100"></svg>']);
+ queryDB(tx);
+}
+// form the query
+function queryDB(tx) {
+ tx.executeSql("SELECT id, data1, data2, svgImage from test_table;", [], querySuccess, errorCB);
+}
+// Display the results
+function querySuccess(tx, results) {
+ var len = results.rows.length;
+ console.log("results.rows.length: " + results.rows.length + " [should be 2]"); 
+ for (var i = 0; i < len; i++) { // loop as many times as there are row results
+ document.getElementById("output").innerHTML +=
+ "<table><tr><td>ID = " + results.rows.item(i).id + 
+ "</td><td>data1 = " + results.rows.item(i).data1 + 
+ "</td><td>data2 = " + results.rows.item(i).data2 + 
+ "</td><td>svgImage = " + results.rows.item(i).svgImage + "</td></tr></table>";
+ } 
+}
+// Transaction error callback
+function errorCB(err) {
+console.log("Error processing SQL: " + err.code);
+}
+// Success error callback
+function successCB() {
+}
+</script>
+
+ </head>
+<body>
+ <input type="button" class="buttonClass" onclick='window.location="index.html"' value="return">
+<div class="segment">
+<h2>SQLitePlugin Test</h2>
+<div id="output">&nbsp;</div>
+<input type="button" class="buttonClass" onclick='window.location="https://iphonedevlog.wordpress.com/2014/04/07/installing-chris-brodys-sqlite-database-with-cordova-cli-android/"' value="View Code On iPhoneDevLog">
+</div>
+</body>
+ </html>
+<!-- ********************* END *********************** -->

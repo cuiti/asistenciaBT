@@ -1,6 +1,13 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
+        "file": "plugins/io.litehelpers.cordova.sqlite/www/SQLitePlugin.js",
+        "id": "io.litehelpers.cordova.sqlite.SQLitePlugin",
+        "clobbers": [
+            "SQLitePlugin"
+        ]
+    },
+    {
         "file": "plugins/org.bcsphere.bluetooth/www/org.underscorejs.underscore/underscore.js",
         "id": "org.bcsphere.bluetooth.underscorejs.underscore"
     },
@@ -98,20 +105,13 @@ module.exports = [
         "merges": [
             "BC"
         ]
-    },
-    {
-        "file": "plugins/io.litehelpers.cordova.sqlite/www/SQLitePlugin.js",
-        "id": "io.litehelpers.cordova.sqlite.SQLitePlugin",
-        "clobbers": [
-            "SQLitePlugin"
-        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "org.bcsphere.bluetooth": "0.5.1",
-    "io.litehelpers.cordova.sqlite": "0.7.7"
+    "io.litehelpers.cordova.sqlite": "0.7.7",
+    "org.bcsphere.bluetooth": "0.5.1"
 }
 // BOTTOM OF METADATA
 });

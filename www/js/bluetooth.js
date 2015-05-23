@@ -2,6 +2,7 @@
     // Wait for device API libraries to load
     //
     document.addEventListener("deviceready",onDeviceReady,false);
+ document.write("<script type='text/javascript' src='cordova.js'></script>");
 
     // device APIs are available
     //
@@ -9,6 +10,10 @@
         ko.applyBindings(new AsistenciaViewModel());
     }
 
+function getUserMac(){
+    var string = window.device.uuid;
+    return string;
+}
     function AlumnoViewModel(data) {
         var self = this;
         self.name = "";
