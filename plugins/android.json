@@ -15,6 +15,10 @@
                         {
                             "xml": "<feature name=\"BCBluetooth\"><param name=\"android-package\" value=\"org.bcsphere.bluetooth.BCBluetooth\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -40,6 +44,9 @@
             "PACKAGE_NAME": "com.example.hello"
         },
         "org.bcsphere.bluetooth": {
+            "PACKAGE_NAME": "com.example.hello"
+        },
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.example.hello"
         }
     },

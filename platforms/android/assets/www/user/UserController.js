@@ -1,68 +1,116 @@
 //Based on http://www.html5rocks.com/en/tutorials/webdatabase/todo/
 document.addEventListener("deviceready", init, false);
+ document.write("<script type='text/javascript' src='cordova.js'></script>");
 //Activate :active state on device
 document.addEventListener("touchstart", function() {}, false);
-document.write("<script type='text/javascript' src='../js/bluetooth.js'></script>");
-document.write("<script type='text/javascript' src='../js/SQLitePlugin.js'></script>");
 
-
-var app = {};
-    usr={};
-    app.db=null;
-    uuid="";
-
-app.openDb = function() {
-   var dbName = "App";
+/*app.openDb = function() {
    if (window.navigator.simulator === true) {
         // For debugin in simulator fallback to native SQL Lite
         console.log("Use built in SQL Lite");
-        app.db = window.openDatabase(dbName, "1.0", "Cordova Demo", 200000);
+        app.db = window.openDatabase("App", "1.0", "Cordova Demo", 200000);
     }
     else {
-        app.db = window.sqlitePlugin.openDatabase(dbName);
+        app.db = window.sqlitePlugin.openDatabase({name: "App", location: 1});
+
         console.log("open DB");
     }
 }
+*/
+var db= null;
 
-app.createTable = function() {
-    var db = app.db;
+function init() {
+  db = window.sqlitePlugin.openDatabase({name: "App.db"});
+  createTable();     
+}
+
+function createTable() {
+   
     db.transaction(function(tx) {
-
-        tx.executeSql('DROP TABLE IF EXISTS usuarios');
-        tx.executeSql("CREATE TABLE IF NOT EXISTS usuarios(ID INTEGER PRIMARY KEY ASC AUTO-INCREMENT, nombre varchar(50) NOT NULL, apellido varchar(50) NOT NULL, legajo varchar(15) NULL, UUID varchar(40), nombreUsuario varchar(15), token varchar(20) NULL, added_on DATETIME)", [], function(tx, r){
-            console.log("Tabla creada");
-         },
-         function(tx, e){
-            alert("Se ha producido un error: " );
-         });
+            var stringdb = "CREATE TABLE IF NOT EXISTS usuarios("
+                        +"id integer PRIMARY KEY ASC,"
+                        +"nombre varchar(40) NOT NULL,"
+                        +"apellido varchar(40) NOT NULL,"
+                        +"legajo varchar(15) NULL,"
+                        +"UUID varchar(40) NOT NULL,"
+                        +"nombreusuario varchar(15) NOT NULL,"
+                        +"added_on DATETIME)";
+              tx.executeSql(stringdb, [], function(tx, r){
+                                                alert("tabla creada ;)");
+                                                console.log("Tabla creada");
+                                                },function(tx, e){
+                                                alert("Se ha producido un error: " + e.message);
+                                                console.log("no se creo la tabla");
+                                                });
     });
 }
-      
-app.guardarEnBD = function(usr) {
-    var db = app.db;
+function guardarEnBD(usr) {
     db.transaction(function(tx) {
         var addedOn = new Date();  
-        tx.executeSql("INSERT INTO usuarios(nombre,apellido,legajo,nombreUsuario,UUID,added_on) VALUES (?,?,?,?,?,?)",
-                      [usr.nombre.value,usr.apellido.value,usr.legajo.value,usr.nombreUsuario.value,usr.UUID.value,addedOn], function(tx, r){
-            console.log("Elemento introducido");
-         },
-         function(tx, e){
-            console.log("Se ha producido un error: ");
-         },
-                      app.onSuccess,
-                      app.onError);
+        var stringdb ="INSERT INTO usuarios(nombre,apellido,legajo,nombreUsuario,UUID,added_on)" + " VALUES (?,?,?,?,?,?)";
+        var arraydata =   [usr.nombre.value,usr.apellido.value,usr.legajo.value,usr.nombreUsuario.value,"123456643",addedOn];
+        alert(stringdb);
+        alert(arraydata);                             
+        tx.executeSql(stringdb,arraydata,function(tx, r){
+              alert("se introdujo un elemento");
+              console.log("Elemento introducido");},
+             function(tx, e){
+              alert("no se introdujo");
+              console.log("Se ha producido un error: ");});
     });
-}
-      
-app.onError = function(tx, e) {
-    console.log("Error: " + e.message);
 } 
-      
-app.onSuccess = function(tx, r) {
-    app.refresh();
-}
+function getUser() {}
+/*           db.transaction(function(transaction) {
+                transaction.executeSql("SELECT * FROM usuarios",[],
+                function(tx, result) {
+                      var dataLength = result.rows.length;
+                       console.log(dataLength);
+                        alert(dataLength);
+                      if(dataLength  > 0){
+                           var usuario =new User();
+                           usuario.nombre = result.rows.item(0).nombre;
+            console.log(usuario.nombre);
+            alert(usuario.nombre)
+                       }else{
+                             console.log("No business found having this business id."); 
+                       }
+                  }, 
+                  function(error) {
+                        console.log("Error occurred while getting the data.");
+                  });
+          }); 
+}*/
+/*function getUser(){
+    db.transaction(function(tx) {
+        tx.executeSql("SELECT * FROM usuarios", [], 
+                      dameusuario, 
+                      app.onError);
+    })
 
-app.refresh = function() {
+    var dameusuario = function (tx,rs){
+               alert(rs.rows.item(0).nombre);
+                alert(rs.rows.item(0).apellido);
+    alert(rs.rows.item(0).nombreusuario);
+    alert(rs.rows.item(0).uuid);
+console.log(rs.rows.item(0).nombre);
+
+console.log(rs.rows.item(0).apellido);
+console.log(rs.rows.item(0).uuid);
+console.log(rs.rows.item(0).nombreUsuario);
+            var nombre = document.getElementById("alumnoNombre");
+            var Apellido = document.getElementById("alumnoApellido");
+            var UserName = document.getElementById("alumnoUsername");
+            var UUID = document.getElementById("alumnoUUID");
+            nombre.innerHTML=rs.rows.item(0).nombre;
+            Apellido.innerHTML=rs.rows.item(0).apellido;
+            UserName.innerHTML=rs.rows.item(0).nombreUsuario;
+            UUID.innerHTML=rs.rows.item(0).UUID;
+            
+    }
+}
+/*
+
+/*function imprimir() {
     var renderTodo = function (row) {
         return "<li>" + "<div class='todo-check'></div>" + row['nombre'] +"\n"+ row['apellido'] ;"<a class='button delete' href='javascript:void(0);'  onclick='app.deleteTodo(" + row.ID + ");'><p class='todo-delete'></p></a>" + "<div class='clear'></div>" + "</li>";
     }
@@ -83,61 +131,20 @@ app.refresh = function() {
                       render, 
                       app.onError);
     });
-}
+}*/
 
- function getAllUsers(){
-    app.refresh();
- } 
-
-function getUser(){
- abrirBD();
- var db = app.db;
-
-    db.transaction(function(tx) {
-        tx.executeSql("SELECT * FROM usuarios", [], 
-                      dameusuario, 
-                      app.onError);
-    })
-
-    var dameusuario = function (tx,rs){
-            var nombre = document.getElementById("alumnoNombre");
-            var Apellido = document.getElementById("alumnoApellido");
-            var UserName = document.getElementById("alumnoUsername");
-            var UUID = document.getElementById("alumnoUUID");
-            nombre.innerHTML=rs.rows.item(0).nombre;
-            Apellido.innerHTML=rs.rows.item(0).apellido;
-            UserName.innerHTML=rs.rows.item(0).nombreUsuario;
-            UUID.innerHTML=rs.rows.item(0).UUID;
-            console.log(rs.rows.item(0).nombre);
-            console.log(rs.rows.item(0).apellido);
-            console.log(rs.rows.item(0).nombreUsuario);
-            console.log(rs.rows.item(0).UUID);
-            console.log(nombre);
-            console.log(Apellido);
-            console.log(UserName);
-            console.log(UUID);
-    }
-}
-function abrirBD(){
-    app.openDb();
-}
-function init() {
-    uuid = device.uuid;
-    abrirBD();
-    app.createTable();
- }
 
 function addTodo() {
    var usuario = new User(); 
-    app.guardarEnBD(usuario);
-   
+    guardarEnBD(usuario);
+    return false;
+    //getUser();
 }
 
 function User(){
     this.nombre =  document.getElementById("Nombre");
-    this.apellido = document.getElementById("Apellido")
-    this.legajo = document.getElementById("Legajo")
-    this.nombreUsuario =  document.getElementById("Username")
-    this.UUID = uuid;
-       
+    this.apellido = document.getElementById("Apellido");
+    this.legajo = document.getElementById("Legajo");
+    this.nombreUsuario =  document.getElementById("Username");
+    this.UUID = "que lindo UUID (?)";       
 }

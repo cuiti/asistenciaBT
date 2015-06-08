@@ -7,6 +7,9 @@
     <feature name="BCBluetooth">
         <param name="android-package" value="org.bcsphere.bluetooth.BCBluetooth" />
     </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
     <name>Asistencia Bluetooth</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.

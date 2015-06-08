@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bluetooth</title>
+    <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/ratchet.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/bluetooth.js"></script>
+  </head>
+  
+  <body>
+      <header class="bar bar-nav">
+          <h1 class="title">Asistencia Bluethoot para <span>IBD</span></h1>
+      </header>
+	    
+      <div class="bar bar-standard bar-header-secondary">
+          <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
+      </div>
+      
+	 <div class="content">
+         <div class="content-padded">
+            <h3>Listado De alumnos</h3>
+            <div class="card">
+                <ul class="table-view" data-bind="foreach: alumnos">
+                  <li class="table-view-cell">
+                      <span data-bind="text: name"></span>
+                      <span data-bind=" css: { 'badge-positive' : present()}, text: present() ? 'presente' : 'ausente'" class="badge"></span>
+                  </li>    
+                </ul>
+            </div>
+         </div>
+         <div class="content-padded">
+            <h3>Dispositivos no inscriptos</h3>
+             <div class="card">
+                <ul class="table-view" data-bind="foreach: detectedDevices">
+                  <li class="table-view-cell">
+                      <span data-bind="text: name"></span>
+                      <button data-bind="click: $parent.registerStudent" class="btn btn-positive">Inscribir</button>
+                  </li>    
+                </ul>
+            </div> 
+         </div>
+      </div>
+      <nav class="bar bar-tab">
+          <a class="tab-item" href="index.html">
+            <span class="icon icon-home"></span>
+            <span class="tab-label">Home</span>
+          </a>
+          <a class="tab-item" href="#">
+            <span class="icon icon-person"></span>
+            <span class="tab-label">Mi Perfil</span>
+          </a>
+          <a class="tab-item" href="#">
+            <span class="icon icon-list"></span>
+            <span class="tab-label">Mis Clases</span>
+          </a>
+          <a class="tab-item" href="#">
+            <span class="icon icon-gear"></span>
+            <span class="tab-label">Configuracion</span>
+          </a>
+    </nav>
+  </body>
+</html>

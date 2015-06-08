@@ -105,13 +105,21 @@ module.exports = [
         "merges": [
             "BC"
         ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.device/www/device.js",
+        "id": "org.apache.cordova.device.device",
+        "clobbers": [
+            "device"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
     "io.litehelpers.cordova.sqlite": "0.7.7",
-    "org.bcsphere.bluetooth": "0.5.1"
+    "org.bcsphere.bluetooth": "0.5.1",
+    "org.apache.cordova.device": "0.3.0"
 }
 // BOTTOM OF METADATA
 });

@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html>
+    
+  <head>
+    <title>Registro de usuarios</title>
+    <link rel="stylesheet" type="text/css" href="../css/ratchet.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/index.css" />
+  
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script> 
+  <script type="text/javascript" charset="utf-8" src="../js/vendor/ratchet.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./UserController.js"></script>
+
+        <script type="text/javascript" charset="utf-8" src="../js/gen_validatorv4.js"></script>
+        
+  </head>
+<body onload='init()'>
+<div id="wrap">
+    <header class="bar bar-nav">
+        <h1 class="title"> Bienvenido! </h1>
+    </header>
+
+        <div id="main">
+          
+            <div class="content">
+                <form class="input-group" id="form" action="profile.html" method="post" data-transition"slide" >
+             </br></br>
+        
+                       <div class="input-area ch30">   
+                <div class="input-row">
+                    <label>Nombre</label>
+                    <input id="Nombre" name="Nombre" pattern="[a-zA-Z0-9\s]+" type="text" placeholder="Nombre" >
+                </div></div>
+                <div class="input-row">
+                    <label>Apellido</label>
+                    <input type="text" id="Apellido" name="Apellido" placeholder="Apellido" >
+                </div>
+                <div class="input-row">
+                    <label>Legajo</label>
+                    <input type="text" id="Legajo" placeholder="Legajo">
+                </div></br>
+                <div class="input-row">
+                    <label>Nombre de usuario</br></label>
+                    <input type="text"  id="Username" name="Username" placeholder="Nombre de usuario" >
+                    </div>
+           </div>
+
+        </div>        
+</div>
+<div id="footer">               
+    <button class="btn btn-primary btn-block" type="submit" id="addButton" src="user/UserController.js" onclick="addTodo()" onClick= "profile.html">Crear Usuario</button>
+</div> 
+</form>
+<script  type="text/javascript">
+        var frmvalidator = new Validator("form");
+        frmvalidator.addValidation("Nombre","req","Ingrese su nombre!");
+        frmvalidator.addValidation("Nombre","maxlen=50",
+       "Longitud maxima de 50 caracteres");
+        frmvalidator.addValidation("Nombre","alpha_s",
+        "Solo se permiten letras!"); 
+        frmvalidator.addValidation("Apellido","req","Ingrese su apellido!");
+        frmvalidator.addValidation("Apellido","maxlen=50",
+       "Longitud maxima de 50 caracteres");
+        frmvalidator.addValidation("Apellido","alpha_s",
+        "Solo se permiten letras!"); 
+        frmvalidator.addValidation("Username","req","Ingrese su nombre de usuario!");
+        frmvalidator.addValidation("Username","maxlen=15",
+       "Longitud maxima de 15 caracteres");
+        frmvalidator.addValidation("Username","alnum",
+        "solo se permiten caracteres alfanumericos!"); 
+
+ </script>
+
+</body>
+</html>
+        
