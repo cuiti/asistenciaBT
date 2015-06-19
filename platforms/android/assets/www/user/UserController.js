@@ -20,7 +20,7 @@ document.addEventListener("touchstart", function() {}, false);
 var db= null;
 
 function init() {
-  db = window.sqlitePlugin.openDatabase({name: "App.db"});
+  db = window.openDatabase({name: "App.db"});
   createTable();     
 }
 
@@ -31,35 +31,38 @@ function createTable() {
                         +"id integer PRIMARY KEY ASC,"
                         +"nombre varchar(40) NOT NULL,"
                         +"apellido varchar(40) NOT NULL,"
-                        +"legajo varchar(15) NULL,"
-                        +"UUID varchar(40) NOT NULL,"
-                        +"nombreusuario varchar(15) NOT NULL,"
+                        +"legajo varchar(15),"
+                        +"UUID varchar(40),"
+                        +"nombreusuario varchar(15),"
                         +"added_on DATETIME)";
-              tx.executeSql(stringdb, [], function(tx, r){
+              tx.executeSql(stringdb, [], function (tx, r){
                                                 alert("tabla creada ;)");
                                                 console.log("Tabla creada");
-                                                },function(tx, e){
+                                                },function (tx, e){
                                                 alert("Se ha producido un error: " + e.message);
                                                 console.log("no se creo la tabla");
                                                 });
     });
 }
+
+
+
 function guardarEnBD(usr) {
     db.transaction(function(tx) {
         var addedOn = new Date();  
-        var stringdb ="INSERT INTO usuarios(nombre,apellido,legajo,nombreUsuario,UUID,added_on)" + " VALUES (?,?,?,?,?,?)";
-        var arraydata =   [usr.nombre.value,usr.apellido.value,usr.legajo.value,usr.nombreUsuario.value,"123456643",addedOn];
+        var stringdb ="INSERT INTO usuarios(nombre,apellido,legajo,nombreusuario,UUID) VALUES (?,?,?,?,?)";
+        var arraydata = [usr.nombre.value,usr.apellido.value,usr.legajo.value,usr.nombreUsuario.value,"123456643",addedOn];
         alert(stringdb);
         alert(arraydata);                             
-        tx.executeSql(stringdb,arraydata,function(tx, r){
+        tx.executeSql(stringdb,arraydata,function success(tx, r){
               alert("se introdujo un elemento");
               console.log("Elemento introducido");},
-             function(tx, e){
-              alert("no se introdujo");
+             function error(tx, e){
+              alert("no se introdujo" +e.message);
               console.log("Se ha producido un error: ");});
     });
-} 
-function getUser() {}
+}
+//function getUser() {}
 /*           db.transaction(function(transaction) {
                 transaction.executeSql("SELECT * FROM usuarios",[],
                 function(tx, result) {
@@ -137,8 +140,9 @@ console.log(rs.rows.item(0).nombreUsuario);
 function addTodo() {
    var usuario = new User(); 
     guardarEnBD(usuario);
-    return false;
     //getUser();
+    return false;
+    
 }
 
 function User(){
@@ -146,5 +150,5 @@ function User(){
     this.apellido = document.getElementById("Apellido");
     this.legajo = document.getElementById("Legajo");
     this.nombreUsuario =  document.getElementById("Username");
-    this.UUID = "que lindo UUID (?)";       
+    this.UUID = "que lindo UUID (?)";  //device.uuid     
 }

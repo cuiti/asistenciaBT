@@ -37,12 +37,16 @@
                 <ul class="table-view" data-bind="foreach: detectedDevices">
                   <li class="table-view-cell">
                       <span data-bind="text: name"></span>
-                      <button data-bind="click: $parent.registerStudent" class="btn btn-positive">Inscribir</button>
+                      <span data-bind="text: device_mac"></span>
+                      <button data-bind="click:$parent.searchforTeacher" class="btn btn-positive">conectate</button>
                   </li>    
                 </ul>
-            </div> 
+            </div>
+
          </div>
       </div>
+
+           
       <nav class="bar bar-tab">
           <a class="tab-item" href="index.html">
             <span class="icon icon-home"></span>

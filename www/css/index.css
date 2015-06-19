@@ -17,7 +17,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 * { margin: 0; padding: 0; }/*Quitamos unas propiedades que por defecto traen los navegadores y las ponemos en “0”*/ html, body { height: 100%; } 
 .error {
     color:red;
 }#wrap { min-height: 100%; } #main { overflow: auto; padding-bottom: 50px; text-align: center; }/* Altura en px del footer */ #footer { position: relative; margin-top: -50px; /* altura en px del footer con valor negativo */ height: 50px; /* Altura del Footer en px*/ clear: both; background: #286af0; text-align: center; color: #FFFFFF; } /*Opera Fix*/ body:before { content: ""; height: 100%; float: left; width: 0; margin-top: -32767px;/* Efecto Negativo para OPERA*/ } - See more at: http://www.thesmartbuzz.com/diseno/footer-siempre-abajo-html-y-css#sthash.Y4IZy3kj.dpuf
+body {font-size: 2em} 
