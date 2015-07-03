@@ -17,6 +17,7 @@
 	    
       <div class="bar bar-standard bar-header-secondary">
           <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
+          <button data-bind="click:debug" class="btn btn-block btn-danger">Debug</button>
       </div>
       
 	 <div class="content">
@@ -37,12 +38,17 @@
                 <ul class="table-view" data-bind="foreach: detectedDevices">
                   <li class="table-view-cell">
                       <span data-bind="text: name"></span>
-                      <button data-bind="click: $parent.registerStudent" class="btn btn-positive">Inscribir</button>
+                      <span data-bind="text: device_mac"></span>
+                      <a data-bind="click:$parent.connectToDevice">conectate</a>
+                      <button data-bind="click:$parent.givePresent" class="btn btn-positive">dar Presente</button>
                   </li>    
                 </ul>
-            </div> 
+            </div>
+
          </div>
       </div>
+
+           
       <nav class="bar bar-tab">
           <a class="tab-item" href="index.html">
             <span class="icon icon-home"></span>

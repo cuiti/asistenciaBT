@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Juan\Desktop\proyecto\asistenciaBT\platforms\android\CordovaLib\assets"/></dataSet><dataSet config="debug"><source path="C:\Users\Juan\Desktop\proyecto\asistenciaBT\platforms\android\CordovaLib\src\debug\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/julia/Documents/code/asistenciaBT/platforms/android/CordovaLib/assets"/></dataSet><dataSet config="debug"><source path="/Users/julia/Documents/code/asistenciaBT/platforms/android/CordovaLib/src/debug/assets"/></dataSet></merger>
