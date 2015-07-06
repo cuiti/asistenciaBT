@@ -3,12 +3,13 @@
     //
  document.addEventListener("deviceready",onDeviceReady,false);
 
-    // device APIs are available
-    //
-    function onDeviceReady() {
-        ko.applyBindings(new AsistenciaViewModel());
-    }
-	        var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
+// device APIs are available
+//
+function onDeviceReady() {
+    ko.applyBindings(new AsistenciaViewModel());
+}
+
+var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
 			
 function getUserMac(){
     var string = window.device.uuid;

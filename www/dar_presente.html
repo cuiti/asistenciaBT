@@ -7,7 +7,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/ratchet.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/presente.js"></script>
   </head>
   
   <body>
@@ -16,35 +16,14 @@
       </header>
 	    
       <div class="bar bar-standard bar-header-secondary">
-          <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
+          <button data-bind="click:givePresent" class="btn btn-block btn-primary">Dar Presente</button>
       </div>
       
 	 <div class="content">
-         <div class="content-padded">
-            <h3>Listado De alumnos</h3>
-            <div class="card">
-                <ul class="table-view" data-bind="foreach: alumnos">
-                  <li class="table-view-cell">
-                      <span data-bind="text: name"></span>
-                      <span data-bind=" css: { 'badge-positive' : present()}, text: present() ? 'presente' : 'ausente'" class="badge"></span>
-                  </li>    
-                </ul>
-            </div>
-         </div>
-         <div class="content-padded">
-            <h3>Dispositivos no inscriptos</h3>
-             <div class="card">
-                <ul class="table-view" data-bind="foreach: detectedDevices">
-                  <li class="table-view-cell">
-                      <span data-bind="text: name"></span>
-                      <span data-bind="text: device_mac"></span>
-                      <button data-bind="" class="btn btn-positive">inscribir</button>
-                  </li>    
-                </ul>
-            </div>
-
-         </div>
+      <div class="content-padded">
+        DANDO PRESENTING....
       </div>
+    </div>
 
            
       <nav class="bar bar-tab">

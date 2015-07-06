@@ -7,7 +7,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/ratchet.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/bluetooth.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
   </head>
   
   <body>
@@ -17,7 +17,6 @@
 	    
       <div class="bar bar-standard bar-header-secondary">
           <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
-          <button data-bind="click:debug" class="btn btn-block btn-danger">Debug</button>
       </div>
       
 	 <div class="content">
@@ -39,8 +38,7 @@
                   <li class="table-view-cell">
                       <span data-bind="text: name"></span>
                       <span data-bind="text: device_mac"></span>
-                      <a data-bind="click:$parent.connectToDevice">conectate</a>
-                      <button data-bind="click:$parent.givePresent" class="btn btn-positive">dar Presente</button>
+                      <button data-bind="" class="btn btn-positive">inscribir</button>
                   </li>    
                 </ul>
             </div>
