@@ -21,6 +21,7 @@ function AlumnoViewModel(data) {
     self.name ="";
 
     if (data) {
+        self.uuid = data.uuid;
         self.name = data.name;
         self.device_mac = data.device_mac;
         self.present(data.present);
@@ -77,7 +78,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("ascii", self.name, self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("ascii", self.uuid, self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {
@@ -90,6 +91,7 @@ function AsistenciaViewModel() {
     self.detectedDevices = ko.observableArray([]);
     self.alumnos = ko.observableArray([
         new AlumnoViewModel({
+            uuid: "45a87e4c194b21c3",
             name: "tablet_pc",
             device_mac: "54:E4:BD:BF:3F:B9",
             present: false
@@ -115,12 +117,18 @@ function AsistenciaViewModel() {
             present: false
         }),
           new AlumnoViewModel({
+            uui: "a2e7bf3401f9b097",
             name: "juan",
             device_mac: "90:5F:2E:BD:32:DC",
             present: false
         }),
         new AlumnoViewModel({name:"Samsung", device_mac:"A4:9A:58:9E:3D:69", present: false}),
-        new AlumnoViewModel({name:"Alfonso Cuitiño", device_mac : "54:44:08:CA:00:28", present: false}),
+        new AlumnoViewModel({
+            uuid: "cdbd1854a1441d10",
+            name:"Alfonso Cuitiño", 
+            device_mac : "54:44:08:CA:00:28",
+            present: false
+        }),
         new AlumnoViewModel({name:"Julia Lasarte", device_mac : "54:44:08:CA:BC:28", present: false})
     ]);
 

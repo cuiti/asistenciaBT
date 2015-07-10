@@ -105,7 +105,7 @@ function PresenteViewModel() {
             alert("estar Presente!!");
             window.clearInterval(self.read_interval);
         } else {
-            self.teacherDevice.rfcommWrite("ascii", data.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
+            self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
         }
         self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
     }
