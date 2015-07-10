@@ -107,9 +107,9 @@ function PresenteViewModel() {
             window.clearInterval(self.read_interval);
             self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
         } else {
-            if (!id || 0 === id.length){
-                self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
-            }
+           // if (!id || 0 === id.length){
+            //    self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
+           // }
         }
     }
 
