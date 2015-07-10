@@ -19,6 +19,7 @@ function TeacherViewModel(data) {
 
 function PresenteViewModel() {
     var self = this;
+    self.uuid = device.uuid;
     self.teacherDevice = null;
     self.connectedTeacher = null;
     self.PrepareInterval = null;
@@ -100,10 +101,12 @@ function PresenteViewModel() {
     }
 
     self.readSuccess = function(data) {
-        console.log(data.value);
-        alert("estas Presente!");
-        window.clearInterval(self.read_interval);
-        self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
+        if (data.value.getASCIIString() == self.uuid) {
+            alert("estar Presente!!");
+            window.clearInterval(self.read_interval);
+        } else {
+            self.teacherDevice.rfcommWrite("ascii", data.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
+        }
         self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
     }
 

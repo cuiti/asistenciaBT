@@ -77,7 +77,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("Hex", "01", self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("ascii", self.name, self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {
@@ -102,6 +102,11 @@ function AsistenciaViewModel() {
         new AlumnoViewModel({
             name: "tlidi2",
             device_mac: "AC:22:0B:35:EE:4E",
+            present: false
+        }),
+        new AlumnoViewModel({
+            name: "tlidi5",
+            device_mac: "AC:22:0B:35:E9:AA",
             present: false
         }),
          new AlumnoViewModel({

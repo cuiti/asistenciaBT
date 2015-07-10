@@ -1,69 +1,56 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Bluetooth</title>
-    <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/vendor/ratchet.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
+ <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Tomar asistencia</title>
   </head>
   
   <body>
-      <header class="bar bar-nav">
-          <h1 class="title">Asistencia Bluethoot para <span>IBD</span></h1>
-      </header>
-	    
-      <div class="bar bar-standard bar-header-secondary">
-          <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
-      </div>
+    <div class="section red" id="index-banner">
+        <div class="row">
+          <div class="col s12 m9">
+            <h3 class="header white-text center-on-small-only">Asistencia</h3>
+          </div>
+          <div class="col s12 m3">
+          </div>
+        </div>
+    </div>
+
+    <div class="container">
+      <a  data-bind="click:scanDevices" class="waves-effect waves-light btn">
+        <i class="material-icons left">recent_actors</i> tomar asistencia
+      </a>
       
-	 <div class="content">
-         <div class="content-padded">
-            <h3>Listado De alumnos</h3>
-            <div class="card">
-                <ul class="table-view" data-bind="foreach: alumnos">
-                  <li class="table-view-cell">
-                      <span data-bind="text: name"></span>
-                      <span data-bind=" css: { 'badge-positive' : present()}, text: present() ? 'presente' : 'ausente'" class="badge"></span>
-                  </li>    
-                </ul>
-            </div>
-         </div>
-         <div class="content-padded">
-            <h3>Dispositivos no inscriptos</h3>
-             <div class="card">
-                <ul class="table-view" data-bind="foreach: detectedDevices">
-                  <li class="table-view-cell">
-                      <span data-bind="text: name"></span>
-                      <span data-bind="text: device_mac"></span>
-                      <button data-bind="" class="btn btn-positive">inscribir</button>
-                  </li>    
-                </ul>
-            </div>
+      <h3 class="header center orange-text">Alumnos</h1>
 
-         </div>
-      </div>
+      <ul class="collection" data-bind="foreach: alumnos">
+        <li class="collection-item">
+          <span data-bind="text:name"></span>
+          <span data-bind="css: { 'new' : present()}, text: present() ? 'presente' : 'ausente'"  class=" new badge"></span>
+        </li>
+      </ul>
 
-           
-      <nav class="bar bar-tab">
-          <a class="tab-item" href="index.html">
-            <span class="icon icon-home"></span>
-            <span class="tab-label">Home</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-person"></span>
-            <span class="tab-label">Mi Perfil</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-list"></span>
-            <span class="tab-label">Mis Clases</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-gear"></span>
-            <span class="tab-label">Configuracion</span>
-          </a>
-    </nav>
+      <h3 class="header center orange-text">Disp no inscriptos</h1>
+          
+      <ul class="collection" data-bind="foreach: detectedDevices">
+        <li class="collection-item">
+            <span data-bind="text: name"></span>
+            <span data-bind="text: device_mac"></span>
+            <button data-bind="" class="btn btn-positive">inscribir</button>
+        </li>    
+      </ul>
+    
+    </div>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" src="js/tomar_asistencia.js"></script>
   </body>
 </html>
