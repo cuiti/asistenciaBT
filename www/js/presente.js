@@ -104,10 +104,10 @@ function PresenteViewModel() {
         if (data.value.getASCIIString() == self.uuid) {
             alert("estar Presente!!");
             window.clearInterval(self.read_interval);
+            self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
         } else {
             self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
         }
-        self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
     }
 
     self.debug = function() {
