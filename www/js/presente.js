@@ -100,11 +100,12 @@ function PresenteViewModel() {
     }
 
     self.readSuccess = function(data) {
-        console.log(data.value);
-        alert("estas Presente!");
-        window.clearInterval(self.read_interval);
-        self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
-        self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
+        if (data.value.getASCIIString() == "XXX") {
+            alert("estas Presente!");
+            window.clearInterval(self.read_interval);
+            //self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
+            self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
+        }
     }
 
     self.debug = function() {

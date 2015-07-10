@@ -77,7 +77,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("Hex", "01", self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("ascii", "XXX", self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {
