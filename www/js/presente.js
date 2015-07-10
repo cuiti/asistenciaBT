@@ -26,12 +26,12 @@ function PresenteViewModel() {
     self.connection_interval = null;
     self.read_interval = null;
     self.teacher = ko.observable(new TeacherViewModel({
-        //name: "TABLET_PC",
-       //device_mac: "60:03:08:C2:E4:F7"
+        name: "TABLET_PC",
+       device_mac: "60:03:08:C2:E4:F7"
        //name: "SAMSUNG",
        //device_mac: "A4:9A:58:9E:3D:69"
-       name: "TLIDI2",
-       device_mac: "AC:22:0B:35:EE:4E"
+       //name: "TLIDI2",
+       //device_mac: "AC:22:0B:35:EE:4E"
     }));
 
     self.givePresent = function() {
@@ -107,7 +107,7 @@ function PresenteViewModel() {
             window.clearInterval(self.read_interval);
             self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
         } else {
-            if (id){
+            if (!id || 0 === id.length){
                 self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
             }
         }

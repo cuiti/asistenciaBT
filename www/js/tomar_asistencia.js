@@ -19,6 +19,7 @@ function AlumnoViewModel(data) {
     self.tryPrepareInterval = null;
     self.tryWriteInterval = null;
     self.name ="";
+    self.uuid ="000";
 
     if (data) {
         self.uuid = data.uuid;
@@ -143,13 +144,13 @@ function AsistenciaViewModel() {
 
     self.openBTSuccess = function(message) {
         alert("Se abrió el BT correctamente.");
+        BC.Bluetooth.StartScan();
     };
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
-        BC.Bluetooth.StartScan();
     };
 
     self.deviceFound = function(s) {
