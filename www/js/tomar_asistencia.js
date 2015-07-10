@@ -19,10 +19,8 @@ function AlumnoViewModel(data) {
     self.tryPrepareInterval = null;
     self.tryWriteInterval = null;
     self.name ="";
-    self.uuid ="000";
 
     if (data) {
-        self.uuid = data.uuid;
         self.name = data.name;
         self.device_mac = data.device_mac;
         self.present(data.present);
@@ -79,7 +77,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("ascii", self.uuid, self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("Hex", "01", self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {
@@ -92,7 +90,6 @@ function AsistenciaViewModel() {
     self.detectedDevices = ko.observableArray([]);
     self.alumnos = ko.observableArray([
         new AlumnoViewModel({
-            uuid: "45a87e4c194b21c3",
             name: "tablet_pc",
             device_mac: "54:E4:BD:BF:3F:B9",
             present: false
@@ -107,29 +104,18 @@ function AsistenciaViewModel() {
             device_mac: "AC:22:0B:35:EE:4E",
             present: false
         }),
-        new AlumnoViewModel({
-            name: "tlidi5",
-            device_mac: "AC:22:0B:35:E9:AA",
-            present: false
-        }),
          new AlumnoViewModel({
             name: "tlidi9",
             device_mac: "5C:FF:35:6E:B0:8D",
             present: false
         }),
           new AlumnoViewModel({
-            uui: "a2e7bf3401f9b097",
             name: "juan",
             device_mac: "90:5F:2E:BD:32:DC",
             present: false
         }),
         new AlumnoViewModel({name:"Samsung", device_mac:"A4:9A:58:9E:3D:69", present: false}),
-        new AlumnoViewModel({
-            uuid: "cdbd1854a1441d10",
-            name:"Alfonso Cuitiño", 
-            device_mac : "54:44:08:CA:00:28",
-            present: false
-        }),
+        new AlumnoViewModel({name:"Alfonso Cuitiño", device_mac : "54:44:08:CA:00:28", present: false}),
         new AlumnoViewModel({name:"Julia Lasarte", device_mac : "54:44:08:CA:BC:28", present: false})
     ]);
 
@@ -144,13 +130,13 @@ function AsistenciaViewModel() {
 
     self.openBTSuccess = function(message) {
         alert("Se abrió el BT correctamente.");
-        BC.Bluetooth.StartScan();
     };
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
+        BC.Bluetooth.StartScan();
     };
 
     self.deviceFound = function(s) {

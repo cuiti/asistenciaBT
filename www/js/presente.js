@@ -19,19 +19,18 @@ function TeacherViewModel(data) {
 
 function PresenteViewModel() {
     var self = this;
-    self.uuid = device.uuid;
     self.teacherDevice = null;
     self.connectedTeacher = null;
     self.PrepareInterval = null;
     self.connection_interval = null;
     self.read_interval = null;
     self.teacher = ko.observable(new TeacherViewModel({
-        name: "TABLET_PC",
-       device_mac: "60:03:08:C2:E4:F7"
+        //name: "TABLET_PC",
+       //device_mac: "60:03:08:C2:E4:F7"
        //name: "SAMSUNG",
        //device_mac: "A4:9A:58:9E:3D:69"
-       //name: "TLIDI2",
-       //device_mac: "AC:22:0B:35:EE:4E"
+       name: "TLIDI2",
+       device_mac: "AC:22:0B:35:EE:4E"
     }));
 
     self.givePresent = function() {
@@ -101,16 +100,11 @@ function PresenteViewModel() {
     }
 
     self.readSuccess = function(data) {
-        var id = data.value.getASCIIString();
-        if (id == self.uuid) {
-            alert("estar Presente!!");
-            window.clearInterval(self.read_interval);
-            self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
-        } else {
-           // if (!id || 0 === id.length){
-            //    self.teacherDevice.rfcommWrite("ascii", data.value.getASCIIString(), function(){alert("escribi")}, function(){alert("no escribi")});
-           // }
-        }
+        console.log(data.value);
+        alert("estas Presente!");
+        window.clearInterval(self.read_interval);
+        self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
+        self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
     }
 
     self.debug = function() {

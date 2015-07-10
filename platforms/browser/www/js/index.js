@@ -49,7 +49,3 @@ var app = {
 };
 
 app.initialize();
-
-$(function(){
-    $(".button-collapse").sideNav();
-});
