@@ -40,7 +40,7 @@ function AlumnoViewModel(data) {
     };
 
     self.writeSuccess = function() {
-        alert("Se envio la confirmación correctamente a"+self.name);
+        alert("Se envio la confirmación correctamente a "+self.name);
         self.present(true);
         window.clearInterval(self.tryWriteInterval);
         self.device.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
@@ -50,6 +50,7 @@ function AlumnoViewModel(data) {
     };
 
     self.writeError = function() {
+        alert("no se pudo escribir");
         console.error("no se pudo escribir, intentando de nuevo en 2 segundos")
     }
 
@@ -77,7 +78,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("ascii", "XXX", self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("ascii","80", self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {

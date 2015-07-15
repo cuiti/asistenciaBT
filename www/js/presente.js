@@ -25,12 +25,16 @@ function PresenteViewModel() {
     self.connection_interval = null;
     self.read_interval = null;
     self.teacher = ko.observable(new TeacherViewModel({
-        //name: "TABLET_PC",
+       //name: "TABLET_PC",
        //device_mac: "60:03:08:C2:E4:F7"
        //name: "SAMSUNG",
        //device_mac: "A4:9A:58:9E:3D:69"
-       name: "TLIDI2",
-       device_mac: "AC:22:0B:35:EE:4E"
+       //name: "TLIDI2",
+       //device_mac: "AC:22:0B:35:EE:4E"
+       //name: "tablet viki",
+       //device_mac: "96:4E:46:66:22:CB"
+       name: "samsung",
+       device_mac: "78:59:5E:9A:F5:E3"
     }));
 
     self.givePresent = function() {
@@ -81,8 +85,8 @@ function PresenteViewModel() {
     }
 
     self.tryRead = function() {
-        self.teacherDevice.rfcommRead(self.readSuccess, self.readError)
-        window.clearInterval(self.tryRead);
+           self.teacherDevice.rfcommRead(self.readSuccess, self.readError);
+         window.clearInterval(self.tryRead);
     }
 
     self.tryPrepare = function() {
@@ -95,17 +99,22 @@ function PresenteViewModel() {
     };
 
     self.readError = function() {
+        alert("no lei");
         //self.connectedTeacher.rfcommSubscribe(self.readSuccess);
         console.log("error leyendo del canal rfcomm, intentando de nuevo en dos segundos")
     }
 
     self.readSuccess = function(data) {
-        if (data.value.getASCIIString() == "XXX") {
+        var d=data.value.getASCIIString();
+        var e= new String("80");
+        var res= d.slice(0, 2);
+        alert(data.deviceAddress); //aca sacas la mac del que escribe!
+        if (e.valueOf() == res.valueOf()) {
             alert("estas Presente!");
             window.clearInterval(self.read_interval);
             //self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
             self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
-        }
+        } else alert("Lo que lei no es mi dato jiji");
     }
 
     self.debug = function() {
