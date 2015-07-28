@@ -78,7 +78,7 @@ function AlumnoViewModel(data) {
     };
 
     self.tryWrite = function() {
-        self.device.rfcommWrite("ascii","80", self.writeSuccess, self.writeError);
+        self.device.rfcommWrite("ascii","ping", self.writeSuccess, self.writeError);
     };
 
     self.tryConnection = function() {

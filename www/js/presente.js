@@ -106,13 +106,13 @@ function PresenteViewModel() {
 
     self.readSuccess = function(data) {
         var d=data.value.getASCIIString();
-        var e= new String("80");
-        var res= d.slice(0, 2);
+        var e= new String("ping");
+        var res= d.slice(0, 4);
         alert(data.deviceAddress); //aca sacas la mac del que escribe!
         if (e.valueOf() == res.valueOf()) {
             alert("estas Presente!");
             window.clearInterval(self.read_interval);
-            //self.teacherDevice.rfcommWrite("Hex", "01", function(){alert("escribi")}, function(){alert("no escribi")});
+            self.teacherDevice.rfcommWrite("ascii", "ok", function(){alert("escribi")}, function(){alert("no escribi")});
             self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
         } else alert("Lo que lei no es mi dato jiji");
     }
