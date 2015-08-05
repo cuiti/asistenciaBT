@@ -2,17 +2,17 @@
 <html>
   <head>
     <title>Bluetooth</title>
-    <link rel="stylesheet" type="text/css" href="css/ratchet.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/vendor/ratchet.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/vendor/materialize.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
   </head>
   
   <body>
       <header class="bar bar-nav">
-          <h1 class="title">Asistencia Bluethoot para <span>IBD</span></h1>
+          <h4 class="title">Asistencia Bluetooth para <span>una materia (?</span></h1>
       </header>
 	    
       <div class="bar bar-standard bar-header-secondary">
@@ -21,7 +21,7 @@
       
 	 <div class="content">
          <div class="content-padded">
-            <h3>Listado De alumnos</h3>
+            <h5>Listado De alumnos</h3>
             <div class="card">
                 <ul class="table-view" data-bind="foreach: alumnos">
                   <li class="table-view-cell">
@@ -32,7 +32,7 @@
             </div>
          </div>
          <div class="content-padded">
-            <h3>Dispositivos no inscriptos</h3>
+            <h5>Dispositivos no inscriptos</h3>
              <div class="card">
                 <ul class="table-view" data-bind="foreach: detectedDevices">
                   <li class="table-view-cell">
