@@ -24,7 +24,8 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <title>Asistencia Bluetooth</title>
         <script type="text/javascript" charset="utf-8" src="SQLitePlugin.js"></script>
 		<script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
@@ -32,14 +33,55 @@
 
     </head>
     <body>
-        <div class="app">
-            <h1>Asistencia Bluetooth</h1>
-            <div>
-               <a href="bluetooth.html" class="waves-effect waves-light btn"><i class="material-icons left">settings_bluetooth</i>Tomar asistencia</a>
-			   <a href="deviceprop.html" class="waves-effect waves-light btn"><i class="material-icons left">phonelink_setup</i>Device properties</a>
-			   <a href="dar_presente.html" class="waves-effect waves-light btn"><i class="material-icons left">assignment_ind</i>Dar presente</a>
-            </div>
+  <div class="container">
+        <nav class="light-blue lighten-1 z-depth-3" role="navigation">
+         <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><IMG SRC="./img/logo.png"  width="60" height="60"></a>
+    </div>
+  </nav>
+
+       <!--div class="app"-->
+       <div class="row center">
+        <h3 class="header center orange-text light flow-text">Asistencia Bluetooth</h5>
+      </div>
+            
+                
+  <div class="container">
+         <div class="section">
+
+      <!--   Icon Section   -->
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><a href="bluetooth.html" class="waves-effect waves-teal btn-flat-large"><i class="large material-icons">bluetooth_searching</i></a></h2>
+            <h5 class="center flow-text">Tomar asistencia</h5>
+          </div>
         </div>
+
+        <div class="col s12 m6">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><a href="deviceprop.html" class="waves-effect waves-teal btn-flat-large">    
+        <i class="large material-icons">face</i></a></h2>
+            <h5 class="center flow-text">Mi perfil</h5>
+
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="icon-block">
+            <h2 class="center light-blue-text"><a href="dar_presente.html" class="waves-effect waves-teal btn-flat-large"><i class="large material-icons">thumb_up</i></a></h2>
+            <h5 class="center flow-text">Dar presente</h5>
+          </div>
+        </div>
+    </div>
+
+    </div>
+    <br><br>
+
+    <div class="section">
+
+    </div>
+  </div>
+ </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>

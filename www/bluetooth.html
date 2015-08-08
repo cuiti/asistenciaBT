@@ -14,16 +14,27 @@
       <header class="bar bar-nav">
           <h4 class="title">Asistencia Bluetooth para <span>una materia (?</span></h1>
       </header>
-	    
       <div class="bar bar-standard bar-header-secondary">
-          <button data-bind="click:scanDevices" class="btn btn-block btn-primary">Tomar Asistencia</button>
+          <button data-bind="click:scanDevices" id="boton" class="btn btn-block btn-primary">Tomar Asistencia</button>
+        <div class="container" id="preload" style="display:none"> 
+          <div class="preloader-wrapper big active">
+          <div class="spinner-layer spinner-blue-only">
+          <div class="circle-clipper left">
+          <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+          </div><div class="circle-clipper right">
+          <div class="circle"></div>
+          </div>
+          </div>
+          </div>
       </div>
       
 	 <div class="content">
          <div class="content-padded">
             <h5>Listado De alumnos</h3>
             <div class="card">
-                <ul class="table-view" data-bind="foreach: alumnos">
+                <ul class="responsive-table" data-bind="foreach: alumnos">
                   <li class="table-view-cell">
                       <span data-bind="text: name"></span>
                       <span data-bind=" css: { 'badge-positive' : present()}, text: present() ? 'presente' : 'ausente'" class="badge"></span>

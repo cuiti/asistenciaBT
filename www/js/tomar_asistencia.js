@@ -26,23 +26,44 @@ function AlumnoViewModel(data) {
         self.present(data.present);
     }
 
+
+    self.connect = function() {
+        self.device = BC.bluetooth.devices[self.device_mac];
+        self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
+        self.device.addEventListener("deviceconnected", self.prepareStudentAndWrite);
+    }
+
+
     self.connectionSuccess = function() {
         alert("nos conectamos correctamente!!");
     };
 
     self.connectionError = function() {
-        console.error("No se pudo conectar con", self.name," intentando de nuevo en 2 segundos");
+        console.error("No se pudo conectar con", self.device.deviceName," intentando de nuevo");
+        self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
+    };
+
+
+    self.prepareStudentAndWrite = function(s) {
+        self.connectedDevice = s;
+        alert("device:" + s.deviceAddress + "is connected successfully!")
+        self.device.prepare(self.tryWrite, self.prepareError)
+    };
+
+    self.tryWrite = function() {
+        self.device.rfcommWrite("ascii","ping", self.writeSuccess, self.writeError);
     };
 
     self.prepareError = function(msg) {
         console.error("No se pudo preparar el dispositivo.");
+        self.device.prepare(self.tryWrite, self.prepareError)
         console.log(msg);
     };
 
+
     self.writeSuccess = function() {
-        alert("Se envio la confirmación correctamente a "+self.name);
+        Materialize.toast("Se envio la confirmación correctamente a "+self.name, 3000, 'rounded');
         self.present(true);
-        window.clearInterval(self.tryWriteInterval);
         self.device.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
         BC.Bluetooth.StopScan();
         window.vm.scanDevices();
@@ -51,38 +72,8 @@ function AlumnoViewModel(data) {
 
     self.writeError = function() {
         alert("no se pudo escribir");
-        console.error("no se pudo escribir, intentando de nuevo en 2 segundos")
-    }
-
-    self.setTryConnectionInterval = function() {
-        self.device = BC.bluetooth.devices[self.device_mac];
-        self.device.addEventListener("deviceconnected", self.prepareStudentAndWrite);
-        self.tryConnectionInterval = setInterval(self.tryConnection, 5000);
-    }
-
-    self.prepareStudentAndWrite = function(s) {
-        self.connectedDevice = s;
-        window.clearInterval(self.tryConnectionInterval);
-        alert("device:" + s.deviceAddress + "is connected successfully!")
-        //self.tryPrepareInterval = setInterval(self.tryPrepare, 5000);
-        self.tryPrepare();
-    };
-
-    self.tryPrepare = function() {
-        self.device.prepare(self.setTryWriteInterval, self.prepareError)
-    };
-
-    self.setTryWriteInterval = function() {
-        self.tryWriteInterval = setInterval(self.tryWrite, 5000);
-        window.clearInterval(self.tryPrepareInterval);
-    };
-
-    self.tryWrite = function() {
+        console.error("no se pudo escribir, intentando de nuevo.")
         self.device.rfcommWrite("ascii","ping", self.writeSuccess, self.writeError);
-    };
-
-    self.tryConnection = function() {
-        self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
     }
 }
 
@@ -130,8 +121,9 @@ function AsistenciaViewModel() {
     };
 
     self.openBTSuccess = function(message) {
-        alert("Se abrió el BT correctamente.");
-    };
+        Materialize.toast('Empiezo a tomar asistencia!', 3000, 'rounded');    
+        document.getElementById('preload').style.display = "";
+};
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
@@ -153,7 +145,7 @@ function AsistenciaViewModel() {
             });
 
         if (in_students && !in_students.present()) {
-            in_students.setTryConnectionInterval();
+            in_students.connect();
         } else {
             if (!in_detected_devices) {
                 var a = new AlumnoViewModel({

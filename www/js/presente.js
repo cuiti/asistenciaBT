@@ -47,60 +47,52 @@ function PresenteViewModel() {
         });
         BC.Bluetooth.StartScan();
     };
-    self.tryConnection = function() {
-        self.teacherDevice.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
-    }
-
-    self.connectionSuccess = function() {
-       // alert("nos conectamos correctamente!!");
-        // si ya nos conectamos, limpiamos el intervalo para que no siga intentando.
-    }
-    
-    self.connectionError = function() {
-        console.log("no se pudo establecer conexion", self.name, "reintentando en 2 segundos");
-    };
 
     self.deviceFound = function(s) {
         var nD = s.target;
         if (nD.deviceAddress == self.teacher().device_mac) {
             self.teacherDevice = nD;
-            self.connection_interval = setInterval(self.tryConnection, 5000);
+            //self.connection_interval = setInterval(self.tryConnection, 5000);
+            self.teacherDevice.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
             self.teacherDevice.addEventListener("deviceconnected", self.prepareTeacherAndRead);
         } else {
-            console.log("Encontre a: "+nD.deviceName + "");
+         console.log("Encontre a: "+nD.deviceName + "");
         }
     };
 
-    self.prepareTeacherAndRead = function(s) {
-        self.connectedTeacher = s;
-        alert("device:" + s.deviceAddress + "is connected successfully!")
-        window.clearInterval(self.connection_interval);
-        //self.PrepareInterval = setInterval(self.tryPrepare,5000);
-        self.tryPrepare();
+    self.connectionSuccess = function() {
+      // alert("nos conectamos correctamente!!");
+    }
+    
+    self.connectionError = function() {
+        console.log("no se pudo establecer conexion", self.name, "reintentando");
+        self.teacherDevice.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
     };
 
-    self.setTryReadInterval = function() {
-        window.clearInterval(self.PrepareInterval);
-        self.read_interval = setInterval(self.tryRead, 5000);
-    }
+    self.prepareTeacherAndRead = function(s) {
+        self.teacherDevice = s;
+        alert("device:" + s.deviceAddress + "is connected successfully!");
+        Materialize.toast('Me conecte con el profesor', 3000, 'rounded'); 
+        self.teacherDevice.prepare(self.tryRead, self.prepareError)
+    };
 
     self.tryRead = function() {
-           self.teacherDevice.rfcommRead(self.readSuccess, self.readError);
-         window.clearInterval(self.tryRead);
+        self.teacherDevice.rfcommRead(self.readSuccess, self.readError);
     }
 
     self.tryPrepare = function() {
-        self.connectedTeacher.prepare(self.setTryReadInterval, self.prepareError)
+        self.teacherDevice.prepare(self.setTryReadInterval, self.prepareError)
     };
 
     self.prepareError = function(message) {
-        console.log("error preparing teacher device intentando de nuevo en 5 segundos");
+        console.log("error preparing teacher device intentando de nuevo");
+        self.teacherDevice.prepare(self.tryRead, self.prepareError)
         console.log(message);
     };
 
     self.readError = function() {
         alert("no lei");
-        //self.connectedTeacher.rfcommSubscribe(self.readSuccess);
+        self.teacherDevice.rfcommRead(self.readSuccess, self.readError);
         console.log("error leyendo del canal rfcomm, intentando de nuevo en dos segundos")
     }
 
@@ -110,13 +102,18 @@ function PresenteViewModel() {
         var res= d.slice(0, 4);
         alert(data.deviceAddress); //aca sacas la mac del que escribe!
         if (e.valueOf() == res.valueOf()) {
-            alert("estas Presente!");
-            window.clearInterval(self.read_interval);
-            self.teacherDevice.rfcommWrite("ascii", "ok", function(){alert("escribi")}, function(){alert("no escribi")});
+            
+        Materialize.toast('Estas presente!!', 4000, 'rounded'); 
+        alert("estas Presente!");
+            self.teacherDevice.rfcommWrite("ascii", "ok", function(){alert("escribi")},self.writeError);
             self.connectedTeacher.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
-        } else alert("Lo que lei no es mi dato jiji");
+        } else {alert("Lo que lei no es mi dato jiji");
+                self.teacherDevice.rfcommRead(self.readSuccess, self.readError);}
     }
-
+    self.writeError = function(){
+        alert("No escribi");
+        self.teacherDevice.rfcommWrite("ascii", "ok", function(){alert("escribi")},self.writeError());
+    }
     self.debug = function() {
         console.log("hey");
     }
