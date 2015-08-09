@@ -2,6 +2,7 @@
 document.addEventListener("deviceready", onDeviceReady, false);
 var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
 var DEBUG = false;
+
 // device APIs are available
 function onDeviceReady() {
     $("#preloader-presente").hide();
