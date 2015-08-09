@@ -3,47 +3,97 @@
   <head>
     <title>Bluetooth</title>
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/sweetalert.css"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+	   <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/sweetalert.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/presente.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
   
   <body>
-      <header class="bar bar-nav">
-          <h1 class="title">Asistencia Bluetooth para <span>una materia (?</span></h1>
-      </header>
-	    
-      <div class="bar bar-standard bar-header-secondary">
-          <button data-bind="click:givePresent" class="btn btn-block btn-primary">Dar Presente</button>
-      </div>
+      <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo right">Presente</a>
+        </div>
+      </nav>
       
-	 <div class="content">
-      <div class="content-padded">
-        DANDO PRESENTING....
+      
+	 <main class="content">
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <button data-bind="click:givePresent" class="waves-effect waves-light btn-large"><i class="material-icons right">thumb_up</i>Dar Presente</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col s12">
+          <div class="center-align">
+            <div id="preloader-presente" class=" preloader-wrapper big active">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
     </div>
+    </main>
 
            
-      <nav class="bar bar-tab">
-          <a class="tab-item" href="index.html">
-            <span class="icon icon-home"></span>
-            <span class="tab-label">Home</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-person"></span>
-            <span class="tab-label">Mi Perfil</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-list"></span>
-            <span class="tab-label">Mis Clases</span>
-          </a>
-          <a class="tab-item" href="#">
-            <span class="icon icon-gear"></span>
-            <span class="tab-label">Configuracion</span>
-          </a>
-    </nav>
+    <footer class="page-footer blue">
+      <div class="container">
+        <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">Footer</h5>
+          <p class="grey-text text-lighten-4">Links a las cosas</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      Made by <a class="orange-text text-lighten-3" href="#">Grupo Fenix</a>
+      </div>
+    </div>
+  </footer>
   </body>
 </html>

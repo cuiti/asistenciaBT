@@ -7,7 +7,18 @@ function onDeviceReady() {
     ko.applyBindings(vm);
 }
 
+
+
+var DEBUG  = false;
 var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
+
+function logmsg(msg) {
+    if (DEBUG) {
+        Materialize.toast(msg,2000,'rounded');
+    } else {
+        console.log(msg);
+    }
+}
 
 function AlumnoViewModel(data) {
     var self = this;
@@ -35,18 +46,18 @@ function AlumnoViewModel(data) {
 
 
     self.connectionSuccess = function() {
-        alert("nos conectamos correctamente!!");
+        //alert("nos conectamos correctamente!!");
     };
 
     self.connectionError = function() {
-        console.error("No se pudo conectar con", self.device.deviceName," intentando de nuevo");
+        logmsg("No se pudo conectar con"+self.device.deviceName+" intentando de nuevo");
         self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
     };
 
 
     self.prepareStudentAndWrite = function(s) {
         self.connectedDevice = s;
-        alert("device:" + s.deviceAddress + "is connected successfully!")
+        logmsg("device:" + s.deviceAddress + "conectado");
         self.device.prepare(self.tryWrite, self.prepareError)
     };
 
@@ -55,25 +66,49 @@ function AlumnoViewModel(data) {
     };
 
     self.prepareError = function(msg) {
-        console.error("No se pudo preparar el dispositivo.");
+        logmsg("No se pudo preparar el dispositivo.");
         self.device.prepare(self.tryWrite, self.prepareError)
         console.log(msg);
     };
 
 
     self.writeSuccess = function() {
-        Materialize.toast("Se envio la confirmación correctamente a "+self.name, 3000, 'rounded');
-        self.present(true);
-        self.device.disconnect(function(){alert("me desconecté")}, function(){alert("no me desconecté")});
-        BC.Bluetooth.StopScan();
-        window.vm.scanDevices();
-
+        logmsg("Se envio la confirmación correctamente a "+self.name);
+        self.device.rfcommRead(self.readSuccess, self.readError);
     };
 
     self.writeError = function() {
-        alert("no se pudo escribir");
-        console.error("no se pudo escribir, intentando de nuevo.")
+        logmsg("no se pudo escribir, intentando de nuevo.");
         self.device.rfcommWrite("ascii","ping", self.writeSuccess, self.writeError);
+    }
+
+    self.readSuccess = function(data) {
+        var d=data.value.getASCIIString();
+        var e= new String("ok");
+        var res= d.slice(0, 2);
+        if (e.valueOf() == res.valueOf()) {
+            logmsg("ping back recibido!");
+            self.present(true);
+            self.device.disconnect(self.disconnectSuccess, self.disconnectError);
+        } else {
+           logmsg("Lo que lei no es mi dato jiji");
+            self.device.rfcommRead(self.readSuccess, self.readError);}
+    }
+
+    self.readError = function() {
+        logmsg("No pude leer la confirmacion del alumno, intentando otra vez");
+        self.device.rfcommRead(self.readSuccess, self.readError);
+    }
+
+    self.disconnectSuccess = function() {
+        BC.Bluetooth.StopScan();
+        window.vm.scanDevices();
+        logmsg("Se desconecto del alumno correctamente.");
+    };
+
+    self.disconnectError = function() {
+        logmsg("no se pudo desconectar, intentando de nuevo.");
+        self.device.disconnect(self.disconnectSuccess, self.disconnectError);
     }
 }
 
@@ -117,11 +152,11 @@ function AsistenciaViewModel() {
     };
 
     self.openBTError = function() {
-        console.error("No pudo abrirse el bluetooth");
+        logmsg("No pudo abrirse el bluetooth");
     };
 
     self.openBTSuccess = function(message) {
-        Materialize.toast('Empiezo a tomar asistencia!', 3000, 'rounded');    
+        logmsg('Empiezo a tomar asistencia!');    
         document.getElementById('preload').style.display = "";
 };
 
