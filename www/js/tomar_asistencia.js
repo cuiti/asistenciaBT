@@ -74,7 +74,9 @@ function AlumnoViewModel(data) {
 
     self.writeSuccess = function() {
         logmsg("Se envio la confirmación correctamente a "+self.name);
-        self.device.rfcommRead(self.readSuccess, self.readError);
+        self.present(true);
+        self.device.disconnect(self.disconnectSuccess, self.disconnectError);
+        //self.device.rfcommRead(self.readSuccess, self.readError);
     };
 
     self.writeError = function() {
@@ -136,9 +138,19 @@ function AsistenciaViewModel() {
             device_mac: "5C:FF:35:6E:B0:8D",
             present: false
         }),
+         new AlumnoViewModel({
+            name: "tlidi5",
+            device_mac: "AC:22:0B:35:E9:AA",
+            present: false
+        }),
           new AlumnoViewModel({
             name: "juan",
             device_mac: "90:5F:2E:BD:32:DC",
+            present: false
+        }),
+        new AlumnoViewModel({
+            name: "Alfonso XPERIA",
+            device_mac: "30:39:26:FB:B4:E7",
             present: false
         }),
         new AlumnoViewModel({name:"Samsung", device_mac:"A4:9A:58:9E:3D:69", present: false}),

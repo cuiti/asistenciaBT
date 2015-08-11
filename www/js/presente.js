@@ -27,12 +27,12 @@ function PresenteViewModel() {
     self.connection_interval = null;
     self.read_interval = null;
     self.teacher = ko.observable(new TeacherViewModel({
-        name: "TABLET_PC",
-       device_mac: "54:E4:BD:BF:3F:B9"
+       //name: "TABLET_PC",
+       //device_mac: "54:E4:BD:BF:3F:B9"
        //name: "SAMSUNG",
        //device_mac: "A4:9A:58:9E:3D:69"
-       //name: "TLIDI2",
-       //device_mac: "AC:22:0B:35:EE:4E"
+       name: "TLIDI2",
+       device_mac: "AC:22:0B:35:EE:4E"
        //name: "tablet viki",
        //device_mac: "96:4E:46:66:22:CB"
        //name: "samsung",
