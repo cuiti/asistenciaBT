@@ -14,13 +14,30 @@ function onDeviceReady() {
 }, function() {
     console.log('error :(');
 });
-  
+    window.MacAddress.getMacAddress(
+    function(macAddress) {alert(macAddress); device_address=macAddress},
+    function(fail) {alert(fail);}
+);
 }
 
 function RegisterVM() {
   var self = this;
   self.username = ko.observable();
+  self.device_address = ko.observable();
+  self.first_name = ko.observable();
+  self.last_name = ko.observable();
 
+  self.validateName = function() {
+    if ($("#first_name").value.length==0){
+        $("#first_name").removeClass("valid").addClass("invalid"); 
+    }
+  };
+
+  self.validateLastName = function() {
+    if ($("#last_name").value.length==0){
+        $("#last_name").removeClass("valid").addClass("invalid"); 
+    }   };
+  
   self.nameChanged = function() {
     $("#username-progress").show();
     cordovaHTTP.get(checknameURL+self.username(), {}, {}, 
@@ -33,7 +50,7 @@ function RegisterVM() {
       self.getDataFailure(response);
     });
   };
-  
+
   self.getDataSuccess = function(data) {
     if (data.free) {
       $("#username").removeClass("invalid").addClass("valid");
