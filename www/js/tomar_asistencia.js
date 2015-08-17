@@ -1,16 +1,26 @@
+var DEBUG  = false;
+var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
+var username = "movilesbluetooth";
+var password = "3mFh5qNR";
+var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";
+var currentCursoID = 0;
+
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
 function onDeviceReady() {
-    window.vm = new AsistenciaViewModel();
-    ko.applyBindings(vm);
+    currentCursoID = localStorage.getItem("currentCursoID");
+    cordovaHTTP.useBasicAuth(username, password, function() {
+        console.log('success!');
+        window.vm = new AsistenciaViewModel();
+        ko.applyBindings(vm);
+    }, 
+    function() {
+        console.log('error :(');
+    });
+    
 }
-
-
-
-var DEBUG  = false;
-var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
 
 function logmsg(msg) {
     if (DEBUG) {
@@ -26,10 +36,14 @@ function AlumnoViewModel(data) {
     self.connectedDevice = null;
     self.device_mac = "";
     self.present = ko.observable(false);
-    self.tryConnectionInterval = null;
-    self.tryPrepareInterval = null;
-    self.tryWriteInterval = null;
     self.name ="";
+    self.MAXATTEMPS = 20;
+    self.triesCounter = 0;
+
+    self.ConnectingToDevice = false;
+    self.PreparingDevice    = false;
+    self.ReadingDevice      = false;
+    self.WritingDevice      = false;
 
     if (data) {
         self.name = data.name;
@@ -50,8 +64,11 @@ function AlumnoViewModel(data) {
     };
 
     self.connectionError = function() {
-        logmsg("No se pudo conectar con"+self.device.deviceName+" intentando de nuevo");
-        self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
+        if (self.triesCounter <= self.MAXATTEMPS) {
+            logmsg("No se pudo conectar con"+self.device.deviceName+" intentando de nuevo");
+            self.device.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
+            self.triesCounter++;
+        }
     };
 
 
@@ -117,46 +134,32 @@ function AlumnoViewModel(data) {
 function AsistenciaViewModel() {
     var self = this;
     self.detectedDevices = ko.observableArray([]);
-    self.alumnos = ko.observableArray([
-        new AlumnoViewModel({
-            name: "tablet_pc",
-            device_mac: "54:E4:BD:BF:3F:B9",
-            present: false
-        }),
-        new AlumnoViewModel({
-            name: "tlidi3",
-            device_mac: "AC:22:0B:35:EF:8B",
-            present: false
-        }),
-        new AlumnoViewModel({
-            name: "tlidi2",
-            device_mac: "AC:22:0B:35:EE:4E",
-            present: false
-        }),
-         new AlumnoViewModel({
-            name: "tlidi9",
-            device_mac: "5C:FF:35:6E:B0:8D",
-            present: false
-        }),
-         new AlumnoViewModel({
-            name: "tlidi5",
-            device_mac: "AC:22:0B:35:E9:AA",
-            present: false
-        }),
-          new AlumnoViewModel({
-            name: "juan",
-            device_mac: "90:5F:2E:BD:32:DC",
-            present: false
-        }),
-        new AlumnoViewModel({
-            name: "Alfonso XPERIA",
-            device_mac: "30:39:26:FB:B4:E7",
-            present: false
-        }),
-        new AlumnoViewModel({name:"Samsung", device_mac:"A4:9A:58:9E:3D:69", present: false}),
-        new AlumnoViewModel({name:"Alfonso Cuitiño", device_mac : "54:44:08:CA:00:28", present: false}),
-        new AlumnoViewModel({name:"Julia Lasarte", device_mac : "54:44:08:CA:BC:28", present: false})
-    ]);
+    self.alumnos = ko.observableArray([]);
+
+    
+    self.getDataSuccess = function(data) {
+        var mappedAlumnos = $.map(data.alumnos, function(item) { 
+            return new AlumnoViewModel({
+                name:item.nombre+" "+item.apellido, 
+                device_mac: item.device_address,
+                present: false
+            }) 
+        });
+        self.alumnos(mappedAlumnos);
+    };
+
+    self.getDataFailure = function(response) {
+        console.error(response.error);
+    }  
+
+    cordovaHTTP.get(getCursoURL+currentCursoID, {}, {}, 
+        function(response) {
+          self.getDataSuccess(JSON.parse(response.data));
+        }, 
+        function(response) {
+          self.getDataFailure(response);
+    });
+
 
     self.registerStudent = function(student) {
         self.alumnos.push(student);

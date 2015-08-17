@@ -6,3 +6,9 @@ Para compilar usando PhoneGap por la consola, se necesita instalar:
 - Apache Ant
 - Android SDK
 - ...
+
+Para compilar después de hacer el clone
+
+1. cordova platforms add android
+2. cordova plugin add https://github.com/bcsphere/bluetooth.git
+3. cordova plugin add https://github.com/wymsee/cordova-HTTP.git

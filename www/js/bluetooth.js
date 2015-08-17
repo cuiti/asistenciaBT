@@ -28,7 +28,6 @@ function getUserMac(){
     }   
 	function AsistenciaViewModel() {
         var self = this;
-        var app_id = 
         self.detectedDevices = ko.observableArray([]);
         self.teachers = ko.observableArray([new AlumnoViewModel({name:"Profesor prueba", device_mac:"68:A8:54:3C:2B:B2", present: false})]);
         self.alumnos = ko.observableArray([
