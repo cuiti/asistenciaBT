@@ -14,24 +14,65 @@
   </head>
   
   <body>
+    <nav class="blue" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+        </div>
+      </nav>
+
       <header class="bar bar-nav">
           <h4 class="title">Asistencia Bluetooth <span>Mis cursos</span></h1>
       </header>
       
-  	 <div class="content">
-        <div class="row">
-          <form class="col s12">
-            <div class="row">
-              <div class="input-field col s12">
-                <input id="username" type="text" data-bind="value:username, event: {change: nameChanged}">
-                <label for="username" data-error="Nombre de usuario no disponible" data-success="ok!">Nombre de Usuario</label>
-                <div id="username-progress" class="progress">
-                    <div class="indeterminate"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>   
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input placeholder="" id="first_name" type="text" class="validate">
+          <label for="first_name">Nombre</label>
+        </div>
+        <div class="input-field col s6">
+          <input placeholder="" id="last_name" type="text" class="validate">
+          <label for="last_name">Apellido</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="username" type="text" data-bind="value:username, event: {change: nameChanged}">
+          <label for="username" data-error="Nombre de usuario no disponible" data-success="ok!">Nombre de Usuario</label>
+          <div id="username-progress" class="progress">
+          <div class="indeterminate"></div>
+          </div>
+          </div>
+      </div>
+      <div class="row">
+      <label>Eres un alumno?</label>
+      <div class="switch">
+      <label>
+        No
+      <input type="checkbox" id="alumno" onchange="javascript:showContent()">
+      <span class="lever"></span>
+        Si
+      </label>
+
+      <script>
+        function showContent(){
+         var esEstudiante = document.getElementById("alumno");
+          if (esEstudiante.checked){document.getElementById('leg').style.display = "";}
+          else document.getElementById('leg').style.display = "none";
+          } </script>
+      </div>
     </div>
+      <div class="row" id="leg" style="display:none">
+        <div class="input-field col s6">
+          <input placeholder="" type="text" class="validate">
+          <label for="legajo">Legajo</label>
+        </div>
+      </div>
+    </br>
+  </br>
+    <button class="btn-large waves-effect waves-light" type="submit" name="action">Registrarse
+    </button>
+    </form>
+  </div>
   </body>
 </html>
