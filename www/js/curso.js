@@ -20,13 +20,13 @@ function CursoVM() {
   var self = this;
   self.id = ko.observable();
   self.nombre = ko.observable();
-  self.descripccion = ko.observable();
+  self.descripcion = ko.observable();
   self.profesor = ko.observable();
 
   self.getDataSuccess = function(data) {
     self.id(data.id)
     self.nombre(data.nombre);
-    self.descripccion(data.descripccion);
+    self.descripcion(data.descripcion);
     self.profesor(data.profesor);
   };
 

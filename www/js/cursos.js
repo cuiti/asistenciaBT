@@ -23,7 +23,7 @@ function Curso(data) {
   var self = this;
   self.id = data.id;
   self.nombre = data.nombre;
-  self.descripccion = data.descripccion;
+  self.descripcion = data.descripcion;
   self.profesor = data.profesor;
 
   self.setAsCurrent = function() {
