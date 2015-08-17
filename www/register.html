@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bluetooth</title>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/register.js"></script>
+  </head>
+  
+  <body>
+      <header class="bar bar-nav">
+          <h4 class="title">Asistencia Bluetooth <span>Mis cursos</span></h1>
+      </header>
+      
+  	 <div class="content">
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="username" type="text" data-bind="value:username, event: {change: nameChanged}">
+                <label for="username" data-error="Nombre de usuario no disponible" data-success="ok!">Nombre de Usuario</label>
+                <div id="username-progress" class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>   
+    </div>
+  </body>
+</html>
