@@ -1,8 +1,5 @@
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
-var username = "movilesbluetooth";
-var password = "3mFh5qNR";
-var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";
 var currentCursoID = 0;
 var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
 var DEBUG = false;
@@ -11,12 +8,7 @@ var DEBUG = false;
 function onDeviceReady() {
     $("#preloader-presente").hide();
     currentCursoID = localStorage.getItem("currentCursoID");
-    cordovaHTTP.useBasicAuth(username, password, function() {
-    console.log('success!');
-    ko.applyBindings(new PresenteViewModel());
-}, function() {
-    console.log('error :(');
-});
+    Server.initialize(function() { ko.applyBindings(new PresenteViewModel());}, function() { console.log('error :(');});
 }
 
 function TeacherViewModel(data) {
@@ -51,20 +43,15 @@ function PresenteViewModel() {
 
     
     self.getDataSuccess = function(data) {
-        self.teacher(new TeacherViewModel({name: data.profesor.nombreusuario, device_mac: data.profesor.device_address}));
+        self.teacher(new TeacherViewModel({name: data.usuario_profesor, device_mac: data.address_profesor}));
     };
 
     self.getDataFailure = function(response) {
         console.error(response.error);
     }  
 
-    cordovaHTTP.get(getCursoURL+currentCursoID, {}, {}, 
-        function(response) {
-          self.getDataSuccess(JSON.parse(response.data));
-        }, 
-        function(response) {
-          self.getDataFailure(response);
-    });
+    Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+
 
     self.givePresent = function() {
         $("#preloader-presente").show();
