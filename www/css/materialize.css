@@ -2349,14 +2349,14 @@ span.badge {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
-  span.badge.new {
+  span.badge.present {
     font-weight: 300;
     font-size: 0.8rem;
     color: #fff;
     background-color: #26a69a;
     border-radius: 2px; }
-  span.badge.new:after {
-    content: " new"; }
+  span.badge.present:after {
+    content: ""; }
 
 .video-container {
   position: relative;

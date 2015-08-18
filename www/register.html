@@ -27,18 +27,18 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="" id="first_name" type="text" data-bind="value:first_name, event: {change: validateName}" class="validate" required />
+          <input id="first_name" type="text" data-bind="value:first_name, event: {change: validateName}" class="validate" required />
           <label for="first_name" data-error="Campo requerido">Nombre</label>
         </div>
         <div class="input-field col s6">
-          <input placeholder="" id="last_name" type="text" data-bind="value:last_name, event: {change: validateLastName}" class="validate" required />
+          <input id="last_name" type="text" data-bind="value:last_name, event: {change: validateLastName}" class="validate" required />
           <label for="last_name" data-error="Campo requerido">Apellido</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
           <input id="username" type="text" data-bind="value:username, event: {change: nameChanged}" class="validate" required />
-          <label for="username" data-error="Nombre de usuario no disponible" data-success="ok!">Nombre de Usuario</label>
+          <label for="username" data-error="Nombre de usuario ya existente" data-success="Disponible">Nombre de Usuario</label>
           <div id="username-progress" class="progress">
           <div class="indeterminate"></div>
           </div>
@@ -47,7 +47,7 @@
     </br>
     </br>
     </br>
-      <div class="row">
+      <div class="row center">
       <label>Eres un alumno?</label>
       <div class="switch">
       <label>
@@ -65,9 +65,9 @@
           } </script>
       </div>
     </div>
-      <div class="row" id="leg" style="display:none">
-        <div class="input-field col s6">
-          <input placeholder="" type="text" class="validate">
+      <div class="row center" id="leg" style="display:none">
+        <div class="input-field col s6 offset-s4 grid-example">
+          <input type="text" class="validate">
           <label for="legajo">Legajo</label>
         </div>
       </div>
@@ -75,8 +75,10 @@
     <input id="mac_address" type="hidden" data-bind="value:device_address">
     </br>
   </br>
+  <div class="row center">
     <button class="btn-large waves-effect waves-light center" type="submit" name="action">Registrarse
     </button>
+  </div>
     </form>
   </div>  
   </div>

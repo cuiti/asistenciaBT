@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bluetooth</title>
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
@@ -14,8 +13,13 @@
   </head>
   
   <body>
+      <nav class="blue" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+        </div>
+      </nav>
+
       <header class="bar bar-nav">
-          <h4 class="title">Asistencia Bluetooth <span>Mis cursos</span></h1>
+          <h4 class="title center blue-text"><span>Mis cursos</span></h4>
       </header>
       
   	 <div class="content">
@@ -23,7 +27,7 @@
           <li class="collection-item avatar">
             <i class="material-icons circle">folder</i>
             <span class="title" data-bind="text: nombre"></span>
-            <p data-bind="text: descripccion"></p>
+            <p data-bind="text: descripccion"></br></p>
             <a href="#!" data-bind="click:setAsCurrent" class="secondary-content"><i class="material-icons medium">input</i></a>
           </li>
         </ul>       

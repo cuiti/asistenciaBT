@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bluetooth</title>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/registerSubject.js"></script>
+  </head>
+  
+  <body>
+    <nav class="blue" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+        </div>
+      </nav>
+
+   <div class="container">    
+      <header class="bar bar-nav">
+          <h4 class="title center blue-text"><span>Nuevo Curso</span></h1>
+      </header>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="name" type="text" data-bind="value:name, event: {change: validateName}" class="validate" required />
+          <label for="name" data-error="Nombre de curso ya existente" data-success="Disponible">Nombre del curso</label>
+          <div id="name-progress" class="progress">
+          <div class="indeterminate"></div>
+          </div>
+        </div>
+      </div>
+      </br>
+      </br>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="description" type="text" class="materialize-textarea validate" length="140" />
+          <label for="description">Descripción</label>
+          <script>
+           $(document).ready(function() {
+           $('textarea#description').characterCounter();
+           });</script>
+        </div>
+      </div>
+    
+      <div class="row">
+      </div>
+
+    <input id="teacher_id" type="hidden" data-bind="value:teacher_id">
+    </br>
+  </br>
+  <div class="row center">
+    <button class="btn-large waves-effect waves-light center" type="submit" name="action">Crear curso</button>
+  </div>
+    </form>
+  </div>  
+  </div>
+  </body>
+</html>
