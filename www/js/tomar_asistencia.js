@@ -36,6 +36,7 @@ function AlumnoViewModel(data) {
     self.connectedDevice = null;
     self.device_mac = "";
     self.present = ko.observable(false);
+    self.inscripted = ko.observable(false);
     self.name ="";
     self.MAXATTEMPS = 20;
     self.triesCounter = 0;
@@ -173,11 +174,12 @@ function AsistenciaViewModel() {
     self.openBTSuccess = function(message) {
         logmsg('Empiezo a tomar asistencia!');    
         document.getElementById('preload').style.display = "";
+        setTimeout(function() {BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+}, 3000);
 };
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
         BC.Bluetooth.StartScan();
     };

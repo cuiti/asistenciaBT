@@ -56,9 +56,10 @@ function PresenteViewModel() {
     self.givePresent = function() {
         $("#preloader-presente").show();
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.OpenBluetooth(function() {
-            alert("ahora te lo busco");
+            setTimeout(function() {BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);}, 3000);
+        
+
         }, function() {
             alert("bluetooth open error!");
         });
