@@ -33,8 +33,8 @@ function PresenteViewModel() {
        //device_mac: "54:E4:BD:BF:3F:B9"
        //name: "SAMSUNG",
        //device_mac: "A4:9A:58:9E:3D:69"
-       name: "TLIDI2",
-       device_mac: "AC:22:0B:35:EE:4E"
+       name: "TLIDI9",
+       device_mac: "5C:FF:35:6E:B0:8D"
        //name: "tablet viki",
        //device_mac: "96:4E:46:66:22:CB"
        //name: "samsung",
@@ -124,8 +124,10 @@ function PresenteViewModel() {
         var e= new String("ping");
         var res= d.slice(0, 4);
         if (e.valueOf() == res.valueOf()) {
-            swal("Estas Presente!", "", "success") 
-            self.teacherDevice.rfcommWrite("ascii", "ok", self.writeSuccess,self.writeError);
+            swal("Estas Presente!", "", "success"); 
+            $("#preloader-presente").hide();
+
+            //self.teacherDevice.rfcommWrite("ascii", "ok", self.writeSuccess,self.writeError);
         } else {
             if (DEBUG) {
                 Materialize.toast("Lo que lei no es mi dato jiji", 2000, 'rounded');
@@ -135,6 +137,7 @@ function PresenteViewModel() {
 
     self.writeSuccess = function() {
         Materialize.toast("Se envio la confirmación correctamente.", 2000, 'rounded');
+        $("#preloader-presente").hide();
         self.teacherDevice.disconnect(self.disconnectSuccess, self.disconnectError);
     };
 

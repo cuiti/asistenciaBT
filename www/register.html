@@ -21,7 +21,7 @@
 
    <div class="container">    
       <header class="bar bar-nav">
-          <h4 class="title center blue-text"><span>Nuevo usuario</span></h1>
+          <h4 class="title center thin blue-text"><span>Nuevo usuario</span></h1>
       </header>
   <div class="row">
     <form class="col s12">
@@ -36,13 +36,18 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
           <input id="username" type="text" data-bind="value:username, event: {change: nameChanged}" class="validate" required />
           <label for="username" data-error="Nombre de usuario ya existente" data-success="Disponible">Nombre de Usuario</label>
           <div id="username-progress" class="progress">
           <div class="indeterminate"></div>
           </div>
           </div>
+          <div class="input-field col s6">
+          <input id="password" type="password" class="validate" required />
+          <label for="password">Contrase&ntilde;a</label>
+
+          </div>  
       </div>
     </br>
     </br>
