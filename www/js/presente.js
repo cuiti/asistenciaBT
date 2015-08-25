@@ -47,7 +47,7 @@ function PresenteViewModel() {
     };
 
     self.getDataFailure = function(response) {
-        console.error(response.error);
+        alert.error(response.error);
     }  
 
     Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
