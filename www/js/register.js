@@ -15,7 +15,7 @@ function onDeviceReady() {
     console.log('error :(');
 });
     window.MacAddress.getMacAddress(
-    function(macAddress) {alert(macAddress); device_address=macAddress},
+    function(macAddress) {device_address=macAddress;},
     function(fail) {alert(fail);}
 );
 }

@@ -4,30 +4,49 @@
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
-
-		<link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+		    <link rel="stylesheet" type="text/css" href="css/index.css" />
+		    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
         <title>Asistencia Bluetooth</title>
-		<script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
-		<script type="text/javascript" src="js/vendor/materialize.min.js"></script>
-
-    </head>
-    <body>
-      <nav class="blue" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
-        </div>
-      </nav>
-      <div class="container">
-        <br><br>
-        <h3 class="header center blue-text">Asistencia Bluetooth</h3>
+		    <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
+		    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+  <!--script>
+    document.addEventListener("deviceready",onDeviceReady,false);
+    function onDeviceReady() {  
+    var registrado= window.localStorage.getItem("Mac");
+    if (registrado == null) {$("#preloader").hide(); location.href = "pp.html";}
+    else  {$("#preloader").hide(); document.getElementById("bienvenida").style.display=""; }
+}
+</script-->
+</head>
+<body>
+  <!--div class="row center">
+    <div clas="col s6 offset-s6 grid-example">
+  <div class="preloader-wrapper big active" id="preloader">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
       </div>
-            
-                
+    </div>
+  </div>
+ </div> 
+</div>
+  <div id="bienvenida" style="display:none"-->
+  <nav class="blue" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+    </div>
+  </nav>
+  <div class="container">
+  <br><br>
+  <h3 class="header thin center blue-text">Asistencia Bluetooth</h3>
+  </div>
   <main class="content">
-         <div class="section">
+    <div class="section">
 
       <!--   Icon Section   -->
       <div class="row">
@@ -41,8 +60,8 @@
 
         <div class="col s6 m6">
           <div class="icon-block">
-            <h2 class="center light-blue-text"><a href="registerSubject.html" class="waves-effect waves-light btn-flat-large">    
-        <i class="large material-icons">face</i></a></h2>
+            <h2 class="center light-blue-text"><a href="registerSubject.html" class="waves-effect waves-light btn-flat-large"> 
+            <!--img src="../platforms/android/res/drawable-hdpi/ic_face_black_48dp.png"-->
             <h5 class="center flow-text">Crear curso</h5>
 
           </div>
@@ -59,15 +78,10 @@
         
     </div>
 
-    </div>
-    <br><br>
-        
-
-    <div class="section">
-
-    </div>
   </div>
- </div>
+    <br><br>
+</div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
+</html>

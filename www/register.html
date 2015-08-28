@@ -24,7 +24,7 @@
           <h4 class="title center thin blue-text"><span>Nuevo usuario</span></h1>
       </header>
   <div class="row">
-    <form class="col s12">
+    <form class="col s12" action="index.html" onsubmit="setMac()">
       <div class="row">
         <div class="input-field col s6">
           <input id="first_name" type="text" data-bind="value:first_name, event: {change: validateName}" class="validate" required />
@@ -81,8 +81,13 @@
     </br>
   </br>
   <div class="row center">
-    <button class="btn-large waves-effect waves-light center" type="submit" name="action">Registrarse
+    <button class="btn-large waves-effect waves-light center" type="submit">Registrarse
     </button>
+  
+    <script> function setMac(){
+        window.localStorage.setItem("Mac",device_address.toString());
+      }
+    </script>
   </div>
     </form>
   </div>  
