@@ -71,7 +71,8 @@ function PresenteViewModel() {
         if (nD.deviceAddress == self.teacher().device_mac) {
             self.teacherDevice = nD;
             self.teacherDevice.connect(self.connectionSuccess, self.connectionError, CHANEL, true);
-            self.teacherDevice.addEventListener("deviceconnected", self.prepareTeacherAndRead);
+           self.teacherDevice.addEventListener("deviceconnected", self.prepareTeacherAndRead);
+
         } else {
             if (DEBUG) {
                 Materialize.toast("Encontre a: "+nD.deviceName + "",2000,'rounded');
@@ -79,7 +80,12 @@ function PresenteViewModel() {
         }
     };
 
+    self.onDataAvaliable = function(data) {
+       alert(data);
+    }
+
     self.connectionSuccess = function() {
+    //self.teacherDevice.rfcommSubscribe(self.onDataAvaliable);
       // alert("nos conectamos correctamente!!");
     }
     
@@ -97,6 +103,7 @@ function PresenteViewModel() {
     };
 
     self.tryRead = function() {
+        //self.teacherDevice.rfcommSubscribe(self.onDataAvaliable);
         self.teacherDevice.rfcommRead(self.readSuccess, self.readError);
     }
 

@@ -40,9 +40,9 @@
             <div class="card">
               <h4 class="center blue-text"> Listado de Alumnos</h4>
                 <ul class="collection with-header" data-bind="foreach: alumnos">
-                  <li class="collection-item"><div>
-                      <span data-bind="text: name">
-                      <span class="secondary-content" data-bind=" css: { 'present badge' : present()}, text: present() ? 'presente' : 'ausente'" class="present badge"></span></div>
+                  <li class="collection-item">
+                      <span data-bind="text: name"></span>
+                      <span class="secondary-content present" data-bind=" css: { 'present badge' : present()}, text: present() ? 'presente' : 'ausente'"></span>
                   </li>    
                 </ul>
             </div>
