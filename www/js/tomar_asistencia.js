@@ -174,14 +174,13 @@ function AsistenciaViewModel() {
     self.openBTSuccess = function(message) {
         logmsg('Empiezo a tomar asistencia!');    
         document.getElementById('preload').style.display = "";
-        setTimeout(function() {BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
-}, 3000);
+        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        BC.Bluetooth.StartScan();
 };
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
-        BC.Bluetooth.StartScan();
     };
 
     self.deviceFound = function(s) {
