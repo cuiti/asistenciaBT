@@ -11,32 +11,21 @@
         <title>Asistencia Bluetooth</title>
 		    <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
 		    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
-  <!--script>
+  <script>
     document.addEventListener("deviceready",onDeviceReady,false);
     function onDeviceReady() {  
     var registrado= window.localStorage.getItem("Mac");
     if (registrado == null) {$("#preloader").hide(); location.href = "pp.html";}
     else  {$("#preloader").hide(); document.getElementById("bienvenida").style.display=""; }
 }
-</script-->
+</script>
 </head>
 <body>
-  <!--div class="row center">
-    <div clas="col s6 offset-s6 grid-example">
-  <div class="preloader-wrapper big active" id="preloader">
-    <div class="spinner-layer spinner-blue-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
-      </div>
-    </div>
+  <div class="container preloader center" id="preloader">
+    <img src="./img/preloader_long.GIF" />
   </div>
- </div> 
-</div>
-  <div id="bienvenida" style="display:none"-->
+ 
+  <div id="bienvenida" style="display:none">
   <nav class="blue" role="navigation">
     <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
     </div>
@@ -50,37 +39,24 @@
 
       <!--   Icon Section   -->
       <div class="row">
-        
         <div class="col s6 m6">
           <div class="icon-block">
-            <h2 class="center light-blue-text"><a href="cursos.html" class="waves-effect waves-light btn-flat-large"><i class="large material-icons"></i></a></h2>
+            <h2 class="center light-blue-text"><a href="cursos.html" class="waves-effect waves-light btn-flat-large"><img src="./img/list.png"></a></h2>
             <h5 class="center flow-text">Mis cursos</h5>
           </div>
         </div>
 
         <div class="col s6 m6">
           <div class="icon-block">
-            <h2 class="center light-blue-text"><a href="registerSubject.html" class="waves-effect waves-light btn-flat-large"> 
-            <!--img src="../platforms/android/res/drawable-hdpi/ic_face_black_48dp.png"-->
+            <h2 class="center light-blue-text"><a href="registerSubject.html" class="waves-effect waves-light btn-flat-large"><img src="./img/new.png"></a></h2>
             <h5 class="center flow-text">Crear curso</h5>
 
           </div>
         </div>
-
-        <div class="col s6 m6">
-          <div class="icon-block">
-            <h2 class="center light-blue-text"><a href="pp.html" class="waves-effect waves-light btn-flat-large">    
-        <i class="large material-icons">face</i></a></h2>
-            <h5 class="center flow-text">Nuevo Usuario</h5>
-
-          </div>
-        </div>
-        
-    </div>
-
-  </div>
+            </div>
     <br><br>
-</div>
+  </div>
+  </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
     </body>
