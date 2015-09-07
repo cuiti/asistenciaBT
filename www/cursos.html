@@ -12,7 +12,12 @@
     <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/cursos.js"></script>
   </head>
-  
+  <script>   $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
+        </script>
   <body>
       <nav class="blue" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
@@ -22,8 +27,12 @@
       <header class="bar bar-nav">
           <h4 class="title center blue-text"><span>Mis cursos</span></h4>
       </header>
-      
-  	 <div class="content">
+      <div class="container">
+       <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header blue active"><p class="white-text">Mis cursos como alumno</p></div>
+      <div class="collapsible-body">
+      <div class="content">
         <ul class="collection" data-bind="foreach: cursos">
 
           <li class="collection-item avatar">
@@ -34,5 +43,26 @@
           </li>
         </ul>       
     </div>
+  </div>
+    </li>
+    <li>
+      <div class="collapsible-header blue"><p class="white-text">Mis cursos como docente</p></div>
+            <div class="collapsible-body">
+     <div class="content">
+        <ul class="collection" data-bind="foreach: cursos">
+
+          <li class="collection-item avatar">
+            <img class="left-align" alt="" src="./img/folder.png" />
+            <span class="title" data-bind="text: nombre"></span>
+            <p data-bind="text: descripcion"></p>
+            <a href="#!" data-bind="click:setAsCurrent" class="secondary-content right"><img src="./img/select.png"></a>
+          </li>
+        </ul>       
+    </div></div>
+    </li>
+  </ul>
+</div>
+        
+      
   </body>
 </html>
