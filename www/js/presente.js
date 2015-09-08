@@ -50,20 +50,20 @@ function PresenteViewModel() {
         alert.error(response.error);
     }  
 
+    self.OpenBluetoothSuccess = function() {
+        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        BC.Bluetooth.StartScan();
+    };
+
     Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
 
 
     self.givePresent = function() {
         $("#preloader-presente").show();
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        BC.Bluetooth.OpenBluetooth(function() {
-            setTimeout(function() {BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);}, 3000);
-        
-
-        }, function() {
+        BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
             alert("bluetooth open error!");
         });
-        BC.Bluetooth.StartScan();
     };
 
     self.deviceFound = function(s) {
