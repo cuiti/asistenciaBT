@@ -1,5 +1,5 @@
 var DEBUG  = false;
-var CHANEL =  "00001101-0000-1000-8000-00805f9b34fb";
+var CHANEL =  "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE"f;
 var username = "movilesbluetooth";
 var password = "3mFh5qNR";
 var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";

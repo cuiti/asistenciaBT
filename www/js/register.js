@@ -26,6 +26,20 @@ function RegisterVM() {
   self.device_address = ko.observable();
   self.first_name = ko.observable();
   self.last_name = ko.observable();
+  self.password = ko.observable();
+  self.NroAlu =ko.observable();
+ self.registerSuccess = function(response) {
+      alert("hola");alert(response);
+      //window.localStorage.setItem("user_id",data.id);
+  };
+  
+ self.registerFail=function(response){}
+  
+ self.submitAlumno =function(){
+   Server.RegistrarAlumno(self.first_name(),self.last_name(),self.password(),device_address.toString(),self.NroAlu(),self.username(),self.registerSuccess,self.registerFail);
+   window.localStorage.setItem("Mac",device_address.toString());
+    
+   };
 
   self.validateName = function() {
     if ($("#first_name").value.length==0){

@@ -10,7 +10,8 @@
     <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/register.js"></script>
+    <script type="text/javascript" charset="utf-8" src="./js/register.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
   </head>
   
   <body>
@@ -24,7 +25,7 @@
           <h4 class="title center thin blue-text"><span>Nuevo usuario</span></h1>
       </header>
   <div class="row">
-    <form class="col s12" action="index.html" onsubmit="setMac()">
+    <form class="col s12" action="index.html" data-bind="submit:submitAlumno">
       <div class="row">
         <div class="input-field col s6">
           <input id="first_name" type="text" data-bind="value:first_name, event: {change: validateName}" class="validate" required />
@@ -44,7 +45,7 @@
           </div>
           </div>
           <div class="input-field col s6">
-          <input id="password" type="password" class="validate" required />
+          <input id="password" data-bind="value:password" type="password" class="validate" required />
           <label for="password">Contrase&ntilde;a</label>
 
           </div>  
@@ -72,8 +73,8 @@
     </div>
       <div class="row center" id="leg" style="display:none">
         <div class="input-field col s6 offset-s4 grid-example">
-          <input type="text" class="validate">
-          <label for="legajo">Legajo</label>
+          <input type="text" data-bind="value:NroAlu" class="validate">
+          <label for="NroAlu">Legajo</label>
         </div>
       </div>
 
@@ -83,11 +84,6 @@
   <div class="row center">
     <button class="btn-large waves-effect waves-light center" type="submit">Registrarse
     </button>
-  
-    <script> function setMac(){
-        window.localStorage.setItem("Mac",device_address.toString());
-      }
-    </script>
   </div>
     </form>
   </div>  

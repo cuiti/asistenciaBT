@@ -5,6 +5,10 @@ var currentCursoID = 0;
 function onDeviceReady() {
   currentCursoID = localStorage.getItem("currentCursoID");
   Server.initialize(function() { ko.applyBindings(new CursoVM());}, function() { console.log('error :(');});
+  Server.esprofesor(window.localStorage.getItem("user_id"),currentCursoID,function(data){
+                                                                            if (data.status ==true) $("#es_docente").show();
+                                                                            else $("#es_alumno").show();});
+
 }
 
 function CursoVM() {
@@ -24,6 +28,5 @@ function CursoVM() {
   self.getDataFailure = function(response) {
     console.error(response.error);
   }
-
   Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
 }
