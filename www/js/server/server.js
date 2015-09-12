@@ -77,6 +77,27 @@ function server() {
 		self.errorCallBack = errorCallBack;
 		cordovaHTTP.get(url, {}, {}, self.invokeSuccessCallback, self.invokeFailureCallback);
 	};
+
+	self.pasarPresente = function(alumno_id,clase_id,successCallBack,errorCallBack){
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/marcar_presente/24";
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
+	}
+
+	self.estaPresente = function(alumno_id, clase_id, successCallBack, errorCallBack) {
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/esta_presente/24";
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
+	}
+
+	self.getCurrentUser = function(mac, successCallBack, errorCallBack) {
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/mac/"+mac;
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
+	}
 };
 
 var Server = new server();

@@ -58,12 +58,14 @@ function PresenteViewModel() {
     Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
 
 
+
     self.givePresent = function() {
         $("#preloader-presente").show();
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
-            alert("bluetooth open error!");
-        });
+        window.setInterval(self.chequearPresente, 3000);
+       // BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
+       //     alert("bluetooth open error!");
+       // });
     };
 
     self.deviceFound = function(s) {

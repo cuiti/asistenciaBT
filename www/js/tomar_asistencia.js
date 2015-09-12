@@ -196,7 +196,9 @@ function AsistenciaViewModel() {
             });
 
         if (in_students && !in_students.present()) {
-            in_students.connect();
+            Server.pasarPresente(in_students.id,currentCursoID, self.pasarPresenteSuccess, self.pasarPresenteFailure);
+            in_students.present(true);
+            //in_students.connect();
         } else {
             if (!in_detected_devices) {
                 var a = new AlumnoViewModel({
