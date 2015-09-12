@@ -31,10 +31,16 @@ function RegisterVM() {
   self.last_name = ko.observable("");
   self.password = ko.observable("");
   self.NroAlu =ko.observable(0);
+
  self.registerSuccess = function(response) {
-      alert("hola");alert(response);
-      //window.localStorage.setItem("user_id",data.id);
-  };
+    try {
+        response.data = JSON.parse(response.data);
+        window.localStorage.setItem("user_id",response.data.id);
+        alert(response.data.message);
+    } catch(e) {
+        alert("JSON parsing error");
+    }
+  }
   
  self.registerFail=function(response){}
   

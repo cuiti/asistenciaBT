@@ -37,9 +37,8 @@ function CursosVM() {
   self.getCursosDocenteSuccess = function(data) {
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
     self.cursosDocente(mappedCursos);
+    Server.getCursosById(currentUserID,self.getCursosSuccess, self.getCursosFailure);
   };
 
   Server.getCursosDocente(currentUserID,self.getCursosDocenteSuccess, self.getCursosFailure);
-
-  Server.getCursosById(currentUserID,self.getCursosSuccess, self.getCursosFailure);
 }
