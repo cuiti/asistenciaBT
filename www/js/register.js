@@ -30,7 +30,7 @@ function RegisterVM() {
   self.first_name = ko.observable("");
   self.last_name = ko.observable("");
   self.password = ko.observable("");
-  self.NroAlu =ko.observable(0);
+  self.NroAlu =ko.observable("");
 
  self.registerSuccess = function(response) {
     try {
