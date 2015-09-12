@@ -1,6 +1,7 @@
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
 var currentCursoID = 0;
+var currentUserID = 0;
 var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
 var DEBUG = false;
 
@@ -8,6 +9,7 @@ var DEBUG = false;
 function onDeviceReady() {
     $("#preloader-presente").hide();
     currentCursoID = localStorage.getItem("currentCursoID");
+    currentUserID = localStorage.getItem("user_id");
     Server.initialize(function() { ko.applyBindings(new PresenteViewModel());}, function() { console.log('error :(');});
 }
 
@@ -23,22 +25,18 @@ function TeacherViewModel(data) {
 
 function PresenteViewModel() {
     var self = this;
+    self.id = currentUserID;
     self.teacherDevice = null;
     self.connectedTeacher = null;
     self.PrepareInterval = null;
     self.connection_interval = null;
     self.read_interval = null;
+    self.estoyPresente = false;
+    self.chequearPresenteInterval = null;
+
     self.teacher = ko.observable(new TeacherViewModel({
-       //name: "TABLET_PC",
-       //device_mac: "54:E4:BD:BF:3F:B9"
-       //name: "SAMSUNG",
-       //device_mac: "A4:9A:58:9E:3D:69"
-       name: "TLIDI9",
-       device_mac: "5C:FF:35:6E:B0:8D"
-       //name: "tablet viki",
-       //device_mac: "96:4E:46:66:22:CB"
-       //name: "samsung",
-       //device_mac: "78:59:5E:9A:F5:E3"
+       name: "cargando profesor...",
+       device_mac: "..."
     }));
 
     
@@ -55,14 +53,32 @@ function PresenteViewModel() {
         BC.Bluetooth.StartScan();
     };
 
-    Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+    self.getPresenteSuccess = function(data) {
+        if (data.status) {
+            swal("Tu asistencia fue registrado!", "", "success"); 
+            self.estoyPresente = true;
+            window.clearInterval(self.chequearPresenteInterval);
+        } else {
+            if (data.id == 1 ) {
+                swal("El profesor te marcó como ausente", "", "error"); 
+                window.clearInterval(self.chequearPresenteInterval);
+            }
+        }
+    }
 
 
+    self.getPresenteFailure = function(data) {
+        alert("mugre");
+    }
+
+    self.chequearPresente = function() {
+        Server.estaPresente(self.id,24,self.getPresenteSuccess, self.getPresenteFailure);
+    }
 
     self.givePresent = function() {
         $("#preloader-presente").show();
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        window.setInterval(self.chequearPresente, 3000);
+        self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
        // BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
        //     alert("bluetooth open error!");
        // });
@@ -168,7 +184,5 @@ function PresenteViewModel() {
         self.teacherDevice.disconnect(self.disconnectSuccess, self.disconnectError);
     }
 
-    self.debug = function() {
-        console.log("hey");
-    }
+    Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
 }
