@@ -40,6 +40,7 @@ function AlumnoViewModel(data) {
     self.name ="";
     self.MAXATTEMPS = 20;
     self.triesCounter = 0;
+    self.id = 0;
 
     self.ConnectingToDevice = false;
     self.PreparingDevice    = false;
@@ -47,6 +48,7 @@ function AlumnoViewModel(data) {
     self.WritingDevice      = false;
 
     if (data) {
+        self.id = data.id;
         self.name = data.name;
         self.device_mac = data.device_mac;
         self.present(data.present);
@@ -143,7 +145,8 @@ function AsistenciaViewModel() {
             return new AlumnoViewModel({
                 name:item.nombre+" "+item.apellido, 
                 device_mac: item.device_address,
-                present: false
+                present: false,
+                id : item.id
             }) 
         });
         self.alumnos(mappedAlumnos);
