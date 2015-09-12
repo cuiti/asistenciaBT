@@ -3,7 +3,7 @@ document.addEventListener("deviceready",onDeviceReady,false);
 var username = "movilesbluetooth";
 var password = "3mFh5qNR";
 var checknameURL = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/checkname/";
-
+var device_address = 0;
 // device APIs are available
 function onDeviceReady() {
   currentCursoID = localStorage.getItem("currentCursoID");
@@ -15,19 +15,22 @@ function onDeviceReady() {
     console.log('error :(');
 });
     window.MacAddress.getMacAddress(
-    function(macAddress) {device_address=macAddress;},
+    function(macAddress) {
+      device_address=macAddress;
+      alert(macAddress);
+    },
     function(fail) {alert(fail);}
 );
 }
 
 function RegisterVM() {
   var self = this;
-  self.username = ko.observable();
-  self.device_address = ko.observable();
-  self.first_name = ko.observable();
-  self.last_name = ko.observable();
-  self.password = ko.observable();
-  self.NroAlu =ko.observable();
+  self.username = ko.observable("");
+  self.device_address = ko.observable("");
+  self.first_name = ko.observable("");
+  self.last_name = ko.observable("");
+  self.password = ko.observable("");
+  self.NroAlu =ko.observable(0);
  self.registerSuccess = function(response) {
       alert("hola");alert(response);
       //window.localStorage.setItem("user_id",data.id);

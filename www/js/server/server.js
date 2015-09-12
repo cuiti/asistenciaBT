@@ -30,7 +30,7 @@ function server() {
 		self.errorCallBack = errorCallBack;
 
 		//cordovaHTTP.post(url,{nombre: name,apellido: surname,password: contra, legajo: nroalu, device_address: mac, nombreusuario: username},{}, self.invokeSuccessCallback,self.invokeFailureCallback);
-		cordovaHTTP.post(url,{nombre: name,apellido: surname,password: contra, legajo: nroalu, device_address: mac, nombreusuario: username},{}, function(response) {
+		cordovaHTTP.post(url,{nombre: name,apellido: surname,password: contra, legajo: nroalu, device_address: mac, username: username},{}, function(response) {
     // prints 200
     alert(response.status);
     try {

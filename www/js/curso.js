@@ -1,13 +1,14 @@
 // Wait for device API libraries to load
 document.addEventListener("deviceready",onDeviceReady,false);
-var currentCursoID = 0;
+var currentCursoID = 2;
+var user_id = 15;
 // device APIs are available
 function onDeviceReady() {
   currentCursoID = localStorage.getItem("currentCursoID");
   Server.initialize(function() { ko.applyBindings(new CursoVM());}, function() { console.log('error :(');});
-  Server.esprofesor(window.localStorage.getItem("user_id"),currentCursoID,function(data){
-                                                                            if (data.status ==true) $("#es_docente").show();
-                                                                            else $("#es_alumno").show();});
+ // Server.esprofesor(window.localStorage.getItem("user_id"),currentCursoID,function(data){
+   //                                                                         if (data.status ==true) $("#es_docente").show();
+     //                                                                       else $("#es_alumno").show();});
 
 }
 
@@ -23,6 +24,8 @@ function CursoVM() {
     self.nombre(data.nombre);
     self.descripcion(data.descripcion);
     self.profesor(data.profesor);
+    if (self.profesor() == user_id) $("#es_docente").show();
+    else {$("#es_alumno").show();}
   };
 
   self.getDataFailure = function(response) {

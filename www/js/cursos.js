@@ -1,6 +1,6 @@
 // Wait for device API libraries to load
 document.addEventListener("deviceready",onDeviceReady,false);
-
+var currentUserID = 15;
 // device APIs are available
 function onDeviceReady() {
   currentUserID = localStorage.getItem("user_id");
