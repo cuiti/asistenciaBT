@@ -1,9 +1,10 @@
 // Wait for device API libraries to load
 document.addEventListener("deviceready",onDeviceReady,false);
-var currentUserID = 15;
+var currentUserID;
 // device APIs are available
 function onDeviceReady() {
   currentUserID = localStorage.getItem("user_id");
+  $("#preload").show();
   Server.initialize(function() { ko.applyBindings(new CursosVM());}, function() { console.log('error :(');});
 }
 
@@ -26,17 +27,22 @@ function CursosVM() {
   self.cursosDocente = ko.observableArray([]);
 
   self.getCursosSuccess = function(data) {
+    $("#preload").hide();
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
-    self.cursos(mappedCursos);
+    if (mappedCursos.length != 0){
+    self.cursos(mappedCursos);}
   };
 
   self.getCursosFailure = function(response) {
+    $("#preload").hide();
     console.error(response.error);
   }
 
   self.getCursosDocenteSuccess = function(data) {
+    $("#preload").hide();
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
-    self.cursosDocente(mappedCursos);
+    if (mappedCursos.length != 0){
+    self.cursosDocente(mappedCursos);}
     Server.getCursosById(currentUserID,self.getCursosSuccess, self.getCursosFailure);
   };
 

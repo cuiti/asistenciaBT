@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <script type="text/javascript" src="js/search.js"></script>
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/cursos.js"></script>
+  </head>
+<body>
+	<nav class="blue" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+        </div>
+      </nav>
+
+<div class="container">
+<nav class="blue">
+    <div class="nav-wrapper">
+      <form>
+        <div class="input-field">
+          <input id="search" type="search" data-bind="value:busqueda, event: {change: Search}" required>
+          <label for="search"><img src="./img/search_1.png" alt=""></label>
+        </div>
+      </form>
+  </nav>
+      <div class="section center">
+        <div class="row"><h4 class="center thin"> Buscar un curso </h4></div>
+      	<div class="row center">
+      	<img src="./img/preloader_short.GIF" id="preloader" alt="" style="display:none">
+        <ul class="collection center" data-bind="foreach:resultado">
+          <li class="collection-item avatar">
+            <span class="title" data-bind="text: nombre"></span>
+            <p data-bind="text: descripcion"></p>
+            <a class="secondary-content waves-effect waves-light btn-flat-large">Inscribirse</a>
+          </li>
+        </ul>       
+    </div>
+    </div>
+</div>
+</body>

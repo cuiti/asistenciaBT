@@ -177,7 +177,7 @@ function AsistenciaViewModel() {
     self.openBTSuccess = function(message) {
         logmsg('Empiezo a tomar asistencia!');    
         document.getElementById('preload').style.display = "";
-        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        //BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.StartScan();
 };
 

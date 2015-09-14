@@ -17,8 +17,10 @@ function onDeviceReady() {
 
 function RegisterVM() {
   var self = this;
-  self.name = ko.observable();
-  self.teacher_id = ko.observable();
+  self.name = ko.observable("");
+  self.teacher_id = ko.observable("");
+  self.horarios=ko.observable("");
+  self.descripcion = ko.observable("");
   
   self.validateName = function() {
     $("#name-progress").show();
@@ -33,6 +35,15 @@ function RegisterVM() {
     });
   };
 
+  self.submitCurso =function(){
+   self.teacher_id(window.localStorage.getItem("user_id"));
+   Server.RegistrarCurso(self.name(),self.descripcion(),self.horarios(),self.teacher_id(),self.registerSuccess,self.registerFail);
+   };
+
+self.registerSuccess = function(response) {}
+  
+ self.registerFail=function(response){}
+  
   self.getDataSuccess = function(data) {
     if (data.free) {
       $("#name").removeClass("invalid").addClass("valid");

@@ -36,7 +36,7 @@ function RegisterVM() {
     try {
         response.data = JSON.parse(response.data);
         window.localStorage.setItem("user_id",response.data.id);
-        alert(response.data.message);
+        //alert(response.data.message);
     } catch(e) {
         alert("JSON parsing error");
     }

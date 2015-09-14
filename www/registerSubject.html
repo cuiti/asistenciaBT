@@ -6,7 +6,7 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-
+    <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
@@ -21,10 +21,10 @@
 
    <div class="container">    
       <header class="bar bar-nav">
-          <h4 class="title center blue-text"><span>Nuevo Curso</span></h1>
+          <h4 class="title center blue-text thin"><span>Nuevo Curso</span></h1>
       </header>
   <div class="row">
-    <form class="col s12">
+    <form class="col s12" action="" data-bind="submit:submitCurso">
       <div class="row">
         <div class="input-field col s12">
           <input id="name" type="text" data-bind="value:name, event: {change: validateName}" class="validate" required />
@@ -38,7 +38,7 @@
       </br>
       <div class="row">
         <div class="input-field col s12">
-          <input id="description" type="text" class="materialize-textarea validate" length="140" />
+          <input id="description" type="text" data-bind:"value:descripcion" class="materialize-textarea validate" length="140" />
           <label for="description">Descripción</label>
           <script>
            $(document).ready(function() {
@@ -47,13 +47,9 @@
         </div>
       </div>
     
-      <div class="row">
-      </div>
-
     <input id="teacher_id" type="hidden" data-bind="value:teacher_id">
-    </br>
-  </br>
-  <div class="row center">
+   
+   <div class="row center">
     <button class="btn-large waves-effect waves-light center" type="submit" name="action">Crear curso</button>
   </div>
     </form>

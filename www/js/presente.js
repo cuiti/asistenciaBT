@@ -49,8 +49,8 @@ function PresenteViewModel() {
     }  
 
     self.OpenBluetoothSuccess = function() {
-        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
-        BC.Bluetooth.StartScan();
+        //BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        //BC.Bluetooth.StartScan();
     };
 
     self.getPresenteSuccess = function(data) {
@@ -79,8 +79,8 @@ function PresenteViewModel() {
         $("#preloader-presente").show();
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
-       // BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
-       //     alert("bluetooth open error!");
+        BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
+        alert("bluetooth open error!");
        // });
     };
 

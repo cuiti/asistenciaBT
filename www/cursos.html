@@ -21,19 +21,20 @@
   <body>
       <nav class="blue" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
-        </div>
+        <a href="cursos.html" class="right"><img src="./img/refresh.png" alt=""></a></div>
       </nav>
 
       <header class="bar bar-nav">
           <h4 class="title center blue-text"><span>Mis cursos</span></h4>
       </header>
       <div class="container">
+        <div class="row center" id="preload" style="display:none"><img src="./img/preloader_short.GIF" alt=""></div> 
        <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header blue active"><p class="white-text">Mis cursos como alumno</p></div>
       <div class="collapsible-body">
       <div class="content">
-        <ul class="collection" data-bind="foreach: cursos">
+        <ul class="collection" data-bind="foreach:cursos">
 
           <li class="collection-item avatar">
             <img class="left-align" alt="" src="./img/folder.png" />
@@ -49,7 +50,7 @@
       <div class="collapsible-header blue"><p class="white-text">Mis cursos como docente</p></div>
             <div class="collapsible-body">
      <div class="content">
-        <ul class="collection" data-bind="foreach: cursosDocente">
+        <ul class="collection" data-bind="foreach:cursosDocente">
 
           <li class="collection-item avatar">
             <img class="left-align" alt="" src="./img/folder.png" />
