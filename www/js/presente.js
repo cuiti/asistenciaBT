@@ -55,11 +55,13 @@ function PresenteViewModel() {
 
     self.getPresenteSuccess = function(data) {
         if (data.status) {
-            swal("Tu asistencia fue registrado!", "", "success"); 
+        $("#preloader-presente").hide();
+            swal("Tu asistencia fue registrada!", "", "success"); 
             self.estoyPresente = true;
             window.clearInterval(self.chequearPresenteInterval);
         } else {
             if (data.id == 1 ) {
+        $("#preloader-presente").hide();
                 swal("El profesor te marcó como ausente", "", "error"); 
                 window.clearInterval(self.chequearPresenteInterval);
             }
@@ -68,6 +70,7 @@ function PresenteViewModel() {
 
 
     self.getPresenteFailure = function(data) {
+        $("#preloader-presente").hide();
         alert("mugre");
     }
 
@@ -77,10 +80,11 @@ function PresenteViewModel() {
 
     self.givePresent = function() {
         $("#preloader-presente").show();
+        BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
+        alert("bluetooth open error!");});
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
-        BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
-        alert("bluetooth open error!");
+        
        // });
     };
 

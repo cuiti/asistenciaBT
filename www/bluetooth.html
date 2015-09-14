@@ -18,7 +18,7 @@
       </nav>
 
       <header class="bar bar-nav">
-          <h4 class="title center blue-text">Una materia</span></h1>
+          <h4 class="title center thin blue-text">Una materia</span></h1>
       </header>
       <div class="container center">
       <button data-bind="click:scanDevices" id="boton" class="btn-large waves-effect waves-light center">Tomar Asistencia</button>
@@ -26,31 +26,21 @@
               <img src="./img/preloader_short.GIF">              
           </div>
       </div> 
-	 <div class="content">
+	 <div class="row">
+      <div class="col s12">
          <div class="content-padded">
             <div class="card">
-              <h4 class="center blue-text"> Listado de Alumnos</h4>
+              <h4 class="center blue-text thin"> Listado de Alumnos</h4>
                 <ul class="collection with-header" data-bind="foreach: alumnos">
                   <li class="collection-item">
                       <span data-bind="text: name"></span>
-                      <span class="secondary-content present" data-bind=" css: { 'present badge' : present()}, text: present() ? 'presente' : 'ausente'"></span>
+                      <span class="secondary-content present" data-bind=" css: { 'present badge' : present()}, text: present() ? 'presente' : 'ausente'"></span> 
                   </li>    
                 </ul>
             </div>
+          </div>  
          </div>
-         <div class="content-padded">
-            <h5>Dispositivos no inscriptos</h3>
-             <div class="card">
-                <ul class="table-view" data-bind="foreach: detectedDevices">
-                  <li class="table-view-cell">
-                      <span data-bind="text: name"></span>
-                      <span data-bind="text: device_mac"></span>
-                      <button data-bind="" class="btn btn-positive">inscribir</button>
-                  </li>    
-                </ul>
-            </div>
-
-         </div>
+    </div>
       </div>
   </body>
 </html>

@@ -179,7 +179,7 @@ function AsistenciaViewModel() {
         document.getElementById('preload').style.display = "";
         //BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
         BC.Bluetooth.StartScan();
-};
+    };
 
     self.scanDevices = function() {
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);

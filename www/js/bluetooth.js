@@ -5,8 +5,17 @@
 
 // device APIs are available
 //
+var currentCursoID;
+var currentStudentID;
 function onDeviceReady() {
-    ko.applyBindings(new AsistenciaViewModel());
+      currentCursoID = window.localStorage.getItem("currentCursoID");
+      var fecha= new Date();
+      var fecha_act= fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear();
+      var hora =fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+      alert(fecha_act);
+      alert(hora);
+      Server.initialize(function() { ko.applyBindings(new AsistenciaViewModel());}, function() { console.log('error :(');});    
+      Server.crearClase(currentCursoID, fecha_act,hora,"",function(data){});
 }
 
 var CHANEL = "7A9C3B55-78D0-44A7-A94E-A93E3FE118CE";
@@ -28,6 +37,8 @@ function getUserMac(){
     }   
 	function AsistenciaViewModel() {
         var self = this;
+        self.currentStudentID = ko.observable();
+        self.currentClassID = ko.observable();
         self.detectedDevices = ko.observableArray([]);
         self.teachers = ko.observableArray([new AlumnoViewModel({name:"Profesor prueba", device_mac:"68:A8:54:3C:2B:B2", present: false})]);
         self.alumnos = ko.observableArray([
@@ -86,6 +97,10 @@ function getUserMac(){
         self.registerStudent = function(studentDevice) {
             self.alumnos.push(studentDevice);
             self.detectedDevices.remove(studentDevice);
+        };
+
+        self.MarcarPresente = function() {
+            Server.PresenteManual(currentStudentID,currentClassID);
         };
         
         
