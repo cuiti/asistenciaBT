@@ -13,3 +13,4 @@ Para compilar después de hacer el clone
 2. cordova plugin add https://github.com/bcsphere/bluetooth.git
 3. cordova plugin add https://github.com/wymsee/cordova-HTTP.git
 4. cordova plugin add https://github.com/jlasarte/MacAddress.git
+5. cordova plugin add https://github.com/jlasarte/BTPlugin.git
