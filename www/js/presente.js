@@ -79,6 +79,7 @@ function PresenteViewModel() {
     }
 
     self.givePresent = function() {
+        window.BTPlugin.enableVisibility(function(){alert("ajj"), function(){alert("jajaj")}});
         $("#preloader-presente").show();
         BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
         alert("bluetooth open error!");});
