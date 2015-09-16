@@ -14,3 +14,5 @@ Para compilar después de hacer el clone
 3. cordova plugin add https://github.com/wymsee/cordova-HTTP.git
 4. cordova plugin add https://github.com/jlasarte/MacAddress.git
 5. cordova plugin add https://github.com/jlasarte/BTPlugin.git
+6. cordova plugin add cordova-plugin-network-information
+
