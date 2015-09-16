@@ -4,6 +4,7 @@ var username = "movilesbluetooth";
 var password = "3mFh5qNR";
 var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";
 var currentCursoID = 0;
+var currentClassID;
 
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -19,7 +20,13 @@ function onDeviceReady() {
     function() {
         console.log('error :(');
     });
-    
+          alert("antes de la clase");
+
+      var fecha= new Date();
+      var fecha_act= fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear();
+      var hora =fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+      Server.crearClase(currentCursoID, fecha_act,hora,"",function(data){alert(data);currentClassID=data.id;});
+
 }
 
 function logmsg(msg) {
@@ -163,6 +170,11 @@ function AsistenciaViewModel() {
         function(response) {
           self.getDataFailure(response);
     });
+
+        self.MarcarPresente = function() {
+            Server.PresenteManual(currentStudentID,currentClassID);
+        };
+        
 
 
     self.registerStudent = function(student) {

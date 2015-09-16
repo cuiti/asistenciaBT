@@ -19,14 +19,14 @@ function server() {
 	self.invokeFailureCallback = function(response) {
 		self.errorCallBack(response);
 	}
-	/*self.inscribirEnCurso = function(id_user,id_curso,successCallBack,errorCallBack){
+	self.inscribirEnCurso = function(id_user,id_curso,successCallBack,errorCallBack){
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/inscribir_en_curso";
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
 		alert(id_user);
 		alert(id_curso);
 		cordovaHTTP.post(url,{usuario_id: id_user, curso_id: id_curso},{}, self.invokeSuccessCallback, self.invokeFailureCallback); 
-	}; */
+	};
 
 	self.PresenteManual =function(id_user,id_class){
 	var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/marcar_presente/"+clase_id+"/";
@@ -37,9 +37,12 @@ function server() {
 		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/es_profesor/"+id_curso;
 		cordovaHTTP.get(url, {}, {}, self.invokeSuccessCallback, self.invokeFailureCallback);
 	}
-	self.CrearClase = function (id_curso,date,time,timeEnd){
+	self.CrearClase = function (id_curso,date,time,timeEnd,successCallBack,errorCallBack){
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/cursos/generar_clase/";
-		cordovaHTTP.post(url,{curso_id: id_curso, fecha: date, hora_inicio: time, hora_fin : timeEnd},{}, function(response){},function(response){}); 
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		
+		cordovaHTTP.post(url,{curso_id: id_curso, fecha: date, hora_inicio: time, hora_fin : timeEnd},{}, self.invokeSuccessCallback,self.invokeFailureCallback); 
 	}; 
 	self.RegistrarCurso = function(name,descri,horario,id_profe,successCallBack,errorCallBack){
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/cursos/alta";
@@ -102,8 +105,8 @@ function server() {
 		self.errorCallBack = errorCallBack;
 		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
 	}
-	self.buscarCurso = function(nombre,successCallBack,errorCallBack){
-		var url= "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/buscar/"+nombre;
+	self.buscarCurso = function(nombre,alumno_id,successCallBack,errorCallBack){
+		var url= "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/buscar/"+alumno_id+"/"+nombre;
 		self.successCallBack= successCallBack;
 		self.errorCallBack=errorCallBack;
 		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);

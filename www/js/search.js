@@ -24,7 +24,7 @@ self.getDataSuccess = function(data) {
     self.resultado(mappedCursos);}
   };
 
-  /*self.inscribirse=function(){
+  self.inscribirse=function(){
     alert("adentro de inscribir");
     localStorage.setItem("currentCursoID", self.id);
     var usuario=localStorage.getItem("user_id");
@@ -32,14 +32,15 @@ self.getDataSuccess = function(data) {
     alert(curso);
     alert(usuario);
     Server.inscribirEnCurso(usuario,curso,function(data){Materialize.toast('Te inscribiste en el curso', 4000);}, function(response){});
-  }*/
+  }
 
   self.getDataFailure = function(response) {
   	$("#preloader").hide();
     console.error(response.error);
   }
   self.Search=function(){
+    var user_id=window.localStorage.getItem("user_id");
   	$("#preloader").show();
-    Server.buscarCurso(self.busqueda(),self.getDataSuccess,self.getDataFailure);
+    Server.buscarCurso(self.busqueda(),user_id,self.getDataSuccess,self.getDataFailure);
 }
 }

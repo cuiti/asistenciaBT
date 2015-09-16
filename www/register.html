@@ -13,9 +13,11 @@
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
     <script type="text/javascript" charset="utf-8" src="./js/register.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
+    <script type="text/javascript">function AbrirBt(){BC.Bluetooth.OpenBluetooth(function(){alert("abierto")},function(){alert("fallo");});
+            }</script>
   </head>
   
-  <body>
+  <body onload="AbrirBt()">
     <nav class="blue" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
         </div>

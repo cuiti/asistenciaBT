@@ -29,36 +29,26 @@
       </header>
       <div class="container">
         <div class="row center" id="preload" style="display:none"><img src="./img/preloader_short.GIF" alt=""></div> 
-       <ul class="collapsible" data-collapsible="accordion">
-    <li>
+        <ul class="collapsible" data-collapsible="accordion">
+      <li>
       <div class="collapsible-header blue active"><p class="white-text">Mis cursos como alumno</p></div>
       <div class="collapsible-body">
-      <div class="content">
-        <ul class="collection" data-bind="foreach:cursos">
-
-          <li class="collection-item avatar">
-            <img class="left-align" alt="" src="./img/folder.png" />
-            <span class="title" data-bind="text: nombre"></span>
-            <p data-bind="text: descripcion"></p>
-            <a href="#!" data-bind="click:setAsCurrent" class="secondary-content right"><img src="./img/select.png"></a>
-          </li>
-        </ul>       
+          <div class="collection" data-bind="foreach:cursos">
+           <a href="#!" data-bind="click:setAsCurrent" class="collection-item"><img class="left-align" alt="" src="./img/folder.png" />
+          <b><span class="title black-text" data-bind="text: nombre"></span></b><br>
+          <span class="black-text" data-bind="text: descripcion"></span></a>
+          </div>
+      
     </div>
-  </div>
     </li>
     <li>
       <div class="collapsible-header blue"><p class="white-text">Mis cursos como docente</p></div>
             <div class="collapsible-body">
-     <div class="content">
-        <ul class="collection" data-bind="foreach:cursosDocente">
-
-          <li class="collection-item avatar">
-            <img class="left-align" alt="" src="./img/folder.png" />
-            <span class="title" data-bind="text: nombre"></span>
-            <p data-bind="text: descripcion"></p>
-            <a href="#!" data-bind="click:setAsCurrent" class="secondary-content right"><img src="./img/select.png"></a>
-          </li>
-        </ul>       
+        <div class="collection" data-bind="foreach:cursosDocente">
+        <a href="#!" data-bind="click:setAsCurrent" class="collection-item"><img class="left-align" alt="" src="./img/folder.png" />
+            <b><span class="title black-text" data-bind="text: nombre"></span></b><br>
+            <span class="black-text" data-bind="text: descripcion"></span></a><br>
+            
     </div></div>
     </li>
   </ul>
