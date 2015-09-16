@@ -18,7 +18,9 @@ function Curso(data) {
   self.id = data.id;
   self.nombre = data.nombre;
   self.descripcion = data.descripcion;
-  self.profesor = data.profesor;
+  self.id_profesor = data.id_profesor;
+  self.address_profesor = data.address_profesor;
+  self.usuario_profesor = data.usuario_profesor;
 
   self.setAsCurrent = function() {
     localStorage.setItem("currentCursoID", self.id);

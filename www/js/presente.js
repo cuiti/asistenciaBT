@@ -13,6 +13,11 @@ function onDeviceReady() {
     Server.initialize(function() { ko.applyBindings(new PresenteViewModel());}, function() { console.log('error :(');});
 }
 
+function internet() {
+  var networkState = navigator.connection.type;
+  return networkState != Connection.NONE;
+}
+
 function TeacherViewModel(data) {
     var self = this;
     self.device_mac = "";
@@ -189,5 +194,15 @@ function PresenteViewModel() {
         self.teacherDevice.disconnect(self.disconnectSuccess, self.disconnectError);
     }
 
-    Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+    self.initialize = function() {
+        if (internet()) {
+            Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+        } else {
+            var c  = window.localStorage.getItem("currentCurso");
+            c = JSON.parse(c);
+            self.getDataSuccess(c);
+        }
+    }
+
+    self.initialize();
 }
