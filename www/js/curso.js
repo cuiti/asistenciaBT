@@ -9,6 +9,11 @@ function onDeviceReady() {
   Server.initialize(function() { ko.applyBindings(new CursoVM());}, function() { console.log('error :(');});
 }
 
+function internet() {
+  var networkState = navigator.connection.type;
+  return networkState != Connection.NONE;
+}
+
 function CursoVM() {
   var self = this;
   self.id = ko.observable();
@@ -28,5 +33,16 @@ function CursoVM() {
   self.getDataFailure = function(response) {
     console.error(response.error);
   }
-  Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+
+  self.initialize = function() {
+    if (internet()) {
+        Server.getCurso(currentCursoID,self.getDataSuccess,self.getDataFailure);
+    } else {
+      var c  = window.localStorage.getItem("currentCurso");
+      c = JSON.parse(c);
+      self.getDataSuccess(c);
+    }
+  }
+
+  self.initialize();
 }

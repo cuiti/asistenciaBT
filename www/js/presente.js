@@ -49,8 +49,8 @@ function PresenteViewModel() {
     }  
 
     self.OpenBluetoothSuccess = function() {
-        //BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
-        //BC.Bluetooth.StartScan();
+        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        BC.Bluetooth.StartScan();
     };
 
     self.getPresenteSuccess = function(data) {

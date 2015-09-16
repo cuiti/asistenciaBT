@@ -111,6 +111,7 @@ function server() {
 		self.errorCallBack=errorCallBack;
 		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
 	}
+
 };
 
 var Server = new server();

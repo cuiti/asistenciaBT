@@ -21,9 +21,9 @@
 <div class="row center"><h4 class="center blue-text thin"> Buscar un curso </h4></div>
 <nav class="blue">
     <div class="nav-wrapper">
-      <form>
+      <form data-bind="submit: Search">
         <div class="input-field">
-          <input id="search" type="search" data-bind="value:busqueda, event: {change: Search, submit: Search}" required>
+          <input id="search" type="search" data-bind="value:busqueda, event: {change: Search}" required>
           <label for="search"><img src="./img/search_1.png" alt=""></label>
         </div>
       </form>

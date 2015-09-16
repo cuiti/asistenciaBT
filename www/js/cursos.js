@@ -8,6 +8,11 @@ function onDeviceReady() {
   Server.initialize(function() { ko.applyBindings(new CursosVM());}, function() { console.log('error :(');});
 }
 
+function internet() {
+  var networkState = navigator.connection.type;
+  return networkState != Connection.NONE;
+}
+
 function Curso(data) {
   var self = this;
   self.id = data.id;
@@ -17,6 +22,7 @@ function Curso(data) {
 
   self.setAsCurrent = function() {
     localStorage.setItem("currentCursoID", self.id);
+    localStorage.setItem("currentCurso", JSON.stringify(self));
     window.location = "curso.html";
   }
 }
@@ -30,7 +36,10 @@ function CursosVM() {
     $("#preload").hide();
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
     if (mappedCursos.length != 0){
-    self.cursos(mappedCursos);}
+      self.cursos(mappedCursos); 
+      // faltaria ver si es la primera vez y no tiene conexion que hacemo
+      window.localStorage.setItem("cursosComoAlumno",JSON.stringify(mappedCursos));
+    }
   };
 
   self.getCursosFailure = function(response) {
@@ -42,9 +51,27 @@ function CursosVM() {
     $("#preload").hide();
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
     if (mappedCursos.length != 0){
-    self.cursosDocente(mappedCursos);}
+      self.cursosDocente(mappedCursos);
+      window.localStorage.setItem("cursosComoDocente",JSON.stringify(mappedCursos));
+    }
     Server.getCursosById(currentUserID,self.getCursosSuccess, self.getCursosFailure);
   };
 
-  Server.getCursosDocente(currentUserID,self.getCursosDocenteSuccess, self.getCursosFailure);
+  self.initialize = function() {
+    if (internet()) {
+      Server.getCursosDocente(currentUserID,self.getCursosDocenteSuccess, self.getCursosFailure);
+    } else {
+      $("#preload").hide();
+      var cD = window.localStorage.getItem("cursosComoDocente");
+      var c  = window.localStorage.getItem("cursosComoAlumno");
+      cD = JSON.parse(cD);
+      c  = JSON.parse(c);
+      var mappedCursos = $.map(cD, function(item) { return new Curso(item) });
+      var mappedCursosA = $.map(c, function(item) { return new Curso(item) });
+      self.cursosDocente(mappedCursos);
+      self.cursos(mappedCursosA);
+    }
+  }
+
+  self.initialize();
 }
