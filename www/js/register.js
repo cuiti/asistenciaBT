@@ -8,6 +8,7 @@ var device_address = 0;
 function onDeviceReady() {
   currentCursoID = localStorage.getItem("currentCursoID");
   $("#username-progress").hide();
+  BC.Bluetooth.OpenBluetooth(function(){alert("abierto")},function(){alert("fallo");});
 	cordovaHTTP.useBasicAuth(username, password, function() {
     console.log('success!');
     ko.applyBindings(new RegisterVM());
@@ -36,13 +37,15 @@ function RegisterVM() {
     try {
         response.data = JSON.parse(response.data);
         window.localStorage.setItem("user_id",response.data.id);
-        //alert(response.data.message);
+        alert(response.data.message);
     } catch(e) {
         alert("JSON parsing error");
     }
   }
   
- self.registerFail=function(response){}
+ self.registerFail=function(response){
+  console.log(response);
+ }
   
  self.submitAlumno =function(){
    Server.RegistrarAlumno(self.first_name(),self.last_name(),self.password(),device_address.toString(),self.NroAlu(),self.username(),self.registerSuccess,self.registerFail);
@@ -51,13 +54,13 @@ function RegisterVM() {
    };
 
   self.validateName = function() {
-    if ($("#first_name").value.length==0){
+    if ($("#first_name").val().length==0){
         $("#first_name").removeClass("valid").addClass("invalid"); 
     }
   };
 
   self.validateLastName = function() {
-    if ($("#last_name").value.length==0){
+    if ($("#last_name").val().length==0){
         $("#last_name").removeClass("valid").addClass("invalid"); 
     }   };
   

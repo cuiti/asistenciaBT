@@ -54,7 +54,7 @@ function server() {
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/registro/";
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
-		cordovaHTTP.post(url,{nombre: name,apellido: surname,password: contra, legajo: nroalu, device_address: mac, username: username},{}, successCallBack, errorCallBack); 
+		cordovaHTTP.post(url,{nombre: name,apellido: surname,password: contra, legajo: nroalu, device_address: mac, username: username},{}, self.successCallBack, self.errorCallBack); 
 	}; 
 
 	self.getCursosById = function(id_user,successCallBack, errorCallBack) { //cursos donde el usuario es estudiante
