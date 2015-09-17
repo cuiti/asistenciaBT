@@ -119,7 +119,7 @@ function server() {
 		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
 	}
 
-	self.marcarClaseCompletada = function(id_clas, successCallBack, errorCallBack){
+	self.marcarClaseCompletada = function(id_clase, successCallBack, errorCallBack){
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/cursos/marcar_completada/";
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
