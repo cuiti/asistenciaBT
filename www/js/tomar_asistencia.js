@@ -25,7 +25,7 @@ function onDeviceReady() {
       var fecha= new Date();
       var fecha_act= fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear();
       var hora =fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-      Server.crearClase(currentCursoID, fecha_act,hora,"",function(data){alert(data);currentClassID=data.id;});
+     // Server.crearClase(currentCursoID, fecha_act,hora,"",function(data){alert(data);currentClassID=data.id;});
 
 }
 
