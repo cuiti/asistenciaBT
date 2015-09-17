@@ -54,8 +54,8 @@ function PresenteViewModel() {
     }  
 
     self.OpenBluetoothSuccess = function() {
-        BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
-        BC.Bluetooth.StartScan();
+        //BC.Bluetooth.RFCOMMListen("appName", CHANEL, true);
+        //BC.Bluetooth.StartScan();
     };
 
     self.getPresenteSuccess = function(data) {
@@ -84,7 +84,7 @@ function PresenteViewModel() {
     }
 
     self.givePresent = function() {
-        window.BTPlugin.enableVisibility(function(){alert("ajj"), function(){alert("jajaj")}});
+        window.BTPlugin.enableVisibility(function(){console.log("visible ok");}, function(){alert("jajaj")});
         $("#preloader-presente").show();
         BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
         alert("bluetooth open error!");});
