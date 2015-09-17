@@ -38,13 +38,21 @@ function PresenteViewModel() {
     self.read_interval = null;
     self.estoyPresente = false;
     self.chequearPresenteInterval = null;
-
+    self.currentClaseID = 0;
     self.teacher = ko.observable(new TeacherViewModel({
        name: "cargando profesor...",
        device_mac: "..."
     }));
 
     
+    self.getClaseSuccess = function(data) {
+        if(data.status) {
+            self.currentClaseID = data.id;
+        } else {
+            swal("Error", "no clase amigo", "error"); 
+        }
+    }
+
     self.getDataSuccess = function(data) {
         self.teacher(new TeacherViewModel({name: data.usuario_profesor, device_mac: data.address_profesor}));
     };
@@ -80,7 +88,7 @@ function PresenteViewModel() {
     }
 
     self.chequearPresente = function() {
-        Server.estaPresente(self.id,24,self.getPresenteSuccess, self.getPresenteFailure);
+        Server.estaPresente(self.id,self.currentClaseID,self.getPresenteSuccess, self.getPresenteFailure);
     }
 
     self.givePresent = function() {
@@ -89,8 +97,11 @@ function PresenteViewModel() {
         BC.Bluetooth.OpenBluetooth(self.OpenBluetoothSuccess, function() {
         alert("bluetooth open error!");});
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
-        
+        if (self.currentClaseID !=0) {
+            self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
+        } else {
+            Server.obtenerUltimaClase(currentCursoID, self.getClaseSuccess, self.getClaseFailure);
+        }
        // });
     };
 

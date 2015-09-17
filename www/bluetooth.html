@@ -4,9 +4,11 @@
     <title>Bluetooth</title>
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <link type="text/css" rel="stylesheet" href="css/sweetalert.css"  media="screen,projection"/>
     <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+	 <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/sweetalert.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
   </head>
@@ -21,7 +23,8 @@
           <h4 class="title center thin blue-text">Una materia</span></h1>
       </header>
       <div class="container center">
-      <button data-bind="click:scanDevices" id="boton" class="btn-large waves-effect waves-light center">Tomar Asistencia</button>
+      <button data-bind="click:tomarAsistencia" id="boton" class="btn-large waves-effect waves-light center">Tomar Asistencia</button>
+      <button data-bind="click:marcarCompletado" id="completar" class="btn-large waves-effect waves-light red center">Finalizar</button>
         <div class="container center" id="preload" style="display:none">
               <img src="./img/preloader_short.GIF">              
           </div>

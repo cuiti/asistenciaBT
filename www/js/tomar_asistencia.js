@@ -12,6 +12,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 // device APIs are available
 function onDeviceReady() {
     currentCursoID = localStorage.getItem("currentCursoID");
+    $("#completar").hide();
     cordovaHTTP.useBasicAuth(username, password, function() {
         console.log('success!');
         window.vm = new AsistenciaViewModel();
@@ -20,13 +21,6 @@ function onDeviceReady() {
     function() {
         console.log('error :(');
     });
-          alert("antes de la clase");
-
-      var fecha= new Date();
-      var fecha_act= fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear();
-      var hora =fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
-     // Server.crearClase(currentCursoID, fecha_act,hora,"",function(data){alert(data);currentClassID=data.id;});
-
 }
 
 function logmsg(msg) {
@@ -145,7 +139,7 @@ function AsistenciaViewModel() {
     var self = this;
     self.detectedDevices = ko.observableArray([]);
     self.alumnos = ko.observableArray([]);
-
+    self.currentClassID = 0;
     
     self.getDataSuccess = function(data) {
         var mappedAlumnos = $.map(data.alumnos, function(item) { 
@@ -193,10 +187,42 @@ function AsistenciaViewModel() {
         BC.Bluetooth.StartScan();
     };
 
-    self.scanDevices = function() {
-        BC.bluetooth.addEventListener("newdevice", self.deviceFound);
-        BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
+    self.classCreatedSuccess = function(data) {
+        if (data.status) {
+            self.currentClassID = data.id;
+            $("#completar").show();
+            BC.bluetooth.addEventListener("newdevice", self.deviceFound);
+            BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
+        } else {
+            alert("opsie volver a intentar");
+        }
+    }
+
+    self.classCreatedFailure = function(data) {
+        alert("no crear");
+    }
+
+    self.tomarAsistencia = function() {
+        var fecha= new Date();
+        var fecha_act= fecha.getDate()+"/"+fecha.getMonth()+"/"+fecha.getFullYear();
+        var hora =fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+        Server.crearClase(currentCursoID, fecha_act,hora,"",self.classCreatedSuccess,self.classCreatedFailure);
     };
+
+    self.marcarCompletadoSuccess = function(data) {
+        if (data.status) {
+            swal("Ok","clase marcada como completada!","success");
+        }
+    }
+
+    self.marcarCompletadoFailure = function(data) {
+        swal("Error", "no se pudo marcar la clase como completada, vuelva a intentarlo", "error");
+    }
+
+    self.marcarCompletado = function() {
+        $("#preload").hide();
+        Server.marcarClaseCompletada(self.currentClassID, self.marcarCompletadoSuccess,self.marcarCompletadoFailure);
+    }
 
     self.deviceFound = function(s) {
         var newDevice = s.target;
@@ -211,7 +237,7 @@ function AsistenciaViewModel() {
             });
 
         if (in_students && !in_students.present()) {
-            Server.pasarPresente(in_students.id,currentCursoID, self.pasarPresenteSuccess, self.pasarPresenteFailure);
+            Server.pasarPresente(in_students.id,self.currentClassID, self.pasarPresenteSuccess, self.pasarPresenteFailure);
             in_students.present(true);
             //in_students.connect();
         } else {

@@ -37,7 +37,7 @@ function server() {
 		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/es_profesor/"+id_curso;
 		cordovaHTTP.get(url, {}, {}, self.invokeSuccessCallback, self.invokeFailureCallback);
 	}
-	self.CrearClase = function (id_curso,date,time,timeEnd,successCallBack,errorCallBack){
+	self.crearClase = function (id_curso,date,time,timeEnd,successCallBack,errorCallBack){
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/cursos/generar_clase/";
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
@@ -86,14 +86,14 @@ function server() {
 	};
 
 	self.pasarPresente = function(alumno_id,clase_id,successCallBack,errorCallBack){
-		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/marcar_presente/24";
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/marcar_presente/"+clase_id;
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
 		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
 	}
 
 	self.estaPresente = function(alumno_id, clase_id, successCallBack, errorCallBack) {
-		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/esta_presente/24";
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+alumno_id+"/esta_presente/"+clase_id;
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
 		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback);
@@ -111,6 +111,20 @@ function server() {
 		self.errorCallBack=errorCallBack;
 		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
 	}
+
+	self.obtenerUltimaClase = function(curso_id,successCallBack,errorCallBack) {
+		var url= "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/"+curso_id+"/obtener_clase";
+		self.successCallBack= successCallBack;
+		self.errorCallBack=errorCallBack;
+		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
+	}
+
+	self.marcarClaseCompletada = function(id_clas, successCallBack, errorCallBack){
+		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/cursos/marcar_completada/";
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.post(url,{clase_id:id_clase},{}, self.successCallBack, self.errorCallBack); 
+	}; 
 
 };
 
