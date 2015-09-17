@@ -48,6 +48,7 @@ function PresenteViewModel() {
     self.getClaseSuccess = function(data) {
         if(data.status) {
             self.currentClaseID = data.id;
+            self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 1000);
         } else {
             swal("Error", "no clase amigo", "error"); 
         }
@@ -98,7 +99,7 @@ function PresenteViewModel() {
         alert("bluetooth open error!");});
         BC.bluetooth.addEventListener("newdevice", self.deviceFound);
         if (self.currentClaseID !=0) {
-            self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 3000);
+            self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 1000);
         } else {
             Server.obtenerUltimaClase(currentCursoID, self.getClaseSuccess, self.getClaseFailure);
         }
