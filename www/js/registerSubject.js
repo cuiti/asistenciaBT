@@ -40,7 +40,10 @@ function RegisterVM() {
    Server.RegistrarCurso(self.name(),self.descripcion(),self.horarios(),self.teacher_id(),self.registerSuccess,self.registerFail);
    };
 
-self.registerSuccess = function(response) {}
+self.registerSuccess = function(response) {
+      window.location = "cursos.html";
+
+}
   
  self.registerFail=function(response){}
   

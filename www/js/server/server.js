@@ -23,8 +23,6 @@ function server() {
 		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/inscribir_en_curso";
 		self.successCallBack = successCallBack;
 		self.errorCallBack = errorCallBack;
-		alert(id_user);
-		alert(id_curso);
 		cordovaHTTP.post(url,{usuario_id: id_user, curso_id: id_curso},{}, self.invokeSuccessCallback, self.invokeFailureCallback); 
 	};
 
@@ -116,6 +114,12 @@ function server() {
 		var url= "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/"+curso_id+"/obtener_clase";
 		self.successCallBack= successCallBack;
 		self.errorCallBack=errorCallBack;
+		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
+	}
+	self.getUserbyID =function(user_id,successCallBack,errorCallBack){
+		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+user_id;
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
 		cordovaHTTP.get(url,{},{},self.invokeSuccessCallback,self.invokeFailureCallback);
 	}
 

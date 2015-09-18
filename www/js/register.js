@@ -32,6 +32,7 @@ function RegisterVM() {
         window.localStorage.setItem("user_id",response.data.id);
         window.localStorage.setItem("Mac",device_address.toString());
         alert(response.data.message);
+        window.location = "cursos.html"
     } catch(e) {
         alert("JSON parsing error");
     }

@@ -20,14 +20,30 @@ function CursoVM() {
   self.nombre = ko.observable();
   self.descripcion = ko.observable();
   self.profesor = ko.observable();
+  self.profesorNombre =ko.observable();
+  
+  self.getTeacherSuccess =function (data){
+  
+    self.profesorNombre(data.apellido+data.nombre);
+   }
+  self.inscripcion=function(){
+    var usuario=localStorage.getItem("user_id");
+    var curso=localStorage.getItem("currentCursoID");
+    Server.inscribirEnCurso(usuario,curso,function(data){Materialize.toast('Te inscribiste en el curso', 4000);    window.location = "cursos.html";
+}, function(response){});
+  }
+
 
   self.getDataSuccess = function(data) {
     self.id(data.id)
     self.nombre(data.nombre);
     self.descripcion(data.descripcion);
     self.profesor(data.id_profesor);
+    Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
     if (self.profesor() == currentUserID) $("#es_docente").show();
     else {$("#es_alumno").show();}
+    Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
+   
   };
 
   self.getDataFailure = function(response) {

@@ -10,6 +10,13 @@ function Curso(data) {
   self.nombre = data.nombre;
   self.descripcion = data.descripcion;
   self.profesor = data.profesor;
+
+  self.setAsCurrent = function(){
+    alert(self.id);
+    window.localStorage.setItem("currentCursoID",self.id);
+    window.location = "inscripcion.html";
+
+  }
 }
 
 function BusquedaVM(){
@@ -23,17 +30,6 @@ self.getDataSuccess = function(data) {
     if (mappedCursos.length != 0){
     self.resultado(mappedCursos);}
   };
-
-  self.inscripcion=function(){
-    alert("adentro de inscribir");
-    localStorage.setItem("currentCursoID", self.id);
-    var usuario=localStorage.getItem("user_id");
-    var curso=localStorage.getItem("currentCursoID");
-    alert(curso);
-    alert(usuario);
-    Server.inscribirEnCurso(usuario,curso,function(data){Materialize.toast('Te inscribiste en el curso', 4000);}, function(response){});
-  }
-
   self.getDataFailure = function(response) {
   	$("#preloader").hide();
     console.error(response.error);

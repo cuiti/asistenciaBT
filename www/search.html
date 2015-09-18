@@ -7,7 +7,6 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
     <script type="text/javascript" src="js/search.js"></script>
     <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
@@ -39,14 +38,16 @@
         <ul class="collection with-header" data-bind="foreach:resultado">
         <li class="collection-item">
           <div>
-            <b><span class="title left black-text" data-bind="text: nombre"></span></b><a data-bind:"click:inscribirse" class="right btn">Inscribirse</a><br>
+            <b><span class="title left black-text" data-bind="text: nombre"></span></b><a data-bind="click: setAsCurrent" class="btn right">Ver</a>
+          </div><br>
             <span class="black-text left" data-bind="text: descripcion"></span><br>
           </div><br>
         </li>
         </ul>
         </div>
       </div>
-    </div>
+      </div>
+      
 </div>
 </body>
 </html>
