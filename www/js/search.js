@@ -24,7 +24,7 @@ self.getDataSuccess = function(data) {
     self.resultado(mappedCursos);}
   };
 
-  self.inscribirse=function(){
+  self.inscripcion=function(){
     alert("adentro de inscribir");
     localStorage.setItem("currentCursoID", self.id);
     var usuario=localStorage.getItem("user_id");
