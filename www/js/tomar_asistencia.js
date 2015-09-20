@@ -5,13 +5,15 @@ var password = "3mFh5qNR";
 var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";
 var currentCursoID = 0;
 var currentClassID;
+var currentCursoName;
 
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
 function onDeviceReady() {
-    currentCursoID = localStorage.getItem("currentCursoID");
+    currentCursoID = window.localStorage.getItem("currentCursoID");
+    currentCursoName = window.localStorage.getItem("currentCurso_Name");
     $("#completar").hide();
     cordovaHTTP.useBasicAuth(username, password, function() {
         console.log('success!');
@@ -140,6 +142,7 @@ function AsistenciaViewModel() {
     self.detectedDevices = ko.observableArray([]);
     self.alumnos = ko.observableArray([]);
     self.currentClassID = 0;
+    self.currentCursoname= ko.observable(currentCursoName);
     
     self.getDataSuccess = function(data) {
         var mappedAlumnos = $.map(data.alumnos, function(item) { 

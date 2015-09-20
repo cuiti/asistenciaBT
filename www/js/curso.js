@@ -42,6 +42,7 @@ function CursoVM() {
     Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
     if (self.profesor() == currentUserID) $("#es_docente").show();
     else {$("#es_alumno").show();}
+    window.localStorage.setItem("currentCurso_Name",self.nombre());
     Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
    
   };

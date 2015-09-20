@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
     <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
     <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" src="js/server/server.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+
 </head>
 <body>
   <div class="container center" id="preloader">
@@ -29,7 +31,7 @@
   </div>
   <main class="content">
     <div class="section">
-      <a type="button" href="index.html" onclick="borrarMac()">BorrarMAC</a>
+      <!--a type="button" href="index.html" onclick="borrarMac()">BorrarMAC</a-->
       <script> function borrarMac(){window.localStorage.removeItem("Mac");}</script>
       <!--   Icon Section   -->
       <div class="row">
@@ -48,7 +50,7 @@
           </div>
         </div>
 
-        <div class="col s6 m6">
+        <div class="col s6 m6" style="display:none" id="crearCurso">
           <div class="icon-block">
             <h2 class="center light-blue-text"><a href="registerSubject.html" class="waves-effect waves-light btn-flat-large"><img src="./img/new.png"></a></h2>
             <h5 class="center flow-text">Crear curso</h5>
@@ -57,7 +59,7 @@
         </div>
           <div class="col s6 m6">
           <div class="icon-block">
-            <h2 class="center light-blue-text"><a href="aboutUs.html" class="waves-effect waves-light btn-flat-large"><img src="./img/button44.png"></a></h2>
+            <h2 class="center light-blue-text"><a href="aboutUs.html" class="waves-effect waves-light btn-flat-large"><img src="./img/button90.png"></a></h2><br>
             <h5 class="center flow-text">Sobre la App</h5>
 
           </div>

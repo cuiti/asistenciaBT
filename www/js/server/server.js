@@ -31,6 +31,13 @@ function server() {
 	cordovaHTTP.get(url,{id: id_user, clase_id: id_class},{},self.invokeSuccessCallback, self.invokeFailureCallback);
 	}
 
+	self.usuarioProfesor = function(id_user,successCallBack,errorCallBack){
+		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/es_profesor"
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.get(url, {}, {}, self.invokeSuccessCallback, self.invokeFailureCallback);
+	
+	}
 	self.esprofesor = function(id_user, id_curso,successCallBack){
 		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/es_profesor/"+id_curso;
 		cordovaHTTP.get(url, {}, {}, self.invokeSuccessCallback, self.invokeFailureCallback);

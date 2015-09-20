@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+
     },
     // Bind Event Listeners
     //
@@ -33,13 +34,23 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        var mac = window.localStorage.getItem("Mac");
+    Server.initialize(function() {}, function() {});
+    var mac = window.localStorage.getItem("Mac");
         if (mac == null) {
             $("#preloader").hide(); 
             location.href = "pp.html";
         } else  {
-            $("#preloader").hide(); 
-            document.getElementById("bienvenida").style.display=""; 
+            var currentUserID =window.localStorage.getItem("user_id");
+            window.localStorage.removeItem("esProfesor");
+            Server.usuarioProfesor(currentUserID,
+                                    function(data){
+                                        $("#preloader").hide(); 
+                                        document.getElementById("bienvenida").style.display=""; 
+                                        if (data.status){
+                                            window.localStorage.setItem("esProfesor",true);
+                                            document.getElementById("crearCurso").style.display=""; }
+                                    },function(){}); 
+            
         }
     },
     // Update DOM on a Received Event
