@@ -13,10 +13,12 @@ function server() {
 	};
 
 	self.invokeSuccessCallback = function(response) {
+		alert("presente");
 		self.successCallBack(JSON.parse(response.data));
 	}
 
 	self.invokeFailureCallback = function(response) {
+		alert("fallo");
 		self.errorCallBack(response);
 	}
 	self.inscribirEnCurso = function(id_user,id_curso,successCallBack,errorCallBack){
@@ -25,11 +27,6 @@ function server() {
 		self.errorCallBack = errorCallBack;
 		cordovaHTTP.post(url,{usuario_id: id_user, curso_id: id_curso},{}, self.invokeSuccessCallback, self.invokeFailureCallback); 
 	};
-
-	self.PresenteManual =function(id_user,id_class){
-	var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/marcar_presente/"+clase_id+"/";
-	cordovaHTTP.get(url,{id: id_user, clase_id: id_class},{},self.invokeSuccessCallback, self.invokeFailureCallback);
-	}
 
 	self.usuarioProfesor = function(id_user,successCallBack,errorCallBack){
 		var url = "http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_user+"/es_profesor"

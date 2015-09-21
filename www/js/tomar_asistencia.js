@@ -6,6 +6,7 @@ var getCursoURL = "http://movilesbluetooth.php.info.unlp.edu.ar/cursos/";
 var currentCursoID = 0;
 var currentClassID;
 var currentCursoName;
+var currentStudentID;
 
 // Wait for device API libraries to load
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -64,7 +65,9 @@ function AlumnoViewModel(data) {
         self.device.addEventListener("deviceconnected", self.prepareStudentAndWrite);
     }
 
-
+    self.setAsCurrent =function(){
+        window.localStorage.setItem("currentStudentID",self.id);
+    }
     self.connectionSuccess = function() {
         //alert("nos conectamos correctamente!!");
     };
@@ -166,19 +169,22 @@ function AsistenciaViewModel() {
         }, 
         function(response) {
           self.getDataFailure(response);
-    });
-
-        self.MarcarPresente = function() {
-            Server.PresenteManual(currentStudentID,currentClassID);
-        };
-        
+    }); 
 
 
     self.registerStudent = function(student) {
         self.alumnos.push(student);
         self.detectedDevices.remove(student);
     };
-
+    
+    self.MarcarPresente = function() {
+        swal({  title: "¿Estas seguro de marcar como presente a este alumno?",      
+                type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Si, Marcarlo como presente",   closeOnConfirm: false }, 
+                function(){ Server.pasarPresente("132",self.currentClassID,function(data){swal("El alumno ahora esta presente!", "", "success");},
+                                                         function(data){alert("No se le pudo pasar presente");}); });
+    };
+       
     self.openBTError = function() {
         logmsg("No pudo abrirse el bluetooth");
     };

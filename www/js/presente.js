@@ -55,7 +55,7 @@ function PresenteViewModel() {
     }
 
     self.getDataSuccess = function(data) {
-        self.teacher(new TeacherViewModel({name: data.usuario_profesor, device_mac: data.address_profesor}));
+        self.teacher(new TeacherViewModel({name: data.nombre_profesor+" "+data.apellido_profesor, device_mac: data.address_profesor}));
     };
 
     self.getDataFailure = function(response) {
