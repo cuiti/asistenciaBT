@@ -13,7 +13,6 @@ function server() {
 	};
 
 	self.invokeSuccessCallback = function(response) {
-		alert("presente");
 		self.successCallBack(JSON.parse(response.data));
 	}
 
