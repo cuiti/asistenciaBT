@@ -5,12 +5,6 @@
     <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-
-    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/cursos.js"></script>
   </head>
   <script>   $(document).ready(function(){
     $('.collapsible').collapsible({
@@ -30,31 +24,41 @@
       <div class="container">
         <div class="row center" id="preload" style="display:none"><img src="./img/preloader_short.GIF" alt=""></div> 
         <ul class="collapsible" data-collapsible="accordion">
-      <li>
-      <div class="collapsible-header blue active"><p class="white-text">Mis cursos como alumno</p></div>
-      <div class="collapsible-body">
-          <div class="collection" data-bind="foreach:cursos">
-           <a href="#!" data-bind="click:setAsCurrent" class="collection-item"><img class="left-align" alt="" src="./img/folder.png" />
-          <b><span class="title black-text" data-bind="text: nombre"></span></b><br>
-          <span class="black-text" data-bind="text: descripcion"></span></a>
-          </div>
+          <li>
+            <div class="collapsible-header blue active"><span class="white-text">Mis cursos como alumno</span></div>
+            <div class="collapsible-body">
+              <div class="container">
+                <div class="collection" data-bind="foreach:cursos">
+                  <a href="#!" data-bind="click:setAsCurrent" class="collection-item">
+                    <img class="left-align" alt="" src="./img/folder.png" />
+                    <span class="title black-text" data-bind="text: nombre"></span>
+                    <span class="black-text" data-bind="text: descripcion"></span>
+                  </a>
+                </div>
+              </div>
       
-    </div>
-    </li>
-    <li id="cursos_docente">
-      <div class="collapsible-header blue"><p class="white-text">Mis cursos como docente</p></div>
-        <div class="collapsible-body">
-        <div class="collection" data-bind="foreach:cursosDocente">
-        <a href="#!" data-bind="click:setAsCurrent" class="collection-item"><img class="left-align" alt="" src="./img/folder.png" />
-            <b><span class="title black-text" data-bind="text: nombre"></span></b><br>
-            <span class="black-text" data-bind="text: descripcion"></span></a><br>
-  </div>
-</div>
-    </li>
-  </div>
-  </ul>
-</div>
-        
-      
+            </div>
+          </li>
+          <li id="cursos_docente">
+            <div class="collapsible-header blue"><span class="white-text">Mis cursos como docente</span></div>
+            <div class="collapsible-body">
+              <div class="container">
+                <div class="collection" data-bind="foreach:cursosDocente">
+                  <a href="#!" data-bind="click:setAsCurrent" class="collection-item">
+                    <img class="left-align" alt="" src="./img/folder.png" />
+                    <span class="title black-text" data-bind="text: nombre"></span>
+                    <span class="black-text" data-bind="text: descripcion"></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    <script type="text/javascript" src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/cursos.js"></script>
   </body>
 </html>

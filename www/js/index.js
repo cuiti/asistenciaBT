@@ -29,28 +29,59 @@ var app = {
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
     },
+
+    getUserInformationFailure: function(data) {
+        alert("data matata")
+    },
+
+    getUserInformationSuccess: function(data) {
+        $("#preloader").hide(); 
+        if (data.status) {
+            $("#bienvenida").show();
+            if (data.status){
+                window.localStorage.setItem("esProfesor",true);
+                $("#crearCurso").show(); 
+            }
+        }
+    },
+
+    ServerInitalizationFailure: function() {
+        alert("no server");
+    },
+
+    getUserData: function() {
+        var currentUserID =window.localStorage.getItem("user_id");
+        Server.usuarioProfesor(currentUserID, app.getUserInformationSuccess, app.getUserInformationFailure);
+    },
+
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-    Server.initialize(function() {}, function() {});
-    var mac = window.localStorage.getItem("Mac");
+        var networkState = navigator.connection.type;
+        var esProfesor =window.localStorage.getItem("esProfesor");
+        var mac = window.localStorage.getItem("Mac");
+        var internet = networkState != Connection.NONE;
         if (mac == null) {
-            $("#preloader").hide(); 
-            location.href = "pp.html";
-        } else  {
-            var currentUserID =window.localStorage.getItem("user_id");
-            window.localStorage.removeItem("esProfesor");
-            Server.usuarioProfesor(currentUserID,
-                                    function(data){
-                                        $("#preloader").hide(); 
-                                        document.getElementById("bienvenida").style.display=""; 
-                                        if (data.status){
-                                            window.localStorage.setItem("esProfesor",true);
-                                            document.getElementById("crearCurso").style.display=""; }
-                                    },function(){}); 
-            
+            if (internet) {
+                $("#preloader").hide(); 
+                location.href = "pp.html";
+            } else {
+               alert("sin internet no hay nunca mas")
+            }
+        } else {
+            if (esProfesor == null) {
+                if (internet) {
+                    Server.initialize(app.getUserData,app.ServerInitalizationFailure)
+                } else {
+                    alert("sin internet no hay nunca mas")
+                }
+            } else {
+                if (esProfesor) {
+                    $("#crearCurso").show();
+                }
+            }
         }
     },
     // Update DOM on a Received Event

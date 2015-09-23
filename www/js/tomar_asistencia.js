@@ -13,6 +13,9 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 // device APIs are available
 function onDeviceReady() {
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
     currentCursoID = window.localStorage.getItem("currentCursoID");
     currentCursoName = window.localStorage.getItem("currentCurso_Name");
     $("#completar").hide();
@@ -80,6 +83,29 @@ function AlumnoViewModel(data) {
         }
     };
 
+    self.MarcarPresente = function() {
+        swal({
+                title: "¿Estas seguro de marcar como presente a este alumno?",      
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Marcar Presente",   
+                closeOnConfirm: false 
+            }, 
+            function(){ 
+                Server.pasarPresente(
+                    self.id,
+                    window.vm.currentClassID,
+                    function(data){
+                        swal("Ok", "Alumno marcado como Presente!", "success");
+                    },
+                    function(data){
+                        alert("No se le pudo pasar presente");
+                    }
+                ); 
+            }
+        );
+    };
 
     self.prepareStudentAndWrite = function(s) {
         self.connectedDevice = s;
@@ -175,14 +201,6 @@ function AsistenciaViewModel() {
     self.registerStudent = function(student) {
         self.alumnos.push(student);
         self.detectedDevices.remove(student);
-    };
-    
-    self.MarcarPresente = function() {
-        swal({  title: "¿Estas seguro de marcar como presente a este alumno?",      
-                type: "warning",   showCancelButton: true,   confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Si, Marcarlo como presente",   closeOnConfirm: false }, 
-                function(){ Server.pasarPresente("132",self.currentClassID,function(data){swal("El alumno ahora esta presente!", "", "success");},
-                                                         function(data){alert("No se le pudo pasar presente");}); });
     };
        
     self.openBTError = function() {

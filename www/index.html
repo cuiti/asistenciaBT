@@ -1,38 +1,32 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
     <title>Asistencia Bluetooth</title>
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/materialize.min.css" />
-    <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
-    <script type="text/javascript" src="js/server/server.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-
-</head>
-<body>
-  <div class="container center" id="preloader">
-    <img class="preloader" src="./img/preloader_long.GIF" />
-  </div>
- 
-  <div id="bienvenida" style="display:none">
-  <nav class="blue" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a>
+  </head>
+  <body>
+    <div class="container center" id="preloader">
+      <img class="preloader" src="./img/preloader_long.GIF" />
     </div>
-  </nav>
-  <div class="container">
-  <h3 class="header thin center blue-text">Asistencia Bluetooth</h3>
-  </div>
+    
+    <div id="bienvenida">
+      <nav class="blue" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a></div>
+      </nav>
+    
+    <div class="container">
+      <h3 class="header thin center blue-text">Asistencia Bluetooth</h3>
+    </div>
+  
   <main class="content">
     <div class="section">
-      <!--a type="button" href="index.html" onclick="borrarMac()">BorrarMAC</a-->
-      <script> function borrarMac(){window.localStorage.removeItem("Mac");}</script>
-      <!--   Icon Section   -->
       <div class="row">
         <div class="col s6 m6">
           <div class="icon-block">
@@ -66,7 +60,9 @@
         </div>
   </div>
   </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+    <script type="text/javascript" src="js/vendor/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="js/vendor/materialize.min.js"></script>
+    <script type="text/javascript" src="js/server/server.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
 </html>
