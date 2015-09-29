@@ -16,6 +16,8 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var device_address;
+var EstaRegistrado;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -54,31 +56,70 @@ var app = {
         Server.usuarioProfesor(currentUserID, app.getUserInformationSuccess, app.getUserInformationFailure);
     },
 
+    CheckMacAddressOnServer: function(){
+        //falta abrir el BT
+        window.MacAddress.getMacAddress(
+          function(macAddress) {
+            device_address=macAddress;
+            Server.checkMacServer(device_address,app.getMacSuccess,app.getMacFailure);
+          },
+          function(fail) {
+            alert(fail);
+          }
+        );
+      
+  },
+
+  setCurrentUser:function(response){
+    window.localStorage.setItem("Mac",device_address);
+    window.localStorage.setItem("user_id",response.id);
+    $("#preloader").hide(); 
+    $("#bienvenida").show();
+    Server.initialize(app.getUserData,app.ServerInitalizationFailure); //se fija en el server si es profesor
+    },
+
+  CurrentUserFail:function(response){},
+
+  getMacSuccess:function(response){
+    EstaRegistrado=response.status;
+    if (response.status)
+        Server.getCurrentUser(device_address,app.setCurrentUser,app.CurrentUserFail);
+    else {
+        $("#preloader").hide();  
+        location.href = "pp.html";
+    }
+    },
+  getMacFailure: function(response){},
     // deviceready Event Handler
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+        Server.initialize(function() {}, function() { console.log('error :(');});
         var networkState = navigator.connection.type;
         var esProfesor =window.localStorage.getItem("esProfesor");
         var mac = window.localStorage.getItem("Mac");
         var internet = networkState != Connection.NONE;
         if (mac == null) {
             if (internet) {
-                $("#preloader").hide(); 
-                location.href = "pp.html";
+                app.CheckMacAddressOnServer();
             } else {
-               alert("sin internet no hay nunca mas")
+               alert("sin internet no hay nunca mas");
             }
-        } else {
+        } 
+        else{
             if (esProfesor == null) {
                 if (internet) {
-                    Server.initialize(app.getUserData,app.ServerInitalizationFailure)
+                    $("#preloader").hide(); 
+                    $("#bienvenida").show();
+                    Server.initialize(app.getUserData,app.ServerInitalizationFailure); //se fija en el server si es profesor
                 } else {
                     alert("sin internet no hay nunca mas")
                 }
             } else {
                 if (esProfesor) {
+                    $("#bienvenida").show();
+                    $("#preloader").hide(); 
                     $("#crearCurso").show();
                 }
             }

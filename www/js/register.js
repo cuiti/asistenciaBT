@@ -30,7 +30,7 @@ function RegisterVM() {
     try {
         response.data = JSON.parse(response.data);
         window.localStorage.setItem("user_id",response.data.id);
-        window.localStorage.setItem("Mac",device_address.toString());
+        //window.localStorage.setItem("Mac",device_address.toString());
         alert(response.data.message);
         window.location = "index.html"
     } catch(e) {
