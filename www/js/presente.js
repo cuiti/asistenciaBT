@@ -50,7 +50,8 @@ function PresenteViewModel() {
             self.currentClaseID = data.id;
             self.chequearPresenteInterval = window.setInterval(self.chequearPresente, 1000);
         } else {
-            swal("Error", "no clase amigo", "error"); 
+			$("#preloader-presente").hide();
+            swal("¡Un momento!", "El profesor aún no está tomando asistencia. \n Intentá nuevamente en unos segundos", "error"); 
         }
     }
 
