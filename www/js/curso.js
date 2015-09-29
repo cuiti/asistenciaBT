@@ -23,13 +23,12 @@ function CursoVM() {
   self.profesorNombre =ko.observable();
   
   self.getTeacherSuccess =function (data){
-  
-    self.profesorNombre(data.apellido+data.nombre);
+    self.profesorNombre(data.apellido+", "+data.nombre);
    }
   self.inscripcion=function(){
     var usuario=localStorage.getItem("user_id");
     var curso=localStorage.getItem("currentCursoID");
-    Server.inscribirEnCurso(usuario,curso,function(data){Materialize.toast('Te inscribiste en el curso', 4000);    window.location = "cursos.html";
+    Server.inscribirEnCurso(usuario,curso,function(data){swal("Te inscribiste en el curso!", self.nombre(), "success");    window.location = "cursos.html";
 }, function(response){});
   }
 
@@ -39,12 +38,10 @@ function CursoVM() {
     self.nombre(data.nombre);
     self.descripcion(data.descripcion);
     self.profesor(data.id_profesor);
-    Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
+    Server.getUserbyID(self.profesor(),self.getTeacherSuccess,function(){});
     if (self.profesor() == currentUserID) $("#es_docente").show();
     else {$("#es_alumno").show();}
-    window.localStorage.setItem("currentCurso_Name",self.nombre());
-    Server.getUserbyID(self.id,self.getTeacherSuccess,function(){});
-   
+    window.localStorage.setItem("currentCurso_Name",self.nombre());   
   };
 
   self.getDataFailure = function(response) {

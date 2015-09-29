@@ -12,7 +12,6 @@ function Curso(data) {
   self.profesor = data.profesor;
 
   self.setAsCurrent = function(){
-    alert(self.id);
     window.localStorage.setItem("currentCursoID",self.id);
     window.location = "inscripcion.html";
 
