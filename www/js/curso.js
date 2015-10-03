@@ -28,8 +28,20 @@ function CursoVM() {
   self.inscripcion=function(){
     var usuario=localStorage.getItem("user_id");
     var curso=localStorage.getItem("currentCursoID");
-    Server.inscribirEnCurso(usuario,curso,function(data){swal("Te inscribiste en el curso!", self.nombre(), "success");    window.location = "cursos.html";
-}, function(response){});
+    Server.inscribirEnCurso(usuario,curso,
+      function(data){
+        swal({   
+          title: "Te inscribiste en el curso!",   
+          text: "Te inscribiste en el curso " + self.nombre(),   
+          type: "success",   showCancelButton: false,   
+          confirmButtonText: "Ok",   
+          closeOnConfirm: false 
+        }, function(){   
+                window.location = "cursos.html";
+
+        });   
+      }, 
+      function(response){});
   }
 
 
