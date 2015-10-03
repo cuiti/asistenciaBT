@@ -152,6 +152,13 @@ function server() {
 		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback); 
 	};
 
+	self.getAsistenciasForCurso = function(id_curso,id_alumno,successCallBack,errorCallBack) {
+		var url ="http://movilesbluetooth.php.info.unlp.edu.ar/alumnos/"+id_alumno+"/asistencia_curso/"+id_curso;
+		self.successCallBack = successCallBack;
+		self.errorCallBack = errorCallBack;
+		cordovaHTTP.get(url,{},{}, self.invokeSuccessCallback, self.invokeFailureCallback); 
+	};
+
 };
 
 var Server = new server();
