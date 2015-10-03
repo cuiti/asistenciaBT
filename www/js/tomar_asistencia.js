@@ -92,11 +92,13 @@ function AlumnoViewModel(data) {
                 confirmButtonText: "Marcar Presente",   
                 closeOnConfirm: false 
             }, 
-            function(){ 
+            function(){
                 Server.pasarPresente(
                     self.id,
                     window.vm.currentClassID,
                     function(data){
+                        self.alumnosPresentes.push(in_students);
+                        self.alumnos.remove(in_students);
                         swal("Ok", "Alumno marcado como Presente!", "success");
                     },
                     function(data){
@@ -163,13 +165,14 @@ function AlumnoViewModel(data) {
     self.disconnectError = function() {
         logmsg("no se pudo desconectar, intentando de nuevo.");
         self.device.disconnect(self.disconnectSuccess, self.disconnectError);
-    }
+    }    
 }
 
 function AsistenciaViewModel() {
     var self = this;
     self.detectedDevices = ko.observableArray([]);
     self.alumnos = ko.observableArray([]);
+    self.alumnosPresentes = ko.observableArray([]);
     self.currentClassID = 0;
     self.currentCursoname= ko.observable(currentCursoName);
     
@@ -250,7 +253,6 @@ function AsistenciaViewModel() {
         $("#preload").hide();
         Server.marcarClaseCompletada(self.currentClassID, self.marcarCompletadoSuccess,self.marcarCompletadoFailure);
     }
-
     self.deviceFound = function(s) {
         var newDevice = s.target;
         var in_students = ko.utils.arrayFirst(self.alumnos(),
@@ -265,6 +267,8 @@ function AsistenciaViewModel() {
 
         if (in_students && !in_students.present()) {
             Server.pasarPresente(in_students.id,self.currentClassID, self.pasarPresenteSuccess, self.pasarPresenteFailure);
+            self.alumnosPresentes.push(in_students);
+            self.alumnos.remove(in_students);
             in_students.present(true);
             //in_students.connect();
         } else {

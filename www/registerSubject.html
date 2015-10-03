@@ -29,7 +29,7 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="name" type="text" data-bind="value:name, event: {change: validateName}" class="validate" required />
-          <label for="name" data-error="Nombre de curso ya existente" data-success="Disponible">Nombre del curso</label>
+          <label for="name" data-error="Nombre de curso ya existente" data-success="Disponible">Nombre del curso *</label>
           <div id="name-progress" class="progress">
           <div class="indeterminate"></div>
           </div>
@@ -46,6 +46,13 @@
            $('textarea#description').characterCounter();
            });</script>
         </div>
+      </div>
+    
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="horarios" type="text" data-bind:"value:horarios" class="materialize-textarea validate"/>
+          <label for="description">Horarios de cursada</label>
+         </div>
       </div>
     
     <input id="teacher_id" type="hidden" data-bind="value:teacher_id">
