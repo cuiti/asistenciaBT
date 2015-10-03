@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Bluetooth</title>
+      <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+      <link type="text/css" rel="stylesheet" href="css/sweetalert.css"  media="screen,projection"/>
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+   </head>
+   <body>
+      <nav class="blue" role="navigation">
+         <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a></div>
+      </nav>
+      <header class="bar bar-nav">
+         <h4 class="title center thin blue-text">Clase del <span data-bind="text:"></span></h4>
+      </header>
+      <div class="container">
+         <div class="card">
+            <h4 class="center blue-text thin">Clases Anteriores</h4>
+            <ul class="collection with-header" data-bind="foreach: alumnos">
+               <li class="collection-item inline">
+                  <span data-bind="text: nombre "></span> 
+                  <span class="right" data-bind="text: estado"></a> 
+               </li>
+            </ul>
+         </div>
+      </div>
+      <script type="text/javascript" charset="utf-8" src="js/vendor/jquery-1.7.1.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/vendor/materialize.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/vendor/knockout-3.3.0.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/vendor/sweetalert.min.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/clase.js"></script>
+      </head>
+   </body>
+</html>
