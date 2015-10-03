@@ -29,13 +29,12 @@
       <div class="row">
         <div class="input-field col s12">
           <input id="name" type="text" data-bind="value:name, event: {change: validateName}" class="validate" required />
-          <label for="name" data-error="Nombre de curso ya existente" data-success="Disponible">Nombre del curso *</label>
+          <label for="name" data-error="Nombre de curso ya existente" data-success="Disponible">Nombre del curso <span class="red-text"> * </span></label>
           <div id="name-progress" class="progress">
           <div class="indeterminate"></div>
           </div>
         </div>
       </div>
-      </br>
       </br>
       <div class="row">
         <div class="input-field col s12">
@@ -47,6 +46,7 @@
            });</script>
         </div>
       </div>
+    </br>
     
       <div class="row">
         <div class="input-field col s12">
@@ -54,7 +54,7 @@
           <label for="description">Horarios de cursada</label>
          </div>
       </div>
-    
+    <span class="red-text"> * Campos obligatorios </span> 
     <input id="teacher_id" type="hidden" data-bind="value:teacher_id">
    
    <div class="row center">
