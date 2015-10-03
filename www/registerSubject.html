@@ -38,7 +38,7 @@
       </br>
       <div class="row">
         <div class="input-field col s12">
-          <input id="description" type="text" data-bind:"value:descripcion" class="materialize-textarea validate" length="140" />
+          <input id="description" type="text" data-bind="value: descripcion" class="materialize-textarea validate" length="140"/>
           <label for="description">Descripción</label>
           <script>
            $(document).ready(function() {
@@ -50,13 +50,13 @@
     
       <div class="row">
         <div class="input-field col s12">
-          <input id="horarios" type="text" data-bind:"value:horarios" class="materialize-textarea validate"/>
-          <label for="description">Horarios de cursada</label>
+          <input id="horarios" type="text" data-bind="value:horarios" class="materialize-textarea validate"/>
+          <label for="horarios">Horarios de cursada</label>
          </div>
       </div>
     <span class="red-text"> * Campos obligatorios </span> 
     <input id="teacher_id" type="hidden" data-bind="value:teacher_id">
-   
+   <br>
    <div class="row center">
     <button class="btn-large waves-effect waves-light center" type="submit" name="action">Crear curso</button>
   </div>
