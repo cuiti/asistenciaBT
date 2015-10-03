@@ -97,8 +97,8 @@ function AlumnoViewModel(data) {
                     self.id,
                     window.vm.currentClassID,
                     function(data){
-                        self.alumnosPresentes.push(in_students);
-                        self.alumnos.remove(in_students);
+                        window.vm.alumnosPresentes.push(self);
+                        window.vm.alumnos.remove(self);
                         swal("Ok", "Alumno marcado como Presente!", "success");
                     },
                     function(data){

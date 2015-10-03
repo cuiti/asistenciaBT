@@ -17,7 +17,6 @@ function server() {
 	}
 
 	self.invokeFailureCallback = function(response) {
-		alert("fallo");
 		self.errorCallBack(response);
 	}
 	self.inscribirEnCurso = function(id_user,id_curso,successCallBack,errorCallBack){
