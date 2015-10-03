@@ -26,6 +26,18 @@ function RegisterVM() {
   self.password = ko.observable("");
   self.NroAlu =ko.observable("");
 
+  if (navigator.connection.type == Connection.NONE) {
+    swal({   
+          title: "Error",   
+          text: "No se puede buscar cursos sin conexion",   
+          type: "error",   showCancelButton: false,   
+          confirmButtonText: "Volver",   
+          closeOnConfirm: false 
+        }, function(){   
+            window.location = "index.html";
+        }); 
+  }
+
  self.registerSuccess = function(response) {
     try {
         response.data = JSON.parse(response.data);

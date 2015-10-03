@@ -21,6 +21,18 @@ function RegisterVM() {
   self.teacher_id = ko.observable("");
   self.horarios=ko.observable("");
   self.descripcion = ko.observable("");
+
+  if (navigator.connection.type == Connection.NONE) {
+    swal({   
+          title: "Error",   
+          text: "No se puede crear cursos sin conexion",   
+          type: "error",   showCancelButton: false,   
+          confirmButtonText: "Volver",   
+          closeOnConfirm: false 
+        }, function(){   
+            window.location = "index.html";
+        }); 
+  }
   
   self.validateName = function() {
     $("#name-progress").show();

@@ -23,6 +23,18 @@ function BusquedaVM(){
 	self.busqueda= ko.observable();
 	self.resultado = ko.observableArray([]);
 
+  if (navigator.connection.type == Connection.NONE) {
+    swal({   
+          title: "Error",   
+          text: "No se puede buscar cursos sin conexion",   
+          type: "error",   showCancelButton: false,   
+          confirmButtonText: "Volver",   
+          closeOnConfirm: false 
+        }, function(){   
+            window.location = "index.html";
+        }); 
+  }
+
 self.getDataSuccess = function(data) {
   	$("#preloader").hide();
     var mappedCursos = $.map(data, function(item) { return new Curso(item) });
