@@ -221,6 +221,7 @@ function AsistenciaViewModel() {
         if (data.status) {
             self.currentClassID = data.id;
             $("#completar").show();
+            $(".presente-manual").show();
             BC.bluetooth.addEventListener("newdevice", self.deviceFound);
             BC.Bluetooth.OpenBluetooth(self.openBTSuccess, self.openBTError);
         } else {
