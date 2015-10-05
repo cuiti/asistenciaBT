@@ -70,13 +70,13 @@ function PresenteViewModel() {
 
     self.getPresenteSuccess = function(data) {
         if (data.status) {
-        $("#preloader-presente").hide();
+            $("#preloader-presente").hide();
             swal("Tu asistencia fue registrada!", "", "success"); 
             self.estoyPresente = true;
             window.clearInterval(self.chequearPresenteInterval);
         } else {
             if (data.id == 1 ) {
-        $("#preloader-presente").hide();
+                $("#preloader-presente").hide();
                 swal("El profesor te marcó como ausente", "", "error"); 
                 window.clearInterval(self.chequearPresenteInterval);
             }
