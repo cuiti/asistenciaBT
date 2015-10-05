@@ -15,10 +15,39 @@ function internet() {
 
 function Alumno(data) {
   var self = this;
-  self.nombre = data.nombre;
+  self.id= data.usuario_id;
+  self.nombre = data.nombre + " " + data.apellido;
   self.apellido = data.apellido;
-  self.estado = data.estado;
-}
+  self.estado = ko.observable(data.estado);
+  self.Ausente=ko.observable((self.estado() == 'Ausente'));
+ 
+ self.MarcarPresente = function() {
+        swal({
+                title: "¿Estas seguro de marcar como presente a este alumno?",      
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#DD6B55",   
+                confirmButtonText: "Marcar Presente",   
+                closeOnConfirm: false 
+            }, 
+            function(){
+                    Server.pasarPresente(
+                    self.id,
+                    currentClaseID,
+                    function(data){
+                        self.estado('Presente');
+                        self.Ausente(false);
+                        swal("Ok", "Alumno marcado como Presente!", "success");
+                    },
+                    function(data){
+                        alert("No se le pudo pasar presente");
+                    }
+                ); 
+            }
+        );
+    };
+ }
+
 
 function ClaseVM() {
   var self = this;

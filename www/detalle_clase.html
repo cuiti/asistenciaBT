@@ -11,15 +11,16 @@
          <div class="nav-wrapper container"><a id="logo-container" class="brand-logo"><img src="./img/logo.png" height="55"></a></div>
       </nav>
       <header class="bar bar-nav">
-         <h4 class="title center thin blue-text">Clase del <span data-bind="text:"></span></h4>
+         <h4 class="title center thin blue-text">Clase del <span data-bind="text: fecha"></span></h4>
       </header>
       <div class="container">
          <div class="card">
-            <h4 class="center blue-text thin">Clases Anteriores</h4>
+            <h4 class="center blue-text thin">Listado de alumnos</h4>
             <ul class="collection with-header" data-bind="foreach: alumnos">
                <li class="collection-item inline">
                   <span data-bind="text: nombre "></span> 
-                  <span class="right" data-bind="text: estado"></a> 
+                  <span class="right" data-bind="text: estado"></span></br>
+                  <div class="right" data-bind="visible: Ausente"><a data-bind="click: MarcarPresente"> Dar Presente </a></div><br>
                </li>
             </ul>
          </div>
@@ -30,6 +31,8 @@
       <script type="text/javascript" charset="utf-8" src="js/vendor/sweetalert.min.js"></script>
       <script type="text/javascript" charset="utf-8" src="js/server/server.js"></script>
       <script type="text/javascript" charset="utf-8" src="js/clase.js"></script>
+      <script type="text/javascript" charset="utf-8" src="js/tomar_asistencia.js"></script>
+      
       </head>
    </body>
 </html>

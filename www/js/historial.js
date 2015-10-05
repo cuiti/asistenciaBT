@@ -47,7 +47,7 @@ function HistorialVM() {
     if (internet()) {
       Server.getClasesForCurso(self.currentCursoID,self.getClasesForCursoSuccess, self.getClasesForCursoFailure);
     } else {
-      alert("Sin internet no se puede obtener el hisotial")
+      alert("Sin internet no se puede obtener el historial")
     }
   }
 
