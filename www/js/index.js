@@ -104,7 +104,15 @@ var app = {
             if (internet) {
                 app.CheckMacAddressOnServer();
             } else {
-               alert("sin internet no hay nunca mas");
+            swal({   
+          title: "Error",   
+          text: "Sin conexión no se pueden recuperar tus datos, intentalo nuevamente en otro momento",   
+          type: "error",   showCancelButton: false,   
+          confirmButtonText: "ok",   
+          closeOnConfirm: false 
+        }, function(){   
+            window.location = "fail.html";
+        });    
             }
         } 
         else{
@@ -114,7 +122,15 @@ var app = {
                     $("#bienvenida").show();
                     Server.initialize(app.getUserData,app.ServerInitalizationFailure); //se fija en el server si es profesor
                 } else {
-                    alert("sin internet no hay nunca mas")
+                    swal({   
+          title: "Error",   
+          text: "Sin conexión no se pueden recuperar tus datos, intentalo nuevamente en otro momento",   
+          type: "error",   showCancelButton: false,   
+          confirmButtonText: "ok",   
+          closeOnConfirm: false 
+        }, function(){   
+            window.location = "fail.html";
+        }); 
                 }
             } else {
                 if (esProfesor) {
