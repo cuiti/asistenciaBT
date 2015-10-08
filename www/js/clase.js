@@ -23,11 +23,13 @@ function Alumno(data) {
  
  self.MarcarPresente = function() {
         swal({
-                title: "¿Estas seguro de marcar como presente a este alumno?",      
+                title: self.nombre,
+				text: "¿Estás seguro de dar presente a este alumno?",
                 type: "warning",   
                 showCancelButton: true,   
-                confirmButtonColor: "#DD6B55",   
-                confirmButtonText: "Marcar Presente",   
+                confirmButtonColor: "#5E821C",   
+                confirmButtonText: "Marcar Presente",
+				cancelButtonText: "No, cancelar",				
                 closeOnConfirm: false 
             }, 
             function(){
