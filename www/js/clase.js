@@ -1,5 +1,83 @@
-document.addEventListener("deviceready",onDeviceReady,!1);var currentClaseID;function onDeviceReady(){$("#preload").show();currentClaseID=JSON.parse(localStorage.getItem("currentClaseID"));Server.initialize(function(){ko.applyBindings(new ClaseVM)},function(){console.log("error :(")})}function internet(){return navigator.connection.type!=Connection.NONE}
-function Alumno(a){var b=this;b.id=a.usuario_id;b.nombre=a.nombre+" "+a.apellido;b.apellido=a.apellido;b.estado=ko.observable(a.estado);b.Ausente=ko.observable("Ausente"==b.estado());b.MarcarPresente=function(){swal({title:"\u00bfEstas seguro de marcar como presente a este alumno?",type:"warning",showCancelButton:!0,confirmButtonColor:"#DD6B55",confirmButtonText:"Marcar Presente",closeOnConfirm:!1},function(){Server.pasarPresente(b.id,currentClaseID,function(a){b.estado("Presente");b.Ausente(!1);
-swal("Ok","Alumno marcado como Presente!","success")},function(a){alert("No se le pudo pasar presente")})})}}
-function ClaseVM(){var a=this;a.id=currentClaseID;a.alumnos=ko.observableArray([]);a.fecha=ko.observable("");a.getDataForClassSuccess=function(b){$("#preload").hide();a.fecha(b.fecha);b=$.map(b.alumnos,function(a){return new Alumno(a)});0!=b.length&&a.alumnos(b)};a.getDataForClassFailure=function(a){$("#preload").hide();console.error(a.error)};a.initialize=function(){internet()?Server.getClaseByID(a.id,a.getDataForClassSuccess,a.getDataForClassFailure):alert("Sin internet no se puede obtener el hisotial")};
-a.initialize()};
+// Wait for device API libraries to load
+document.addEventListener("deviceready",onDeviceReady,false);
+var currentClaseID;
+// device APIs are available
+function onDeviceReady() {
+  $("#preload").show();
+  currentClaseID = JSON.parse(localStorage.getItem("currentClaseID"));
+  Server.initialize(function() { ko.applyBindings(new ClaseVM());}, function() { console.log('error :(');});
+}
+
+function internet() {
+  var networkState = navigator.connection.type;
+  return networkState != Connection.NONE;
+}
+
+function Alumno(data) {
+  var self = this;
+  self.id= data.usuario_id;
+  self.nombre = data.nombre + " " + data.apellido;
+  self.apellido = data.apellido;
+  self.estado = ko.observable(data.estado);
+  self.Ausente=ko.observable((self.estado() == 'Ausente'));
+ 
+ self.MarcarPresente = function() {
+        swal({
+                title: self.nombre,
+				text: "¿Estás seguro de dar presente a este alumno?",
+                type: "warning",   
+                showCancelButton: true,   
+                confirmButtonColor: "#5E821C",   
+                confirmButtonText: "Marcar Presente",
+				cancelButtonText: "No, cancelar",				
+                closeOnConfirm: false 
+            }, 
+            function(){
+                    Server.pasarPresente(
+                    self.id,
+                    currentClaseID,
+                    function(data){
+                        self.estado('Presente');
+                        self.Ausente(false);
+                        swal("Ok", "Alumno marcado como Presente!", "success");
+                    },
+                    function(data){
+                        alert("No se le pudo pasar presente");
+                    }
+                ); 
+            }
+        );
+    };
+ }
+
+
+function ClaseVM() {
+  var self = this;
+  self.id = currentClaseID;
+  self.alumnos = ko.observableArray([]);
+  self.fecha = ko.observable("");
+
+  self.getDataForClassSuccess = function(data) {
+    $("#preload").hide();
+    self.fecha(data.fecha);
+    var mappedAlumnos = $.map(data.alumnos, function(item) { return new Alumno(item) });
+    if (mappedAlumnos.length != 0){
+      self.alumnos(mappedAlumnos); 
+    }
+  };
+
+  self.getDataForClassFailure = function(response) {
+    $("#preload").hide();
+    console.error(response.error);
+  }
+
+  self.initialize = function() {
+    if (internet()) {
+      Server.getClaseByID(self.id,self.getDataForClassSuccess, self.getDataForClassFailure);
+    } else {
+      alert("Sin internet no se puede obtener el hisotial")
+    }
+  }
+
+  self.initialize();
+}
