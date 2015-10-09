@@ -27,7 +27,7 @@ function Alumno(data) {
 				text: "¿Estás seguro de dar presente a este alumno?",
                 type: "warning",   
                 showCancelButton: true,   
-                confirmButtonColor: "#5E821C",   
+                confirmButtonColor: "#669C01",   
                 confirmButtonText: "Marcar Presente",
 				cancelButtonText: "No, cancelar",				
                 closeOnConfirm: false 
