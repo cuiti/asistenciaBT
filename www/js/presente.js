@@ -86,7 +86,7 @@ function PresenteViewModel() {
 
     self.getPresenteFailure = function(data) {
         $("#preloader-presente").hide();
-        alert("mugre");
+       swal("¡Un momento!", "Asegurate de tener conexión a internet para saber si se te marcó presente", "error"); 
     }
 
     self.chequearPresente = function() {
