@@ -1,4 +1,7 @@
-﻿# asistenciaBT
+﻿# Appsistencia
+ 
+ Proyecto de Desarrollo de Aplicaciones Móviles Multiplataforma, en III-LIDI: “Appsistencia”, desarrollada con PhoneGap. Se encarga de la toma de asistencia automática mediante el uso de Bluetooth, haciendo que los dispositivos de alumnos y profesores se detecten y registren automáticamente. Fue presentada en la Expo Ciencia y Tecnología de  la facultad de Informática de la UNLP el 14/10/2015.
+
 
 Para compilar usando PhoneGap por la consola, se necesita instalar:
 
